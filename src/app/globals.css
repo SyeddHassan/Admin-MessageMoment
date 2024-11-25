@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-color: #f2f5f6;
+    --contraction-background-color: #e9eced;
+
+    --primary-theme: #000000;
+    --secondary-theme: #0069f7;
+
+    --hovered-color: #eff6ff;
+    --selected-color: #0069f7;
+
+    --heading-color: #262a2e;
+    --paragraph-color: #6f6f6f;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --border: #d8d8d8;
+    --radius: 0.5rem;
+
+    --card: #ffffff;
+
+    --sidebar-background: #000000;
+    --sidebar-foreground: #ffffff;
+
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #ffffff;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--paragraph-color);
+  font-family: var(--font-jetbrains-mono), monospace;
+  text-rendering: optimizeLegibility;
+  border: var(--border);
+}
