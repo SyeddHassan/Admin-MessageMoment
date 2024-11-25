@@ -2,7 +2,10 @@ import { ChartOptions, TooltipItem } from "chart.js";
 
 export const PieChartOptions = (): ChartOptions<"doughnut"> => {
   const getLegendPosition = (): "right" | "bottom" => {
-    return window.innerWidth >= 768 ? "right" : "bottom";
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 768 ? "right" : "bottom";
+    }
+    return "right";
   };
 
   return {
