@@ -16,11 +16,11 @@ const FileStatusCard = () => {
       </CardHeader>
 
       {/* FILE STATUS DOUGHNUT CHART */}
-      <CardContent className="pb-12 h-full flex-center mx-auto">
+      <CardContent className="lg:pb-12 pb-[5rem] h-full flex-center mx-auto">
         <DoughnutChart02
           chartData={[
-            { label: "Successful", percentage: 30, color: "#28a745" },
-            { label: "Failed", percentage: 70, color: "#dc3545" },
+            { label: "Successful", percentage: 30, color: "#5ebce1" },
+            { label: "Failed", percentage: 70, color: "#3a56af" },
           ]}
         />
       </CardContent>

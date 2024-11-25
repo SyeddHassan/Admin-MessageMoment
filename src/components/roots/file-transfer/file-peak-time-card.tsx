@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LineChart01 } from "@/components/partials/line-charts";
 
 const FilePeakTimeCard = () => {
   return (
@@ -16,7 +17,30 @@ const FilePeakTimeCard = () => {
       </CardHeader>
 
       {/* FILE PEAK TIME LINE CHART */}
-      <CardContent className="pb-12 h-full flex-center mx-auto"></CardContent>
+      <CardContent className="lg:pb-12 pb-[5rem] h-full flex-center mx-auto">
+        <LineChart01
+          chartData={[
+            {
+              name: "Standard",
+              value: "14:00",
+              color: "#434EDD",
+              data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
+            },
+            {
+              name: "Secure",
+              value: "09:40",
+              color: "#2B7D6B",
+              data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
+            },
+            {
+              name: "Wallet",
+              value: "14:30",
+              color: "#F9C051",
+              data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
+            },
+          ]}
+        />
+      </CardContent>
     </Card>
   );
 };

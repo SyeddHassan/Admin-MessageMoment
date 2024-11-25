@@ -139,10 +139,10 @@ const RealTimeFileTransferStatusTable = ({
         const status = row.getValue<string>("status");
         const statusColor =
           status === "Successful"
-            ? "text-green-500"
+            ? "text-green-600"
             : status === "Failed"
-            ? "text-red-500"
-            : "text-yellow-500";
+            ? "text-red-700"
+            : "text-yellow-600";
 
         return <span className={`font-semibold ${statusColor}`}>{status}</span>;
       },

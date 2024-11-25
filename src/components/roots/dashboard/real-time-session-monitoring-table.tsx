@@ -162,7 +162,9 @@ const RealTimeSessionMonitoringTable = ({
         const locationCode = row.original.locationCode.toLowerCase();
         return (
           <div className="flex items-center lg:gap-8 gap-4">
-            <span className={`w-4 h-4 rounded-full fi fi-${locationCode}`} />
+            <span
+              className={`w-4 h-4 rounded-full fi fi-${locationCode} !bg-cover`}
+            />
             <span>{location}</span>
           </div>
         );

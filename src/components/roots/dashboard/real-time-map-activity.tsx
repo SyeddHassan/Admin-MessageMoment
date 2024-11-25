@@ -69,7 +69,7 @@ const RealTimeMapActivity = ({
               return (
                 <div key={index} className="flex items-center gap-4 px-8">
                   <span
-                    className={`fi fi-${code.toLowerCase()} !w-[25px] !h-[25px] rounded-full flag-shadow`}
+                    className={`fi fi-${code.toLowerCase()} !w-[25px] !h-[25px] rounded-full flag-shadow !bg-cover`}
                   />
 
                   <div className="w-[calc(100%-40px)]">

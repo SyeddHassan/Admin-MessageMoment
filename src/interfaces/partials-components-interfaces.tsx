@@ -37,3 +37,13 @@ export interface DoughnutChart02Props {
 export interface PieChartProps {
   data: { label: string; value: number; color: string }[];
 }
+
+// LINE CHARTS
+export interface LineChart01Props {
+  chartData: {
+    name: string;
+    value: string | number;
+    color: string;
+    data: number[];
+  }[];
+}
