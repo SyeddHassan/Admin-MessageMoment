@@ -12,7 +12,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import zoomPlugin from "chartjs-plugin-zoom";
 
 import { LineChart01Props } from "@/interfaces/partials-components-interfaces";
 
@@ -26,8 +25,7 @@ ChartJS.register(
   Filler,
   Title,
   Tooltip,
-  Legend,
-  zoomPlugin
+  Legend
 );
 
 export const LineChart01 = ({ chartData }: LineChart01Props) => {
