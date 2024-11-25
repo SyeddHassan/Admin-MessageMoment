@@ -7,11 +7,11 @@ export interface RealTimeFileTransferStatusTableProps01 {
 
 export interface RealTimeFileTransferStatusTableProps02 {
   sessionId: number;
-  participants: number;
   sessionType: string;
-  location: string;
-  locationCode: string;
-  duration: string;
+  file: string;
+  fileType: string;
+  status: string;
+  size: string;
 }
 
 export type ColumnDefWithMeta<T> = ColumnDef<T> & {

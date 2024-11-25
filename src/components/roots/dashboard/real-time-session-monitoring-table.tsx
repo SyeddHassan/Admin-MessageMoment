@@ -185,7 +185,7 @@ const RealTimeSessionMonitoringTable = ({
       id: "actions",
       header: "",
       cell: () => (
-        <Button className="w-full bg-secondary-theme hover:bg-[#0052cc] text-white font-inter text-[14px] rounded-[6px] button-box-shadow">
+        <Button className="w-full bg-secondary-theme hover:bg-[#0052cc] text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
           Manage
         </Button>
       ),
@@ -218,7 +218,10 @@ const RealTimeSessionMonitoringTable = ({
                     <th
                       key={header.id}
                       className={`px-4 py-4 border-b border-gray-300 ${
-                        header.column.columnDef.meta?.className || ""
+                        (
+                          header.column
+                            .columnDef as ColumnDefWithMeta<RealTimeSessionMonitoringTableProps>
+                        ).meta?.className || ""
                       }`}
                     >
                       {header.isPlaceholder
@@ -235,19 +238,25 @@ const RealTimeSessionMonitoringTable = ({
             <tbody>
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="hover:bg-gray-50">
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className={`px-4 py-2 border-b border-gray-200 md:text-[14px] text-[12px] ${
-                        cell.column.columnDef.meta?.className || ""
-                      }`}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const metaClassName =
+                      (
+                        cell.column
+                          .columnDef as ColumnDefWithMeta<RealTimeSessionMonitoringTableProps>
+                      ).meta?.className || "";
+
+                    return (
+                      <td
+                        key={cell.id}
+                        className={`px-4 py-2 border-b border-gray-200 md:text-[14px] text-[12px] ${metaClassName}`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>

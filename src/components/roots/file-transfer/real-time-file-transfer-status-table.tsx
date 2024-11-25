@@ -136,7 +136,7 @@ const RealTimeFileTransferStatusTable = ({
         </div>
       ),
       cell: ({ row }) => {
-        const status = row.getValue("status");
+        const status = row.getValue<string>("status");
         const statusColor =
           status === "Successful"
             ? "text-green-500"
@@ -163,10 +163,10 @@ const RealTimeFileTransferStatusTable = ({
       header: "",
       cell: () => (
         <div className="w-full flex items-center gap-4">
-          <Button className="w-full bg-primary-theme hover:bg-black/70 text-white font-inter text-[14px] rounded-[6px] button-box-shadow">
+          <Button className="w-full bg-transparent text-secondary-theme underline font-inter tracking-wide text-[14px]">
             View File
           </Button>
-          <Button className="w-full bg-primary-theme hover:bg-black/70 text-white font-inter text-[14px] rounded-[6px] button-box-shadow">
+          <Button className="w-full bg-secondary-theme hover:bg-[#0052cc] text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
             Download File
           </Button>
         </div>
@@ -196,40 +196,52 @@ const RealTimeFileTransferStatusTable = ({
             <thead className="bg-hovered-color rounded-lg font-inter text-heading-color">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      key={header.id}
-                      className={`px-4 py-4 border-b border-gray-300 ${
-                        header.column.columnDef.meta?.className || ""
-                      }`}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </th>
-                  ))}
+                  {headerGroup.headers.map((header) => {
+                    const metaClassName =
+                      (
+                        header.column
+                          .columnDef as ColumnDefWithMeta<RealTimeFileTransferStatusTableProps02>
+                      ).meta?.className || "";
+
+                    return (
+                      <th
+                        key={header.id}
+                        className={`px-4 py-4 border-b border-gray-300 ${metaClassName}`}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    );
+                  })}
                 </tr>
               ))}
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="hover:bg-gray-50">
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className={`px-4 py-2 border-b border-gray-200 md:text-[14px] text-[12px] ${
-                        cell.column.columnDef.meta?.className || ""
-                      }`}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const metaClassName =
+                      (
+                        cell.column
+                          .columnDef as ColumnDefWithMeta<RealTimeFileTransferStatusTableProps02>
+                      ).meta?.className || "";
+
+                    return (
+                      <td
+                        key={cell.id}
+                        className={`px-4 py-2 border-b border-gray-200 md:text-[14px] text-[12px] ${metaClassName}`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>
