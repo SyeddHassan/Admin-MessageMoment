@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import {
   ArcElement,
@@ -24,6 +24,17 @@ ChartJS.register(
 );
 
 export const PieChart = ({ data }: PieChartProps) => {
+  const [options, setOptions] = useState(() => PieChartOptions());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setOptions(PieChartOptions());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const chartData = {
     labels: data.map((item) => item.label),
     datasets: [
@@ -35,8 +46,6 @@ export const PieChart = ({ data }: PieChartProps) => {
       },
     ],
   };
-
-  const options = PieChartOptions();
 
   return (
     <div className="relative mx-auto aspect-square w-full">

@@ -1,11 +1,15 @@
 import { ChartOptions, TooltipItem } from "chart.js";
 
 export const PieChartOptions = (): ChartOptions<"doughnut"> => {
+  const getLegendPosition = (): "right" | "bottom" => {
+    return window.innerWidth >= 768 ? "right" : "bottom";
+  };
+
   return {
     responsive: true,
     plugins: {
       legend: {
-        position: "right" as const,
+        position: getLegendPosition(),
         labels: {
           color: "#000000",
           usePointStyle: true,
