@@ -7,7 +7,7 @@ import Logo from "../../../public/logo-white.svg";
 
 const AuthenticationPage = () => {
   return (
-    <main className="h-[90vh] w-screen bg-primary-theme py-4 overflow-hidden">
+    <main className="h-screen w-screen bg-primary-theme py-4">
       <Image
         src={Logo}
         alt="MessageMoment"
