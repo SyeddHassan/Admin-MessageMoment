@@ -1,6 +1,23 @@
 import { ChartOptions, TooltipItem } from "chart.js";
 
-export const DoughnutChartOptions = (): ChartOptions<"doughnut"> => {
+export const DoughnutChart01Options = (): ChartOptions<"doughnut"> => {
+  return {
+    cutout: "85%",
+    plugins: {
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        display: false,
+      },
+      datalabels: {
+        display: false,
+      },
+    },
+  };
+};
+
+export const DoughnutChart02Options = (): ChartOptions<"doughnut"> => {
   return {
     responsive: true,
     plugins: {

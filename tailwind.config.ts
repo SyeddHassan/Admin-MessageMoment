@@ -25,6 +25,7 @@ export default {
         "paragraph-color": "var(--paragraph-color)",
 
         "hovered-color": "var(--hovered-color)",
+        "secondary-theme-hovered-color": "var(--secondary-theme-hovered-color)",
         "selected-color": "var(--selected-color)",
 
         border: "var(--border)",

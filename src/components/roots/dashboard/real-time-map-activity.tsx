@@ -80,7 +80,7 @@ const RealTimeMapActivity = ({
                       <Progress
                         value={parseFloat(percentage)}
                         className="h-[7px] bg-[#e9ecef]"
-                        indicatorClassName={`bg-secondary-theme rounded-[50rem]`}
+                        indicatorClassName={`bg-[#0069f7] rounded-[50rem]`}
                       />
                       <p className="text-[0.75rem]">{percentage}%</p>
                     </div>

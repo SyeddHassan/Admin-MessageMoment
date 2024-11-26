@@ -18,7 +18,11 @@ const UsersAverageChatRoomCard = () => {
 
       {/* USER AVERAGE CHAT ROOM DOUGHNUT CHART */}
       <CardContent className="pb-12 h-full flex-center mx-auto">
-        <DoughnutChart01 label="Avg. Users: 7/10" percentage={70} />
+        <DoughnutChart01
+          label="Avg. Users: 7/10"
+          percentage={70}
+          backgroundColor={["#91CC75", "#f2f2f2"]}
+        />
       </CardContent>
     </Card>
   );

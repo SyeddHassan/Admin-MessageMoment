@@ -8,10 +8,11 @@
     --contraction-background-color: #e9eced;
 
     --primary-theme: #000000;
-    --secondary-theme: #0069f7;
+    --secondary-theme: #494af8;
 
     --hovered-color: #eff6ff;
-    --selected-color: #0069f7;
+    --secondary-theme-hovered-color: #6d6ef9;
+    --selected-color: #494af8;
 
     --heading-color: #262a2e;
     --paragraph-color: #6f6f6f;

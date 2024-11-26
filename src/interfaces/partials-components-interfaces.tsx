@@ -27,6 +27,7 @@ export interface DateRangePickerProps {
 export interface DoughnutChart01Props {
   label: string;
   percentage: number;
+  backgroundColor: [string, string];
 }
 
 export interface DoughnutChart02Props {
@@ -47,3 +48,5 @@ export interface LineChart01Props {
     data: number[];
   }[];
 }
+
+

@@ -19,7 +19,7 @@ const AdminWelcomePage = () => {
   }, [router]);
 
   return (
-    <main className="h-screen w-screen bg-black flex-center">
+    <main className="h-[90vh] w-screen bg-black flex-center">
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}

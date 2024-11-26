@@ -85,7 +85,7 @@ const RealTimeFileTransferStatusTable = ({
       cell: ({ row }) => (
         <div>{(currentPage - 1) * rowsPerPage + row.index + 1}.</div>
       ),
-      meta: { className: "lg:w-[5%] text-center" },
+      meta: { className: "lg:w-[5%] text-center rounded-[15px_0px_0px_0px]" },
     },
 
     {
@@ -160,13 +160,14 @@ const RealTimeFileTransferStatusTable = ({
 
     {
       id: "actions",
+      meta: { className: "rounded-[0px_15px_0px_0px]" },
       header: "",
       cell: () => (
         <div className="w-full flex items-center gap-4">
-          <Button className="w-full bg-transparent text-secondary-theme underline font-inter tracking-wide text-[14px]">
+          <Button className="w-full bg-transparent text-secondary-theme hover:text-secondary-theme-hovered-color underline font-inter tracking-wide text-[14px]">
             View File
           </Button>
-          <Button className="w-full bg-secondary-theme hover:bg-[#0052cc] text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
+          <Button className="w-full bg-secondary-theme hover:bg-secondary-theme-hovered-color text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
             Download File
           </Button>
         </div>
@@ -193,7 +194,7 @@ const RealTimeFileTransferStatusTable = ({
             key={currentPage}
             className="min-w-full border-b rounded-lg border-gray-200 text-left"
           >
-            <thead className="bg-hovered-color rounded-lg font-inter text-heading-color">
+            <thead className="bg-black font-inter text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -267,6 +268,7 @@ const RealTimeFileTransferStatusTable = ({
                       setCurrentPage(i + 1);
                     }}
                     isActive={currentPage === i + 1}
+                    className="cursor-pointer"
                   >
                     {i + 1}
                   </PaginationLink>

@@ -86,7 +86,7 @@ const RealTimeSessionMonitoringTable = ({
       cell: ({ row }) => (
         <div>{(currentPage - 1) * rowsPerPage + row.index + 1}.</div>
       ),
-      meta: { className: "lg:w-[5%] text-center" },
+      meta: { className: "lg:w-[5%] text-center rounded-[15px_0px_0px_0px]" },
     },
 
     {
@@ -126,7 +126,7 @@ const RealTimeSessionMonitoringTable = ({
             <Progress
               value={percentage}
               className="h-[7px] max-lg:w-[200px] bg-[#e9ecef]"
-              indicatorClassName="bg-secondary-theme rounded-[50rem]"
+              indicatorClassName="bg-[#0069f7] rounded-[50rem]"
             />
             <p className="md:text-[14px] text-[12px]">{percentage}%</p>
           </div>
@@ -186,8 +186,9 @@ const RealTimeSessionMonitoringTable = ({
     {
       id: "actions",
       header: "",
+      meta: { className: "rounded-[0px_15px_0px_0px]" },
       cell: () => (
-        <Button className="w-full bg-secondary-theme hover:bg-[#0052cc] text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
+        <Button className="w-full bg-secondary-theme hover:bg-secondary-theme-hovered-color text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
           Manage
         </Button>
       ),
@@ -213,7 +214,7 @@ const RealTimeSessionMonitoringTable = ({
             key={currentPage}
             className="min-w-full border-b rounded-lg border-gray-200 text-left"
           >
-            <thead className="bg-hovered-color rounded-lg font-inter text-heading-color">
+            <thead className="bg-black font-inter text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -284,6 +285,7 @@ const RealTimeSessionMonitoringTable = ({
                       setCurrentPage(i + 1);
                     }}
                     isActive={currentPage === i + 1}
+                    className="cursor-pointer"
                   >
                     {i + 1}
                   </PaginationLink>

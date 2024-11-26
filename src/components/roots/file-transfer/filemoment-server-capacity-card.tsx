@@ -18,7 +18,11 @@ const FileMomentServerCapacityCard = () => {
 
       {/* FileMoment SERVER CAPACITY DOUGHNUT CHART */}
       <CardContent className="pb-12 h-full flex-center mx-auto">
-        <DoughnutChart01 label="Server Space (Capacity)" percentage={30} />
+        <DoughnutChart01
+          label="Server Space (Capacity)"
+          percentage={30}
+          backgroundColor={["#FC8452", "#f2f2f2"]}
+        />
       </CardContent>
     </Card>
   );

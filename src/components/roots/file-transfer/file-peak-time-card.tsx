@@ -23,19 +23,19 @@ const FilePeakTimeCard = () => {
             {
               name: "Standard",
               value: "14:00",
-              color: "#434EDD",
+              color: "#73C0DE",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
               name: "Secure",
               value: "09:40",
-              color: "#2B7D6B",
+              color: "#EE6666",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
               name: "Wallet",
               value: "14:30",
-              color: "#F9C051",
+              color: "#91CC75",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
           ]}

@@ -20,12 +20,12 @@ const FileTypesCard = () => {
       <CardContent className="lg:pb-12 pb-[5rem] md:w-[70%] h-full flex-center mx-auto">
         <PieChart
           data={[
-            { label: "Audio", value: 16, color: "#f02f1d" },
-            { label: "Image", value: 18, color: "#2285f2" },
-            { label: "Video", value: 16, color: "#d83b82" },
-            { label: "Document", value: 15, color: "#ab40e8" },
-            { label: "Zip", value: 15, color: "#5e37ed" },
-            { label: "Other", value: 20, color: "#4dd992" },
+            { label: "Audio", value: 16, color: "#4CAF50" },
+            { label: "Image", value: 18, color: "#FFC107" },
+            { label: "Video", value: 16, color: "#F44336" },
+            { label: "Document", value: 15, color: "#2196F3" },
+            { label: "Zip", value: 15, color: "#9C27B0" },
+            { label: "Other", value: 20, color: "#FF9800" },
           ]}
         />
       </CardContent>
