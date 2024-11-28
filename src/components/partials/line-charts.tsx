@@ -10,12 +10,19 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-import { LineChart01Props } from "@/interfaces/partials-components-interfaces";
+import {
+  LineChart01Props,
+  LineChart02Props,
+} from "@/interfaces/partials-components-interfaces";
 
-import { LineChart01Options } from "@/utils/line-chart-options";
+import {
+  LineChart01Options,
+  lineChart02Options,
+} from "@/utils/line-chart-options";
 
 ChartJS.register(
   CategoryScale,
@@ -72,4 +79,26 @@ export const LineChart01 = ({ chartData }: LineChart01Props) => {
   );
 };
 
+export const LineChart02 = ({ data }: LineChart02Props) => {
+  // Chart data structure
+ const chartData: ChartData<"line"> = {
+   labels: data.labels,
+   datasets: [
+     {
+       data: data.values,
+       borderColor: "#4397F4",
+       backgroundColor: "rgba(67, 151, 244, 0.3)",
+       fill: false,
+       borderWidth: 2,
+       pointRadius: 0,
+       pointHoverRadius: 0,
+     },
+   ],
+ };
 
+  return (
+    <div className=" h-[400px]">
+      <Line options={lineChart02Options} data={chartData} />
+    </div>
+  );
+};

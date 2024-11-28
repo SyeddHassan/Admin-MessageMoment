@@ -1,3 +1,4 @@
+import { ChartData } from "chart.js";
 import { DateRange } from "react-day-picker";
 
 export interface TableFiltersProps {
@@ -48,5 +49,21 @@ export interface LineChart01Props {
     data: number[];
   }[];
 }
+export interface LineChart02Props {
+  data: {
+    labels: string[]; 
+    values: number[]; 
+  };
+}
 
-
+// GAUGE CHART
+export interface GaugeChartProps {
+  data: ChartData<"doughnut">; // Chart.js data object
+  value: number;
+  title: string;
+  isHalfGauge?: boolean;
+  startColor?: string;
+  endColor?: string;
+  backgroundColor?: string;
+  barWidth?: number;
+}
