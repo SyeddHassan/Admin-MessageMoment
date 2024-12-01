@@ -19,15 +19,15 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-
-import Logo from "../../public/logo-white.svg";
-import MiniLogo from "../../public/logo-shortcut.png";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+
+import Logo from "../../public/logo-white.svg";
+import MiniLogo from "../../public/logo-shortcut.png";
 
 const LargeScreensSidebar = () => {
   const { state } = useSidebar();
