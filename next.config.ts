@@ -1,10 +1,7 @@
-import withTM from "next-transpile-modules";
 import type { NextConfig } from "next";
 
-const withTranspileModules = withTM(["@amcharts/amcharts5"]);
-
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
+  /* config options here */
 };
 
-export default withTranspileModules(nextConfig);
+export default nextConfig;

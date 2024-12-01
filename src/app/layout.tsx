@@ -5,7 +5,7 @@ import { NextThemeProvider } from "@/providers/next-theme-provider";
 // STYLE SHEETS SOURCES
 import "./globals.css";
 import "../styles/includes.css";
-import "../../node_modules/flag-icons/css/flag-icons.css";
+import "../../node_modules/flag-icons/css/flag-icons.min.css";
 
 // FONT CONFIGURATIONS
 const inter = Inter({
