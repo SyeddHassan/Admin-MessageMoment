@@ -1,10 +1,9 @@
 import React from "react";
 
 import MessageMomentStatsCards from "@/components/roots/dashboard/messagemoment-stats-cards";
-import RealTimeGlobalActivityCard from "@/components/roots/dashboard/real-time-global-activity-card";
+import RealTimeMonitoringMapCard from "@/components/roots/dashboard/real-time-monitoring-map-card";
 import RealTimeSessionMonitoringCard from "@/components/roots/dashboard/real-time-session-monitoring-card";
-import RealTimeUsersMonitoringCard from "@/components/roots/dashboard/real-time-users-monitoring-card";
-import UsersAverageChatRoomCard from "@/components/roots/dashboard/users-average-chat-room-card";
+import UsersAvgChatRoomCard from "@/components/roots/dashboard/users-avg-chat-room-card";
 import ReturnedVisitorsCard from "@/components/roots/dashboard/returned-visitors-card";
 
 const DashboardPage = () => {
@@ -13,18 +12,15 @@ const DashboardPage = () => {
       {/* MESSAGEMOMENT STATS CARDS */}
       <MessageMomentStatsCards />
 
-      {/* REAL TIME GLOBAL ACTIVITY CARD */}
-      <RealTimeGlobalActivityCard />
+      {/* REAL TIME MONITORING MAP CARD */}
+      <RealTimeMonitoringMapCard />
 
-      {/* REAL TIME SESSION MONITORING */}
+      {/* REAL TIME SESSION MONITORING CARD */}
       <RealTimeSessionMonitoringCard />
 
-      {/* REAL TIME USERS MONITORING */}
-      <RealTimeUsersMonitoringCard />
-
-      <div className="w-full h-full grid md:grid-cols-2 grid-cols-1 gap-4 mb-[2rem]">
+      <div className="w-full h-full grid md:grid-cols-2 grid-cols-1 md:gap-4 gap-8">
         {/* USERS AVERAGE CHAT ROOM CARD */}
-        <UsersAverageChatRoomCard />
+        <UsersAvgChatRoomCard />
 
         {/* RETURNED VISITORS CARD */}
         <ReturnedVisitorsCard />

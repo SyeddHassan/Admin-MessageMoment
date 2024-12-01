@@ -19,10 +19,10 @@ const TableFilters = ({
       <div className="md:flex max-sm:w-full max-md:grid max-md:grid-cols-2 font-inter font-medium">
         <Button
           onClick={() => setSelectedTab("View All")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border lg:text-[16px] md:text-[14px] text-[12px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
             selectedTab === "View All"
-              ? "bg-selected-color text-white"
-              : "bg-white hover:bg-hovered-color text-heading-color"
+              ? "bg-selected-color text-theme-heading-color"
+              : "bg-white hover:bg-general-hover text-heading-color"
           }`}
         >
           View All
@@ -30,10 +30,10 @@ const TableFilters = ({
 
         <Button
           onClick={() => setSelectedTab("Standard")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border lg:text-[16px] md:text-[14px] text-[12px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
             selectedTab === "Standard"
-              ? "bg-selected-color text-white"
-              : "bg-white hover:bg-hovered-color text-heading-color"
+              ? "bg-selected-color text-theme-heading-color"
+              : "bg-white hover:bg-general-hover text-heading-color"
           }`}
         >
           Standard
@@ -41,10 +41,10 @@ const TableFilters = ({
 
         <Button
           onClick={() => setSelectedTab("Secure")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border lg:text-[16px] md:text-[14px] text-[12px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
             selectedTab === "Secure"
-              ? "bg-selected-color text-white"
-              : "bg-white hover:bg-hovered-color text-heading-color"
+              ? "bg-selected-color text-theme-heading-color"
+              : "bg-white hover:bg-general-hover text-heading-color"
           }`}
         >
           Secure
@@ -52,10 +52,10 @@ const TableFilters = ({
 
         <Button
           onClick={() => setSelectedTab("Wallet")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border lg:text-[16px] md:text-[14px] text-[12px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
             selectedTab === "Wallet"
-              ? "bg-selected-color text-white"
-              : "bg-white hover:bg-hovered-color text-heading-color"
+              ? "bg-selected-color text-theme-heading-color"
+              : "bg-white hover:bg-general-hover text-heading-color"
           }`}
         >
           Wallet
@@ -63,10 +63,10 @@ const TableFilters = ({
       </div>
 
       {/* SEARCH  */}
-      <div className="flex items-center gap-4">
+      <div className="lg:w-fit md:w-[90%] w-full flex items-center gap-4">
         <Input
           placeholder="Search Session ID"
-          className="h-[40px] rounded-[6px] lg:w-[300px] w-full focus:outline-2 focus-visible:ring-secondary-theme"
+          className="h-[40px] rounded-[6px] lg:w-[300px] w-full focus:outline-2 focus-visible:ring-secondary-theme bg-transparent text-[14px] placeholder:text-[14px]"
           value={filteredInput}
           onChange={(e) => setFilteredInput(e.target.value)}
         />
@@ -75,12 +75,10 @@ const TableFilters = ({
           onClick={() => {
             setFilteredInput(filteredInput);
           }}
-          className="h-[40px] border hover:bg-blue-50 card-filter-button-box-shadow"
+          className="h-[40px] border hover:bg-general-hover text-heading-color card-filter-button-box-shadow"
         >
           <ListFilter />
-          <span className="lg:text-[16px] md:text-[14px] text-[12px]">
-            Filter
-          </span>
+          <span className="text-[14px] font-inter tracking-wider">Filter</span>
         </Button>
       </div>
     </div>

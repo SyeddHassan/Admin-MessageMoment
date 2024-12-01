@@ -27,7 +27,7 @@ const SmallScreensSidebar = () => {
   return (
     <Drawer open={isDrawerOpen} onOpenChange={closeDrawer} direction="left">
       <DrawerContent
-        className="bg-black border-none rounded-none"
+        className="bg-primary-theme border-none rounded-none"
         aria-describedby={undefined}
       >
         <DrawerHeader>
@@ -36,24 +36,24 @@ const SmallScreensSidebar = () => {
 
             <ArrowLeftToLine
               onClick={closeDrawer}
-              className="h-[22px] w-[22px] text-white"
+              className="h-[22px] w-[22px] text-theme-heading-color"
             />
           </DrawerTitle>
         </DrawerHeader>
 
-        <ul className="w-[90%] mx-auto p-2 py-8 flex flex-col gap-4">
+        <ul className="w-[90%] mx-auto p-2 py-8 flex flex-col gap-8 rounded-lg">
           {SidebarNavigationData.map((item, index) => (
             <Link key={index} href={item.link} onClick={closeDrawer}>
               <li
-                className={`flex gap-4 p-2 h-fit text-white rounded-md ${
+                className={`flex gap-4 p-2 h-fit text-theme-heading-color rounded-lg ${
                   item.page === 8 || item.page === 7 || item.page === 6
                     ? "items-start"
                     : "items-center"
-                } ${pathname === item.link ? "bg-[#27272A] " : ""}`}
+                } ${pathname === item.link ? "bg-secondary-theme" : ""}`}
               >
                 {item.icon}
                 <p
-                  className={`text-[14px] w-[calc(100%-20px)] text-white font-inter font-semibold ${
+                  className={`text-[14px] w-[calc(100%-20px)] text-theme-heading-color font-inter font-semibold ${
                     item.page === 8 || item.page === 7 || item.page === 6
                       ? "-translate-y-[2px]"
                       : ""

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import Logo from "../../public/logo-white.svg";
-import MiniLogo from "../../public/android-chrome-512x512.png";
+import MiniLogo from "../../public/logo-shortcut.png";
 import {
   Tooltip,
   TooltipContent,
@@ -63,12 +63,12 @@ const LargeScreensSidebar = () => {
                         item.page === 8 || item.page === 7 || item.page === 6
                           ? "items-start"
                           : "items-center"
-                      } ${pathname === item.link ? "bg-[#27272A] " : ""}`}
+                      } ${pathname === item.link ? "bg-secondary-theme" : ""}`}
                     >
                       <Link href={item.link}>
                         {item.icon}
                         <p
-                          className={`text-[16px] w-[calc(100%-20px)] text-white font-inter font-semibold ${
+                          className={`text-[16px] w-[calc(100%-20px)] text-theme-heading-color font-inter font-semibold ${
                             item.page === 8 ||
                             item.page === 7 ||
                             item.page === 6
@@ -93,7 +93,7 @@ const LargeScreensSidebar = () => {
                           <SidebarMenuButton
                             asChild
                             className={`w-full flex-center ${
-                              pathname === item.link ? "bg-[#27272A]" : ""
+                              pathname === item.link ? "bg-secondary-theme" : ""
                             }`}
                           >
                             <Link href={item.link}>{item.icon}</Link>

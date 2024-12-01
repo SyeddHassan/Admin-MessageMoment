@@ -3,6 +3,8 @@ import { PluginAPI } from "tailwindcss/types/config";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
+  darkMode: ["class"],
+
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -21,12 +23,15 @@ export default {
         "primary-theme": "var(--primary-theme)",
         "secondary-theme": "var(--secondary-theme)",
 
+        "general-hover": "var(--general-hover)",
+        "primary-theme-hover": "var(--primary-theme-hover)",
+        "secondary-theme-hover": "var(--secondary-theme-hover)",
+        "selected-color": "var(--selected-color)",
+
         "heading-color": "var(--heading-color)",
         "paragraph-color": "var(--paragraph-color)",
-
-        "hovered-color": "var(--hovered-color)",
-        "secondary-theme-hovered-color": "var(--secondary-theme-hovered-color)",
-        "selected-color": "var(--selected-color)",
+        "theme-heading-color": "var(--theme-heading-color)",
+        "theme-paragraph-color": "var(--theme-paragraph-color)",
 
         border: "var(--border)",
 
@@ -58,15 +63,12 @@ export default {
       },
 
       screens: {
-        "2xs": "240px",
         xs: "320px",
         sm: "480px",
         md: "768px",
         lg: "1024px",
         xl: "1440px",
         "2xl": "1536px",
-        "3xl": "1920px",
-        "4xl": "2560px",
       },
     },
   },

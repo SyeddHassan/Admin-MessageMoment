@@ -1,24 +1,24 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart01 } from "@/components/partials/line-charts";
+import { LineChart03 } from "@/components/partials/line-charts";
 
 const FilePeakTimeCard = () => {
   return (
     <Card
       id="FilePeakTimeSection"
-      className="w-full h-full !rounded-[0.5rem] !card-box-shadow lg:col-span-1 md:col-span-2 col-span-1 lg:order-3 md:order-2 order-3"
+      className="w-full h-full !rounded-[0.5rem] !card-box-shadow col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
-        <CardTitle className="lg:text-[1rem] lg:leading-[18px] text-[14px] leading-[16px] font-inter text-heading-color font-medium">
+        <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
           Files Peak Time
         </CardTitle>
       </CardHeader>
 
       {/* FILE PEAK TIME LINE CHART */}
-      <CardContent className="lg:pb-12 pb-[5rem] h-full flex-center mx-auto">
-        <LineChart01
+      <CardContent className="pb-[5rem] h-full flex-center mx-auto">
+        <LineChart03
           chartData={[
             {
               name: "Standard",

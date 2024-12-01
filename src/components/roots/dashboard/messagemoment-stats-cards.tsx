@@ -6,34 +6,50 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const MessageMomentStatsCards = () => {
   return (
-    <section
-      className={
-        "w-full sm:flex sm:flex-wrap grid grid-cols-2 max-lg:justify-center max-lg:items-center gap-4"
-      }
-    >
+    <section className="w-full grid xl:grid-cols-5 sm:grid-cols-4 grid-cols-1 gap-4">
       {MessageMomentStatsCardsData.map((data) => (
         <Card
           key={data.stats}
-          className={`sm:w-[300px] h-[130px] cursor-pointer rounded-[0.75rem] card-box-showdow-02 !animation-standard flex-center ${
-            data.stats === 5 ? "col-span-2" : ""
+          className={`w-full lg:h-[130px] h-[180px] cursor-pointer rounded-[0.75rem] card-box-showdow-02 !animation-standard flex-center ${
+            data.stats === 1
+              ? "lg:col-span-1 sm:col-span-2 col-span-1"
+              : data.stats === 2
+              ? "xl:col-span-1 sm:col-span-2 col-span-1"
+              : data.stats === 3
+              ? "lg:col-span-1 sm:col-span-4 col-span-1"
+              : data.stats === 4
+              ? "xl:col-span-1 sm:col-span-2 col-span-1"
+              : data.stats === 5
+              ? "xl:col-span-1 sm:col-span-2 col-span-1"
+              : ""
           }`}
         >
-          <CardContent className="flex items-center justify-center sm:gap-8 gap-4 p-0">
+          <CardContent
+            className={`flex items-center justify-center gap-4 p-0 ${
+              data.stats === 1
+                ? "md:flex-row flex-col md:text-start text-center"
+                : data.stats === 2
+                ? "md:flex-row flex-col md:text-start text-center"
+                : data.stats === 3
+                ? "sm:flex-row flex-col sm:text-start text-center"
+                : data.stats === 4
+                ? "md:flex-row flex-col md:text-start text-center"
+                : data.stats === 5
+                ? "md:flex-row flex-col md:text-start text-center"
+                : ""
+            }`}
+          >
             <div
-              className={`sm:w-[3rem] w-[2.5rem] sm:h-[3rem] h-[2.5rem] rounded-[0.5rem] flex-center text-white`}
+              className={`w-[3rem] h-[3rem] rounded-[0.5rem] flex-center text-white`}
               style={{ backgroundColor: data.bgColor }}
             >
               {data.icon}
             </div>
-            <div
-              className={`flex flex-col gap-1 translate-y-[2px] ${
-                data.stats === 5 ? "" : "max-sm:w-[50%]"
-              }`}
-            >
-              <h1 className="font-inter text-heading-color lg:text-[16px] md:text-[14px] text-[12px] lg:leading-[18px] md:leading-[16px] leading-[14px]">
+            <div className="flex flex-col gap-1">
+              <h1 className="font-inter font-medium text-heading-color text-[16px] leading-[20px]">
                 {data.title}
               </h1>
-              <p className="sm:text-[16px] text-[14px] font-semibold">
+              <p className="text-[16px] leading-[20px] font-semibold">
                 {data.detail}
               </p>
             </div>

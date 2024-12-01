@@ -1,8 +1,8 @@
 import { DrawerProvider } from "@/contexts/drawer-context";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-import Sidebar from "@/layouts/sidebar";
 import Header from "@/layouts/header";
+import Sidebar from "@/layouts/sidebar";
 
 export default function RootLayout({
   children,

@@ -11,13 +11,13 @@ const ReturnedVisitorsCard = () => {
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
-        <CardTitle className="lg:text-[1rem] lg:leading-[18px] text-[14px] leading-[16px] font-inter text-heading-color font-medium">
+        <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
           Returned Visitors
         </CardTitle>
       </CardHeader>
 
       {/* RETURNED VISITORS DOUGHNUT CHART */}
-      <CardContent className="pb-12 h-full flex-center mx-auto">
+      <CardContent className="lg:pb-12 pb-[5rem] h-full flex-center mx-auto">
         <DoughnutChart01
           label="Returning Visitors"
           percentage={82}

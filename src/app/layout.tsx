@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { NextThemeProvider } from "@/providers/next-theme-provider";
 
-// STYLE SHEETS SOURCE
+// STYLE SHEETS SOURCES
 import "./globals.css";
-import "../styles/scrollbars.css";
 import "../styles/includes.css";
-import "../../node_modules/flag-icons/css/flag-icons.min.css";
+import "../../node_modules/flag-icons/css/flag-icons.css";
 
 // FONT CONFIGURATIONS
 const inter = Inter({
@@ -83,12 +83,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        suppressHydrationWarning={true}
+        cz-shortcut-listen="true"
         className={`${inter.variable} ${jetbrains_mono.variable} antialiased`}
       >
-        {children}
+        <NextThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </NextThemeProvider>
       </body>
     </html>
   );

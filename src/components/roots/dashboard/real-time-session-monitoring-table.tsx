@@ -1,50 +1,37 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import React, { useState, useMemo } from "react";
 
-import {
-  ColumnDefWithMeta,
-  RealTimeSessionMonitoringTableProps,
-  RealTimeSessionMonitoringTableProps01,
-} from "@/interfaces/dashboard-page-interfaces";
+import { RealTimeSessionMonitoringTableProps } from "@/interfaces/dashboard-page-interfaces";
 
 import { RealTimeSessionMonitoringTableData } from "@/constants/dashboard-page-data";
 
 import {
   flexRender,
-  getCoreRowModel,
+  ColumnDef,
   useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import { Progress } from "@/components/ui/progress";
+import SessionMonitoringTableManageButton from "./session-monitoring-table-manage-button";
 
-import {
-  ArrowRight,
-  ArrowUpWideNarrow,
-  Clock,
-  FileText,
-  MapPin,
-  OctagonAlert,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Clock, FileText, MapPin, Users } from "lucide-react";
 
 const RealTimeSessionMonitoringTable = ({
   selectedTab,
   filteredInput,
-}: RealTimeSessionMonitoringTableProps01) => {
+}: RealTimeSessionMonitoringTableProps) => {
   const [data] = useState(RealTimeSessionMonitoringTableData);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const rowsPerPage = 10;
 
   const filteredData = useMemo(() => {
     let filtered =
@@ -61,54 +48,25 @@ const RealTimeSessionMonitoringTable = ({
     return filtered;
   }, [data, selectedTab, filteredInput]);
 
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-
-  const paginatedData = useMemo(
-    () =>
-      filteredData.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage
-      ),
-    [filteredData, currentPage, rowsPerPage]
-  );
-
-  const columns: ColumnDefWithMeta<RealTimeSessionMonitoringTableProps>[] = [
-    {
-      accessorKey: "index",
-      header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] md:text-[14px] text-[12px]">
-            Index
-          </span>
-          <ArrowUpWideNarrow size={16} />
-        </div>
-      ),
-      cell: ({ row }) => (
-        <div>{(currentPage - 1) * rowsPerPage + row.index + 1}.</div>
-      ),
-      meta: { className: "lg:w-[5%] text-center rounded-[15px_0px_0px_0px]" },
-    },
-
+  const columns: ColumnDef<
+    (typeof RealTimeSessionMonitoringTableData)[number]
+  >[] = [
     {
       accessorKey: "sessionId",
       header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] md:text-[14px] text-[12px]">
-            Session ID
-          </span>
+        <div className="w-full flex items-center gap-4">
+          <span className="font-semibold text-[14px]">Session ID</span>
           <FileText size={16} />
         </div>
       ),
-      meta: { className: "lg:w-[12%]" },
+      cell: ({ row }) => row.getValue("sessionId"),
     },
 
     {
       accessorKey: "participants",
       header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] md:text-[14px] text-[12px]">
-            Participants
-          </span>
+        <div className="w-full flex items-center gap-4">
+          <span className="font-semibold text-[14px]">Participants</span>
           <Users size={16} />
         </div>
       ),
@@ -126,22 +84,19 @@ const RealTimeSessionMonitoringTable = ({
             <Progress
               value={percentage}
               className="h-[7px] max-lg:w-[200px] bg-[#e9ecef]"
-              indicatorClassName="bg-[#0069f7] rounded-[50rem]"
+              indicatorClassName="bg-[#FFC107] rounded-[50rem]"
             />
             <p className="md:text-[14px] text-[12px]">{percentage}%</p>
           </div>
         );
       },
-      meta: { className: "lg:w-[28%] lg:pr-12" },
     },
 
     {
       accessorKey: "sessionType",
       header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] md:text-[14px] text-[12px]">
-            Type
-          </span>
+        <div className="w-full flex items-center gap-4">
+          <span className="font-semibold text-[14px] ">Type</span>
           <ArrowRight size={16} />
         </div>
       ),
@@ -150,10 +105,8 @@ const RealTimeSessionMonitoringTable = ({
     {
       accessorKey: "location",
       header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] md:text-[14px] text-[12px]">
-            Location
-          </span>
+        <div className="w-full flex items-center gap-4">
+          <span className="font-semibold text-[14px]">Location</span>
           <MapPin size={16} />
         </div>
       ),
@@ -161,11 +114,11 @@ const RealTimeSessionMonitoringTable = ({
         const location = row.original.location;
         const locationCode = row.original.locationCode.toLowerCase();
         return (
-          <div className="flex items-center lg:gap-8 gap-4">
+          <div className="flex items-center gap-4">
             <span
-              className={`w-4 h-4 rounded-full fi fi-${locationCode} !bg-cover`}
+              className={`w-[30px] h-[20px] rounded-full fi fi-${locationCode} flag-shadow !bg-cover`}
             />
-            <span>{location}</span>
+            <span className="w-[calc(100%-30px)]">{location}</span>
           </div>
         );
       },
@@ -174,10 +127,8 @@ const RealTimeSessionMonitoringTable = ({
     {
       accessorKey: "duration",
       header: () => (
-        <div className="w-full flex items-center lg:gap-8 gap-4">
-          <span className="font-semibold lg:text-[16px] text-[14px]">
-            Duration
-          </span>
+        <div className="w-full flex items-center gap-4">
+          <span className="font-semibold text-[14px]">Duration</span>
           <Clock size={16} />
         </div>
       ),
@@ -186,126 +137,99 @@ const RealTimeSessionMonitoringTable = ({
     {
       id: "actions",
       header: "",
-      meta: { className: "rounded-[0px_15px_0px_0px]" },
-      cell: () => (
-        <Button className="w-full bg-secondary-theme hover:bg-secondary-theme-hovered-color text-white font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
-          Manage
-        </Button>
-      ),
+      cell: () => <SessionMonitoringTableManageButton />,
     },
   ];
 
   const table = useReactTable({
-    data: paginatedData,
+    data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: { pagination: { pageSize: 10 } },
   });
 
   return (
-    <div className="w-full overflow-x-auto">
-      {filteredData.length === 0 ? (
-        <div className="flex-center flex-col gap-4 my-8">
-          <OctagonAlert className="lg:w-[5%] md:w-[15%] w-[25%] lg:h-[5%] md:h-[15%] h-[25%] text-heading-color" />
-          <h1 className="text-center">No session ID found.</h1>
-        </div>
-      ) : (
-        <>
-          <table
-            key={currentPage}
-            className="min-w-full border-b rounded-lg border-gray-200 text-left"
-          >
-            <thead className="bg-black font-inter text-white">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      key={header.id}
-                      className={`px-4 py-4 border-b border-gray-300 ${
-                        (
-                          header.column
-                            .columnDef as ColumnDefWithMeta<RealTimeSessionMonitoringTableProps>
-                        ).meta?.className || ""
-                      }`}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="hover:bg-gray-50">
-                  {row.getVisibleCells().map((cell) => {
-                    const metaClassName =
-                      (
-                        cell.column
-                          .columnDef as ColumnDefWithMeta<RealTimeSessionMonitoringTableProps>
-                      ).meta?.className || "";
-
-                    return (
-                      <td
-                        key={cell.id}
-                        className={`px-4 py-2 border-b border-gray-200 md:text-[14px] text-[12px] ${metaClassName}`}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* PAGINATION */}
-          <Pagination className="w-full flex items-center justify-center mt-4">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  isActive={currentPage !== 1}
-                  className="ffont-inter text-heading-color text-[14px] cursor-pointer hover:underline border-none"
-                />
-              </PaginationItem>
-              {Array.from({ length: totalPages }, (_, i) => (
-                <PaginationItem key={i}>
-                  <PaginationLink
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage(i + 1);
-                    }}
-                    isActive={currentPage === i + 1}
-                    className="cursor-pointer"
+    <div className="lg:h-[860px] lg:flex lg:flex-col lg:justify-between">
+      <div className="overflow-auto">
+        <Table>
+          <TableHeader className="font-inter tracking-wide text-heading-color font-semibold dark:bg-[#494af8]/10 bg-[#000000]/10 rounded-lg">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id} className="border-none">
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className={`${
+                      header.column.id === "actions"
+                        ? "rounded-[0px_6px_6px_0px]"
+                        : header.column.id === "sessionId"
+                        ? "rounded-[6px_0px_0px_6px]"
+                        : ""
+                    }`}
                   >
-                    {i + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              {totalPages > 5 && <PaginationEllipsis />}
-              <PaginationItem>
-                <PaginationNext
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-                  }}
-                  isActive={currentPage < totalPages}
-                  className={`font-inter text-heading-color text-[14px] cursor-pointer hover:underline border-none`}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </>
-      )}
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No session ID found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* TABLE PAGINATION */}
+      <div className="flex items-center justify-between py-4">
+        <span className="font-semibold font-jetbrains_mono">
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}
+        </span>
+
+        <div className="flex items-center gap-4">
+          <Button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="font-inter text-heading-color border hover:bg-general-hover text-[14px] tracking-wider"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="font-inter bg-secondary-theme text-theme-heading-color hover:bg-secondary-theme-hover text-[14px] tracking-wider"
+          >
+            Next
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

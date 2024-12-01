@@ -2,9 +2,9 @@ import React from "react";
 
 import { SectionalHeadingProps } from "@/interfaces/partials-components-interfaces";
 
-import { Separator } from "../ui/separator";
-
 import { cn } from "@/lib/utils";
+
+import { Separator } from "../ui/separator";
 import { DateRangePicker } from "./date-range-picker";
 import NewCampaignButton from "./new-campaign-button";
 

@@ -5,10 +5,10 @@ import React from "react";
 import { useDrawer } from "@/contexts/drawer-context";
 
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
-import ComponentSearchBar from "../components/roots/layouts/component-search-bar";
-import InboxMenu from "@/components/roots/layouts/inbox-menu";
-import NotificationMenu from "@/components/roots/layouts/notification-menu";
-import ProfileMenu from "@/components/roots/layouts/profile-menu";
+import DashboardSearchbar from "@/components/roots/layouts/dashboard-searchbar";
+import DashboardProfileMenu from "@/components/roots/layouts/dashboard-profile-menu";
+import DashboardInboxMenu from "@/components/roots/layouts/dashboard-inbox-menu";
+import DashboardNotificationMenu from "@/components/roots/layouts/dashboard-notification-menu";
 
 import { Menu } from "lucide-react";
 
@@ -21,26 +21,26 @@ const Header = () => {
       <div className="layout-standard h-full flex items-center justify-between">
         {/* HEADER LEFT SIDE */}
         <div className="flex items-center gap-4">
-          {/* LARGE SCREEN SIDEBAR BUTTON */}
+          {/* LARGE SCREENS SIDEBAR BUTTON */}
           {!open && <SidebarTrigger className="lg:block hidden" />}
 
-          {/* SMALL & MIDDLE SCREEN SIDEBAR BUTTON */}
+          {/* SMALL & MIDDLE SCREENS SIDEBAR BUTTON */}
           <Menu className="h-[20px] w-[20px] lg:hidden" onClick={openDrawer} />
 
           {/* COMPONENT SEARCH BAR */}
-          <ComponentSearchBar />
+          <DashboardSearchbar />
         </div>
 
         {/* HEADER RIGHT SIDE */}
         <div className="flex items-center gap-4">
-          {/* SYSTEM INBOX */}
-          <InboxMenu />
+          {/* DASHBOARD INBOX MENU */}
+          <DashboardInboxMenu />
 
-          {/* SYSTEM NOTIFICATION */}
-          <NotificationMenu />
+          {/* DASHBOARD NOTIFICATION MENU */}
+          <DashboardNotificationMenu />
 
-          {/* SYSTEM PROFILE */}
-          <ProfileMenu />
+          {/* DASHBOARD PROFILE MENU */}
+          <DashboardProfileMenu />
         </div>
       </div>
     </header>

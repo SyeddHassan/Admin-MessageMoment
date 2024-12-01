@@ -1,96 +1,174 @@
-"use client";
+import { useRef, useLayoutEffect } from "react";
 
-import { useEffect, useRef } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import { GaugeChartOptions } from "@/utils/gauge-chart-options";
 import { GaugeChartProps } from "@/interfaces/partials-components-interfaces";
 
-// Register Chart.js components and plugins
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
-
-// Function to create a gradient
-function createGradient(startColor: string, endColor: string) {
-  if (typeof window === "undefined") return startColor;
-  const ctx = document.createElement("canvas").getContext("2d");
-  if (!ctx) return startColor;
-
-  const gradient = ctx.createLinearGradient(0, 0, 200, 0);
-  gradient.addColorStop(0, startColor);
-  gradient.addColorStop(1, endColor);
-  return gradient;
-}
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import * as am5radar from "@amcharts/amcharts5/radar";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 const GaugeChart = ({
-  data,
+  chartId,
   value,
-  title,
-  isHalfGauge = false,
-  startColor = "#4ade80",
-  endColor = "#0ea5e9",
-  backgroundColor = "#e5e7eb",
-  barWidth = 20,
+  axisRange0Color,
+  axisRange1Color,
 }: GaugeChartProps) => {
-  const chartRef = useRef<ChartJS<"doughnut", number[], string> | null>(null);
+  const chartRef = useRef<HTMLDivElement>(null);
 
-  // Re-render chart on prop updates
-  useEffect(() => {
-    chartRef.current?.update();
-  }, [
-    value,
-    data,
-    isHalfGauge,
-    startColor,
-    endColor,
-    backgroundColor,
-    barWidth,
-  ]);
+  useLayoutEffect(() => {
+    if (!chartRef.current) return;
 
-  const circumference = isHalfGauge ? 180 : 360;
-  const rotation = isHalfGauge ? -90 : 0;
+    const root = am5.Root.new(chartId);
+    root.setThemes([am5themes_Animated.new(root)]);
 
-  // Modify the dataset to apply the gradient and other options
-  const processedData = {
-    ...data,
-    datasets: data.datasets.map((dataset) => {
-      // Ensure backgroundColor is defined
-      if (!dataset.backgroundColor) {
-        return dataset; // If backgroundColor is undefined, return dataset as-is
+    const chart = root.container.children.push(
+      am5radar.RadarChart.new(root, {
+        panX: false,
+        panY: false,
+        startAngle: 180,
+        endAngle: 360,
+      })
+    );
+
+    const axisRenderer = am5radar.AxisRendererCircular.new(root, {
+      innerRadius: -40,
+    });
+
+    axisRenderer.grid.template.setAll({
+      stroke: root.interfaceColors.get("background"),
+      visible: true,
+      strokeOpacity: 0.8,
+    });
+
+    const xAxis = chart.xAxes.push(
+      am5xy.ValueAxis.new(root, {
+        maxDeviation: 0,
+        min: 0,
+        max: 100,
+        strictMinMax: true,
+        renderer: axisRenderer,
+      })
+    );
+
+    const axisDataItem = xAxis.makeDataItem({});
+
+    const clockHand = am5radar.ClockHand.new(root, {
+      pinRadius: 50,
+      radius: am5.percent(100),
+      innerRadius: 50,
+      bottomWidth: 0,
+      topWidth: 0,
+    });
+
+    clockHand.pin.setAll({
+      fillOpacity: 0,
+      strokeOpacity: 0.5,
+      stroke: am5.color(0x000000),
+      strokeWidth: 1,
+      strokeDasharray: [2, 2],
+    });
+
+    clockHand.hand.setAll({
+      fillOpacity: 0,
+      strokeOpacity: 0.5,
+      stroke: am5.color(0x000000),
+      strokeWidth: 0.5,
+    });
+
+    const bullet = axisDataItem.set(
+      "bullet",
+      am5xy.AxisBullet.new(root, {
+        sprite: clockHand,
+      })
+    );
+
+    xAxis.createAxisRange(axisDataItem);
+
+    const label = chart.radarContainer.children.push(
+      am5.Label.new(root, {
+        centerX: am5.percent(50),
+        centerY: am5.percent(50),
+        textAlign: "center",
+        fontSize: "1.5em",
+        fill: am5.color(0x000000),
+        fontFamily: "JetBrains Mono",
+      })
+    );
+
+    axisDataItem.set("value", value);
+
+    bullet.get("sprite").on("rotation", () => {
+      const value = axisDataItem.get("value") || 0;
+      label.set("text", Math.round(value).toString() + "%");
+    });
+
+    const axisRange0 = xAxis.createAxisRange(
+      xAxis.makeDataItem({
+        above: true,
+        value: 0,
+        endValue: value,
+      })
+    );
+
+    if (axisRange0) {
+      const axisFill = axisRange0.get("axisFill");
+      if (axisFill) {
+        axisFill.setAll({
+          visible: true,
+          fill: am5.color(axisRange0Color),
+        });
       }
+      const label = axisRange0.get("label");
+      if (label) {
+        label.setAll({
+          forceHidden: true,
+        });
+      }
+    }
 
-      // Explicitly type `color` and `index` in the `map` function
-      return {
-        ...dataset,
-        backgroundColor: (dataset.backgroundColor as string[]).map(
-          (color: string, index: number) =>
-            index === 0 ? createGradient(startColor, endColor) : color
-        ),
-        circumference,
-        rotation,
-      };
-    }),
-  };
+    const axisRange1 = xAxis.createAxisRange(
+      xAxis.makeDataItem({
+        above: true,
+        value: value,
+        endValue: 100,
+      })
+    );
 
-  const options = GaugeChartOptions(barWidth, isHalfGauge);
+    if (axisRange1) {
+      const axisFill = axisRange1.get("axisFill");
+      if (axisFill) {
+        axisFill.setAll({
+          visible: true,
+          fill: am5.color(axisRange1Color),
+        });
+      }
+      const label = axisRange1.get("label");
+      if (label) {
+        label.setAll({
+          forceHidden: true,
+        });
+      }
+    }
 
-  return (
-    <div className="flex justify-center w-full">
-      <div className="relative">
-        <Doughnut data={processedData} options={options} ref={chartRef} />
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-sm text-gray-500 mt-1">{title}</span>
-          <span
-            className="text-3xl font-bold text-gray-800 mt-5"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            {value}%
-          </span>
-        </div>
-      </div>
-    </div>
-  );
+    axisDataItem.animate({
+      key: "value",
+      to: value,
+      duration: 500,
+      easing: am5.ease.out(am5.ease.cubic),
+    });
+
+    xAxis.get("renderer").labels.template.setAll({
+      fill: am5.color(0x000000),
+      fontFamily: "JetBrains Mono",
+      fontSize: "0.9em",
+    });
+
+    chart.bulletsContainer.set("mask", undefined);
+
+    return () => root.dispose();
+  }, [chartId, value, axisRange0Color, axisRange1Color]);
+
+  return <div id={chartId} ref={chartRef} className="w-full h-full" />;
 };
 
 export default GaugeChart;

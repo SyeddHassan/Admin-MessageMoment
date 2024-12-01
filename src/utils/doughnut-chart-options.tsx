@@ -30,8 +30,8 @@ export const DoughnutChart02Options = (): ChartOptions<"doughnut"> => {
           padding: 20,
           font: {
             family: "Inter",
-            size: 12,
-            weight: "bold",
+            size: 14,
+            weight: "normal",
           },
         },
       },
@@ -76,5 +76,22 @@ export const DoughnutChart02Options = (): ChartOptions<"doughnut"> => {
       },
     },
     cutout: "30%",
+  };
+};
+
+export const DoughnutChart03Options = (): ChartOptions<"doughnut"> => {
+  return {
+    cutout: "85%",
+    plugins: {
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        display: false,
+      },
+      datalabels: {
+        display: false,
+      },
+    },
   };
 };

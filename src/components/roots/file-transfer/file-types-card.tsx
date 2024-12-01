@@ -1,31 +1,40 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PieChart } from "@/components/partials/pie-chart";
+import PieChart from "@/components/partials/pie-chart";
 
 const FileTypesCard = () => {
   return (
     <Card
       id="FileTypesSection"
-      className="w-full h-full !rounded-[0.5rem] !card-box-shadow lg:col-span-2 md:col-span-4 col-span-1 lg:order-1 md:order-3 order-1"
+      className="w-full !rounded-[0.5rem] !card-box-shadow md:col-span-2 col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
-        <CardTitle className="lg:text-[1rem] lg:leading-[18px] text-[14px] leading-[16px] font-inter text-heading-color font-medium">
-          Files By Type
+        <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
+          Files by Type
         </CardTitle>
       </CardHeader>
 
       {/* FILE TYPES PIE CHART */}
-      <CardContent className="lg:pb-12 pb-[5rem] md:w-[70%] h-full flex-center mx-auto">
+      <CardContent className="w-full lg:h-[600px] h-[400px] py-8">
         <PieChart
+          chartId="FileTypesPieChart"
           data={[
-            { label: "Audio", value: 16, color: "#4CAF50" },
-            { label: "Image", value: 18, color: "#FFC107" },
-            { label: "Video", value: 16, color: "#F44336" },
-            { label: "Document", value: 15, color: "#2196F3" },
-            { label: "Zip", value: 15, color: "#9C27B0" },
-            { label: "Other", value: 20, color: "#FF9800" },
+            { category: "Image", value: 501.9, color: "#34a853" },
+            { category: "Audio", value: 301.9, color: "#fbbc05" },
+            {
+              category: "Zip",
+              value: 201.1,
+              color: "#ea4335",
+            },
+            {
+              category: "Video",
+              value: 165.8,
+              color: "#4285f4",
+            },
+            { category: "Documents", value: 139.9, color: "#ff6f00" },
+            { category: "Other", value: 139.9, color: "#f02f1d" },
           ]}
         />
       </CardContent>

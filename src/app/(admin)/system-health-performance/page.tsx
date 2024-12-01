@@ -1,9 +1,9 @@
 import React from "react";
 
-import SystemHealthPage from "@/pages/system-health-page";
+import SystemHealthPerformancePage from "@/pages/system-health-performance-page";
 
 const page = () => {
-  return <SystemHealthPage />;
+  return <SystemHealthPerformancePage />;
 };
 
 export default page;

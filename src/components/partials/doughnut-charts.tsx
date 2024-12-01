@@ -1,7 +1,21 @@
 "use client";
 
 import React, { useMemo } from "react";
+
+import {
+  DoughnutChart01Props,
+  DoughnutChart02Props,
+  DoughnutChart03Props,
+} from "@/interfaces/partials-components-interfaces";
+
+import {
+  DoughnutChart01Options,
+  DoughnutChart02Options,
+  DoughnutChart03Options,
+} from "@/utils/doughnut-chart-options";
+
 import { Doughnut } from "react-chartjs-2";
+
 import {
   ArcElement,
   Tooltip,
@@ -10,16 +24,6 @@ import {
   Chart as ChartJS,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
-import {
-  DoughnutChart01Props,
-  DoughnutChart02Props,
-} from "@/interfaces/partials-components-interfaces";
-
-import {
-  DoughnutChart01Options,
-  DoughnutChart02Options,
-} from "@/utils/doughnut-chart-options";
 
 ChartJS.register(
   ArcElement,
@@ -82,6 +86,40 @@ export const DoughnutChart02 = ({ chartData }: DoughnutChart02Props) => {
   return (
     <div className="relative mx-auto aspect-square w-full">
       <Doughnut data={data} options={options} />
+    </div>
+  );
+};
+
+export const DoughnutChart03 = ({
+  percentage,
+  label,
+}: DoughnutChart03Props) => {
+  const chartData = useMemo(
+    () => ({
+      labels: [label],
+      datasets: [
+        {
+          data: [percentage, 100 - percentage],
+          backgroundColor: ["#FAC858", "#f2f2f2"],
+          borderWidth: 0,
+        },
+      ],
+    }),
+    [percentage, label]
+  );
+
+  const options = DoughnutChart03Options();
+
+  return (
+    <div className="relative mx-auto aspect-square">
+      <Doughnut data={chartData} options={options} />
+
+      <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
+        <span className="text-heading-color lg:text-[16px] text-[14px] lg:leading-[18.9px] leading-[16.9px] font-semibold font-inter">
+          {label}
+        </span>
+        <span className="text-[46px] font-bold">{percentage}%</span>
+      </div>
     </div>
   );
 };
