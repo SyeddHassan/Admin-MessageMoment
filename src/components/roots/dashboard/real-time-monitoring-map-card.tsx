@@ -46,7 +46,7 @@ const RealTimeMonitoringMapCard = () => {
       </CardHeader>
 
       {/* REAL TIME MAP ACTIVITIES & STATS */}
-      <CardContent className="py-5 lg:px-[1.5rem] px-1 lg:h-[550px] flex gap-6 md:flex-row flex-col">
+      <CardContent className="py-5 lg:px-[1.5rem] px-1 md:h-[550px] h-[700px] flex md:gap-0 gap-6 md:flex-row flex-col">
         <RealTimeMapActivities selectedTab={selectedTab} />
       </CardContent>
     </Card>

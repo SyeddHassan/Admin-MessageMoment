@@ -23,6 +23,17 @@ export interface DateRangePickerProps {
   setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
 }
 
+// REAL TIME MAP
+export interface RealTimeMapProps {
+  data: {
+    countryName: string;
+    countryCode: string;
+    session: number;
+    latitude: number;
+    longitude: number;
+  }[];
+}
+
 // DOUGHNUT CHARTS
 export interface DoughnutChart01Props {
   label: string;
