@@ -7,7 +7,7 @@ const UsersAvgChatRoomCard = () => {
   return (
     <Card
       id="UserAverageChatRoomSection"
-      className="w-full h-full !rounded-[0.5rem] !card-box-shadow col-span-1"
+      className="w-full !rounded-[0.5rem] !card-box-shadow col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
@@ -17,7 +17,7 @@ const UsersAvgChatRoomCard = () => {
       </CardHeader>
 
       {/* USER AVERAGE CHAT ROOM DOUGHNUT CHART */}
-      <CardContent className="pb-12 h-full flex-center mx-auto">
+      <CardContent className="pb-[5rem] h-full flex-center mx-auto">
         <DoughnutChart01
           label="Avg. Users: 7/10"
           percentage={70}

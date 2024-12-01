@@ -42,7 +42,7 @@ const SessionMonitoringTableManageButton = () => {
                 chat room and remove related data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter>
+            <AlertDialogFooter className="max-md:mt-4">
               <AlertDialogCancel className="text-[14px] text-heading-color font-inter hover:bg-general-hover">
                 Cancel
               </AlertDialogCancel>

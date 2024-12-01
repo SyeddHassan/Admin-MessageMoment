@@ -8,7 +8,7 @@ import ReturnedVisitorsCard from "@/components/roots/dashboard/returned-visitors
 
 const DashboardPage = () => {
   return (
-    <main className="h-full page-layout-standard section-margin-standard">
+    <main className="page-layout-standard section-margin-standard">
       {/* MESSAGEMOMENT STATS CARDS */}
       <MessageMomentStatsCards />
 
@@ -18,7 +18,7 @@ const DashboardPage = () => {
       {/* REAL TIME SESSION MONITORING CARD */}
       <RealTimeSessionMonitoringCard />
 
-      <div className="w-full h-full grid md:grid-cols-2 grid-cols-1 md:gap-4 gap-8">
+      <div className="w-full grid md:grid-cols-2 grid-cols-1 md:gap-4 gap-8">
         {/* USERS AVERAGE CHAT ROOM CARD */}
         <UsersAvgChatRoomCard />
 

@@ -136,7 +136,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "Brazil",
     locationCode: "BR",
-    duration: "1h 12m 04s",
+    duration: 4324,
   },
   {
     sessionId: 18475692345981,
@@ -144,7 +144,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "Germany",
     locationCode: "DE",
-    duration: "0h 45m 33s",
+    duration: 2733,
   },
   {
     sessionId: 12938475672938,
@@ -152,7 +152,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "Japan",
     locationCode: "JP",
-    duration: "2h 11m 21s",
+    duration: 7931,
   },
   {
     sessionId: 12783456923875,
@@ -160,7 +160,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "India",
     locationCode: "IN",
-    duration: "1h 05m 47s",
+    duration: 3927,
   },
   {
     sessionId: 13849576283947,
@@ -168,7 +168,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "USA",
     locationCode: "US",
-    duration: "1h 30m 12s",
+    duration: 5412,
   },
   {
     sessionId: 19847562938475,
@@ -176,7 +176,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "France",
     locationCode: "FR",
-    duration: "1h 18m 50s",
+    duration: 7130,
   },
   {
     sessionId: 12837456928374,
@@ -184,7 +184,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "Australia",
     locationCode: "AU",
-    duration: "2h 05m 40s",
+    duration: 7500,
   },
   {
     sessionId: 12938475623485,
@@ -192,7 +192,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "Brazil",
     locationCode: "BR",
-    duration: "1h 50m 30s",
+    duration: 6630,
   },
   {
     sessionId: 19837465982347,
@@ -200,7 +200,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "Germany",
     locationCode: "DE",
-    duration: "0h 38m 15s",
+    duration: 2295,
   },
   {
     sessionId: 12839475692834,
@@ -208,7 +208,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "Japan",
     locationCode: "JP",
-    duration: "0h 59m 05s",
+    duration: 3545,
   },
   {
     sessionId: 13984756239485,
@@ -216,7 +216,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "India",
     locationCode: "IN",
-    duration: "1h 25m 12s",
+    duration: 5112,
   },
   {
     sessionId: 12398475628347,
@@ -224,7 +224,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "USA",
     locationCode: "US",
-    duration: "1h 10m 43s",
+    duration: 4243,
   },
   {
     sessionId: 12783945692834,
@@ -232,7 +232,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "France",
     locationCode: "FR",
-    duration: "1h 35m 55s",
+    duration: 5755,
   },
   {
     sessionId: 13849576238947,
@@ -240,7 +240,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "Australia",
     locationCode: "AU",
-    duration: "2h 12m 25s",
+    duration: 7945,
   },
   {
     sessionId: 19873456928374,
@@ -248,7 +248,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "Brazil",
     locationCode: "BR",
-    duration: "1h 45m 33s",
+    duration: 6333,
   },
   {
     sessionId: 12938475623489,
@@ -256,7 +256,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "Germany",
     locationCode: "DE",
-    duration: "0h 50m 20s",
+    duration: 3020,
   },
   {
     sessionId: 19837465982348,
@@ -264,7 +264,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "Japan",
     locationCode: "JP",
-    duration: "2h 01m 10s",
+    duration: 7260,
   },
   {
     sessionId: 12839475692835,
@@ -272,7 +272,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Wallet",
     location: "India",
     locationCode: "IN",
-    duration: "0h 42m 55s",
+    duration: 2575,
   },
   {
     sessionId: 13984756239486,
@@ -280,7 +280,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Standard",
     location: "USA",
     locationCode: "US",
-    duration: "1h 15m 37s",
+    duration: 4537,
   },
   {
     sessionId: 12398475628348,
@@ -288,7 +288,7 @@ export const RealTimeSessionMonitoringTableData = [
     sessionType: "Secure",
     location: "France",
     locationCode: "FR",
-    duration: "0h 55m 28s",
+    duration: 3328,
   },
 ];
 

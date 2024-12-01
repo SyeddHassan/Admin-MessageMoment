@@ -6,6 +6,8 @@ import { RealTimeSessionMonitoringTableProps } from "@/interfaces/dashboard-page
 
 import { RealTimeSessionMonitoringTableData } from "@/constants/dashboard-page-data";
 
+import { FormatDuration } from "@/functions/formate-duration";
+
 import {
   flexRender,
   ColumnDef,
@@ -122,6 +124,7 @@ const RealTimeSessionMonitoringTable = ({
           </div>
         );
       },
+      size: 200, // Fixed width in pixels
     },
 
     {
@@ -132,12 +135,18 @@ const RealTimeSessionMonitoringTable = ({
           <Clock size={16} />
         </div>
       ),
+      cell: ({ row }) => {
+        const durationInSeconds = row.getValue("duration") as number;
+        return <span>{FormatDuration(durationInSeconds)}</span>;
+      },
+      size: 150, // Fixed width in pixels
     },
 
     {
       id: "actions",
       header: "",
       cell: () => <SessionMonitoringTableManageButton />,
+      size: 100,
     },
   ];
 
@@ -159,11 +168,19 @@ const RealTimeSessionMonitoringTable = ({
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className={`${
+                    className={`max-lg:!w-[180px] ${
                       header.column.id === "actions"
-                        ? "rounded-[0px_6px_6px_0px]"
+                        ? "rounded-[0px_6px_6px_0px] lg:w-[250px]"
                         : header.column.id === "sessionId"
-                        ? "rounded-[6px_0px_0px_6px]"
+                        ? "rounded-[6px_0px_0px_6px] lg:w-[200px]"
+                        : header.column.id === "participants"
+                        ? "lg:w-[500px]"
+                        : header.column.id === "sessionType"
+                        ? "lg:w-[180px] lg:pl-14"
+                        : header.column.id === "location"
+                        ? "lg:w-[200px]"
+                        : header.column.id === "duration"
+                        ? "lg:w-[200px]"
                         : ""
                     }`}
                   >
@@ -183,7 +200,12 @@ const RealTimeSessionMonitoringTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={`${
+                        cell.column.id === "sessionType" && "lg:pl-14"
+                      }`}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
