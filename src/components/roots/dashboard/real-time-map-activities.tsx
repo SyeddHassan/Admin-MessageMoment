@@ -12,8 +12,8 @@ import { Progress } from "@/components/ui/progress";
 const RealTimeMap = dynamic(() => import("../../partials/real-time-map"), {
   ssr: false,
   loading: () => (
-    <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full flex-center">
-      <MapPinned className="w-[20%] h-[20%] text-secondary-theme" />
+    <div className="w-full h-full flex-center text-secondary-theme">
+      <MapPinned size={220} />
     </div>
   ),
 });
@@ -41,13 +41,7 @@ const RealTimeMapActivities = ({ selectedTab }: RealTimeMapActivitiesProps) => {
       {/* REAL TIME MAP */}
       <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full">
         {selectedTab === "sessions" ? (
-          loading ? (
-            <div className="w-full h-full flex-center text-secondary-theme">
-              <MapPinned size={220} />
-            </div>
-          ) : (
-            <RealTimeMap MapData={RealTimeMapActivityData} />
-          )
+          <RealTimeMap MapData={RealTimeMapActivityData} />
         ) : null}
       </div>
 
