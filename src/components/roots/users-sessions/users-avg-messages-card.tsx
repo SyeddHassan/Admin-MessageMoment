@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const LineChart03 = dynamic(
-  () => import("../../partials/line-charts").then((mod) => mod.LineChart03),
+  () => import("../../partials/line-charts-v2").then((mod) => mod.LineChart03),
   {
     ssr: false,
     loading: () => (
