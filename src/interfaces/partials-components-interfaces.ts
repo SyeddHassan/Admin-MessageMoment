@@ -25,7 +25,7 @@ export interface DateRangePickerProps {
 
 // REAL TIME MAP
 export interface RealTimeMapProps {
-  data: {
+  MapData: {
     countryName: string;
     countryCode: string;
     session: number;

@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 
 import { DoughnutChart01Props } from "@/interfaces/partials-components-interfaces";
 
-import { DoughnutChart01Options } from "@/utils/doughnut-chart-options";
+import { DoughnutChart01Options } from "@/options/doughnut-chart-options";
 
 import { Doughnut } from "react-chartjs-2";
 import {

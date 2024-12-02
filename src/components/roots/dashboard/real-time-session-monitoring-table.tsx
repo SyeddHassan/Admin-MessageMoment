@@ -6,7 +6,7 @@ import { RealTimeSessionMonitoringTableProps } from "@/interfaces/dashboard-page
 
 import { RealTimeSessionMonitoringTableData } from "@/constants/dashboard-page-data";
 
-import { FormatDuration } from "@/functions/formate-duration";
+import { FormatDuration } from "@/utils/formate-duration";
 
 import {
   flexRender,
