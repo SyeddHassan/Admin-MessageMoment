@@ -17,7 +17,7 @@ const DeviceUsersCard = () => {
       </CardHeader>
 
       {/* DEVICE USERS DOUGHNUT CHART */}
-      <CardContent className="pb-[3rem] lg:w-[85%] h-full flex-center mx-auto">
+      <CardContent className="lg:pb-[3rem] pb-[5rem] lg:w-[85%] h-full flex-center mx-auto">
         <DoughnutChart02
           chartData={[
             { label: "Desktop", percentage: 15, color: "#FF8A65" }, 

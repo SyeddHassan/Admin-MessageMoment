@@ -15,6 +15,8 @@ import UsersSharingLinkCard from "@/components/roots/users-sessions/users-sharin
 import DeviceUsersCard from "@/components/roots/users-sessions/device-users-card";
 import BroswerUsersCard from "@/components/roots/users-sessions/broswer-users-card";
 import OperatingSystemUsersCard from "@/components/roots/users-sessions/operating-system-users-card";
+import UsersAvgInactivityCard from "@/components/roots/users-sessions/users-avg-inactivity-card";
+import UsersAvgMessagesCard from "@/components/roots/users-sessions/users-avg-messages-card";
 
 const UsersSessionsPage = () => {
   const [date, setDate] = React.useState<DateRange | undefined>({
@@ -31,7 +33,7 @@ const UsersSessionsPage = () => {
         setDate={setDate}
       />
 
-      <div className="w-full grid lg:grid-cols-3 grid-cols-1 md:gap-4 gap-8">
+      <div className="w-full grid lg:grid-cols-3 grid-cols-1 lg:gap-4 gap-8">
         {/* ACTIVE USERS SESSIONS CARD  */}
         <ActiveUsersSessionsCard />
 
@@ -39,7 +41,7 @@ const UsersSessionsPage = () => {
         <SessionTypeCard />
       </div>
 
-      <div className="w-full grid lg:grid-cols-3 grid-cols-1 md:gap-4 gap-8">
+      <div className="w-full grid lg:grid-cols-3 grid-cols-1 lg:gap-4 gap-8">
         {/* ACTIVE REGION SESSIONS CARD  */}
         <ActiveRegionSessionsCard />
 
@@ -47,15 +49,15 @@ const UsersSessionsPage = () => {
         <SessionDurationCard />
       </div>
 
-      <div className="w-full grid lg:grid-cols-3 grid-cols-1 md:gap-4 gap-8">
+      <div className="w-full grid lg:grid-cols-3 grid-cols-1 lg:gap-4 gap-8">
         {/* PEAK USAGE TIME CARD  */}
-        <div className="col-span-2 bg-black">dsasd</div>
+        <div className="lg:col-span-2 bg-black">dsasd</div>
 
         {/* PEAK TIMES CARD */}
         <PeakTimesCard />
       </div>
 
-      <div className="w-full grid lg:grid-cols-4 grid-cols-1 md:gap-4 gap-8">
+      <div className="w-full grid md:grid-cols-4 grid-cols-1 md:gap-4 gap-8">
         {/* ACTIVE USERS SESSION TIME CARD */}
         <ActiveUsersSessionTimeCard />
 
@@ -72,6 +74,14 @@ const UsersSessionsPage = () => {
 
         {/* OPERATING SYSTEM USERS CARD */}
         <OperatingSystemUsersCard />
+      </div>
+
+      <div className="w-full grid md:grid-cols-2 md:gap-4 gap-8">
+        {/* USER AVERAGE MESSAGES CARD */}
+        <UsersAvgMessagesCard />
+
+        {/* USER AVERAGE INACTIVITY CARD */}
+        <UsersAvgInactivityCard />
       </div>
     </main>
   );

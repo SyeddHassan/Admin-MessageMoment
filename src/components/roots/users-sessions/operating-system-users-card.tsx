@@ -17,7 +17,7 @@ const OperatingSystemUsersCard = () => {
       </CardHeader>
 
       {/* OPERATING SYSTEM USERS DOUGHNUT CHART */}
-      <CardContent className="pb-[3rem] lg:w-[85%] h-full flex-center mx-auto">
+      <CardContent className="lg:pb-[3rem] pb-[5rem] lg:w-[85%] h-full flex-center mx-auto">
         <DoughnutChart02
           chartData={[
             { label: "Mac", percentage: 30, color: "#F06292" },

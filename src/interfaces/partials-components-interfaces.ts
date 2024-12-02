@@ -88,6 +88,10 @@ export interface LineChart02Props {
     low: number;
   }[];
 }
+export interface LineChart03Props {
+  chartId: string;
+  data: { date: string; value: number }[];
+}
 
 // PIE CHARTS
 export interface PieChart01Props {
