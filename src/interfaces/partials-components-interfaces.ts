@@ -71,3 +71,25 @@ export interface BarChart01Props {
     projectMode: number;
   }[];
 }
+
+// LINE CHARTS
+export interface LineChart01Props {
+  chartData: {
+    name: string;
+    value: string | number;
+    color: string;
+    data: number[];
+  }[];
+}
+export interface LineChart02Props {
+  chartData: {
+    date: string;
+    high: number;
+    low: number;
+  }[];
+}
+
+// PIE CHARTS
+export interface PieChart01Props {
+  chartData: { label: string; percentage: number; color: string }[];
+}

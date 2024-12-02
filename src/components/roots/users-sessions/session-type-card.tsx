@@ -20,8 +20,9 @@ const SessionTypeCard = () => {
       <CardContent className="pb-[5rem] h-full md:w-[80%] flex-center mx-auto">
         <DoughnutChart02
           chartData={[
-            { label: "Successful", percentage: 30, color: "#8FD19E" },
-            { label: "Failed", percentage: 20, color: "#F28B82" },
+            { label: "Standard", percentage: 30, color: "#8FD19E" },
+            { label: "Secure", percentage: 20, color: "#F28B82" },
+            { label: "Wallet", percentage: 50, color: "#AEC6FF" },
           ]}
         />
       </CardContent>

@@ -29,7 +29,7 @@ import Loading from "@/components/partials/loader";
 
 import { ArrowDown, ArrowUp, LoaderCircle } from "lucide-react";
 
-const AcctiveUsersSessionsCard = () => {
+const ActiveUsersSessionsCard = () => {
   const [selectedTab, setSelectedTab] = useState("View All");
 
   return (
@@ -136,4 +136,4 @@ const AcctiveUsersSessionsCard = () => {
   );
 };
 
-export default AcctiveUsersSessionsCard;
+export default ActiveUsersSessionsCard;
