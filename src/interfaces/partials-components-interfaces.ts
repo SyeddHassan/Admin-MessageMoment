@@ -1,6 +1,16 @@
+import { ComponentType } from "react";
 import { DateRange } from "react-day-picker";
 
-export interface TableFiltersProps {
+// TABLE FILTERS
+export interface FilterButtons01Props {
+  selectedTab: string;
+  setSelectedTab: (tab: string) => void;
+}
+export interface FilterButtons02Props {
+  selectedTab: string;
+  setSelectedTab: (tab: string) => void;
+}
+export interface FilterButtons03Props {
   selectedTab: string;
   setSelectedTab: (tab: string) => void;
   filteredInput: string;
@@ -23,6 +33,12 @@ export interface DateRangePickerProps {
   setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
 }
 
+export interface LoadingProps {
+  containerClassName?: string;
+  Icon: ComponentType<{ className?: string }>;
+  iconClassName?: string;
+}
+
 // REAL TIME MAP
 export interface RealTimeMapProps {
   MapData: {
@@ -39,4 +55,19 @@ export interface DoughnutChart01Props {
   label: string;
   percentage: number;
   backgroundColor: [string, string];
+}
+export interface DoughnutChart02Props {
+  chartData: { label: string; percentage: number; color: string }[];
+}
+
+// BAR CHARTS
+export interface BarChart01Props {
+  chartId?: string;
+  selectedTab?: string;
+  data: {
+    date: string;
+    users: number;
+    sessions: number;
+    projectMode: number;
+  }[];
 }

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import TableFilters from "@/components/partials/table-filters";
+import { FilterButtons03 } from "@/components/partials/filter-buttons";
 import { Badge } from "@/components/ui/badge";
 import RealTimeSessionMonitoringTable from "./real-time-session-monitoring-table";
 
@@ -26,7 +26,8 @@ const RealTimeSessionMonitoringCard = () => {
       </CardHeader>
 
       <CardContent className="py-5 flex gap-12 flex-col">
-        <TableFilters
+        {/* FILTER BUTTONS */}
+        <FilterButtons03
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           filteredInput={filteredInput}

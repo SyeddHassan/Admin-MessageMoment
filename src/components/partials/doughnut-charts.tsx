@@ -2,9 +2,15 @@
 
 import React, { useMemo } from "react";
 
-import { DoughnutChart01Props } from "@/interfaces/partials-components-interfaces";
+import {
+  DoughnutChart01Props,
+  DoughnutChart02Props,
+} from "@/interfaces/partials-components-interfaces";
 
-import { DoughnutChart01Options } from "@/options/doughnut-chart-options";
+import {
+  DoughnutChart01Options,
+  DoughnutChart02Options,
+} from "@/options/doughnut-chart-options";
 
 import { Doughnut } from "react-chartjs-2";
 import {
@@ -55,6 +61,28 @@ export const DoughnutChart01 = ({
         </span>
         <span className="text-[46px] font-bold">{percentage}%</span>
       </div>
+    </div>
+  );
+};
+
+export const DoughnutChart02 = ({ chartData }: DoughnutChart02Props) => {
+  const data = {
+    labels: chartData.map((data) => data.label),
+    datasets: [
+      {
+        data: chartData.map((data) => data.percentage),
+        backgroundColor: chartData.map((data) => data.color),
+        borderColor: "#fff",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const options = DoughnutChart02Options();
+
+  return (
+    <div className="relative mx-auto aspect-square w-full">
+      <Doughnut data={data} options={options} />
     </div>
   );
 };
