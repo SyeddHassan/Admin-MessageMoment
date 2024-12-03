@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import SessionMonitoringTableManageButton from "../roots/dashboard/session-monitoring-table-manage-button";
+import SessionMonitoringTableManageButton from "./session-monitoring-table-manage-button";
 
 import { ArrowRight, Clock, FileText, MapPin, Users } from "lucide-react";
 

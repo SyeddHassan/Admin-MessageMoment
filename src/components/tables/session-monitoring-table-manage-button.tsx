@@ -21,10 +21,10 @@ import { Separator } from "@/components/ui/separator";
 const SessionMonitoringTableManageButton = () => {
   return (
     <Popover>
-      <PopoverTrigger className="w-full h-[40px] max-lg:px-6 bg-white hover:bg-general-hover text-heading-color font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
+      <PopoverTrigger className="w-full h-[40px] max-lg:px-6 bg-white hover:bg-general-hover dark:bg-background-color dark:hover:bg-primary-theme-hover text-heading-color font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
         Manage
       </PopoverTrigger>
-      <PopoverContent className="bg-white p-6 flex flex-col gap-4">
+      <PopoverContent className="bg-white dark:bg-background-color border-none p-6 flex flex-col gap-4">
         {/* OPTION 1 */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -32,7 +32,7 @@ const SessionMonitoringTableManageButton = () => {
               End Chat
             </p>
           </AlertDialogTrigger>
-          <AlertDialogContent className="bg-white">
+          <AlertDialogContent className="bg-white dark:bg-background-color border-none">
             <AlertDialogHeader>
               <AlertDialogTitle className="font-inter text-heading-color font-bold">
                 Are you absolutely sure?
@@ -43,7 +43,7 @@ const SessionMonitoringTableManageButton = () => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="max-md:mt-4">
-              <AlertDialogCancel className="text-[14px] text-heading-color font-inter hover:bg-general-hover">
+              <AlertDialogCancel className="text-[14px] text-heading-color font-inter hover:bg-general-hover border-border">
                 Cancel
               </AlertDialogCancel>
               <AlertDialogAction className="text-[14px] bg-secondary-theme text-theme-heading-color font-inter hover:bg-secondary-theme-hover">

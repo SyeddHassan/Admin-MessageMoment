@@ -17,7 +17,7 @@ const AppHeaderInboxMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer hover:bg-general-hover p-2 rounded-full">
-        <Badge className="bg-[#ebf3fe] text-primary-theme absolute top-[14px] -translate-x-[2px] rounded-[50rem] z-[1]">
+        <Badge className="bg-[#ececff] text-secondary-theme absolute top-[14px] -translate-x-[2px] rounded-[50rem] z-[1] font-bold">
           12
         </Badge>
         <Inbox className="relative text-heading-color" />

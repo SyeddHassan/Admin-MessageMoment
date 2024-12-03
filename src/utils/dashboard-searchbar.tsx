@@ -98,19 +98,19 @@ const DashboardSearchbar = () => {
         {dropdownVisible && (
           <>
             {suggestions.length > 0 ? (
-              <ul className="absolute top-[42px] left-0 w-full bg-white border rounded-md shadow-lg z-10 max-h-[300px] overflow-y-auto p-4 flex flex-col gap-4">
+              <ul className="absolute top-[42px] left-0 w-full bg-white dark:bg-background-color border dark:border-none rounded-md shadow-lg z-10 max-h-[300px] overflow-y-auto p-4 flex flex-col gap-4">
                 {suggestions.map((section) => (
                   <li
                     key={section.sectionId}
                     onClick={() => handleSelect(section)}
-                    className="p-2 rounded-lg font-inter text-[14px] text-heading-color font-semibold tracking-wide cursor-pointer animation-standard hover:bg-primary-theme hover:text-theme-heading-color"
+                    className="p-2 font-inter text-[14px] text-heading-color font-semibold tracking-wide cursor-pointer hover:text-secondary-theme border-b dark:border-border"
                   >
                     {section.displaySectionName}
                   </li>
                 ))}
               </ul>
             ) : searchTerm.trim() ? (
-              <div className="absolute top-[42px] left-0 w-full bg-white border rounded-md shadow-lg z-10 p-4 text-sm text-heading-color font-inter tracking-wide flex items-center gap-2">
+              <div className="absolute top-[42px] left-0 w-full bg-white border dark:bg-background-color dark:border-none rounded-md shadow-lg z-10 p-4 text-sm text-heading-color font-inter tracking-wide flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-red-600" />
                 No searched section found
               </div>
