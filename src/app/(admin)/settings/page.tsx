@@ -1,9 +1,9 @@
 import React from "react";
 
-import SettingsPage from "@/pages/settings-page";
+import ThemePage from "@/pages/extras/theme-page";
 
 const page = () => {
-  return <SettingsPage />;
+  return <ThemePage />;
 };
 
 export default page;

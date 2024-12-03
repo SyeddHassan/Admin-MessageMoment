@@ -1,8 +1,7 @@
-import { DrawerProvider } from "@/contexts/drawer-context";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-import Header from "@/layouts/header";
-import Sidebar from "@/layouts/sidebar";
+import { AppSidebar } from "@/components/layouts/app-sidebar";
+import AppHeader from "@/components/layouts/app-header";
 
 export default function RootLayout({
   children,
@@ -11,13 +10,11 @@ export default function RootLayout({
 }>) {
   return (
     <SidebarProvider>
-      <DrawerProvider>
-        <Sidebar />
-        <main className="w-full">
-          <Header />
-          {children}
-        </main>
-      </DrawerProvider>
+      <AppSidebar />
+      <main className="w-full">
+        <AppHeader />
+        {children}
+      </main>
     </SidebarProvider>
   );
 }

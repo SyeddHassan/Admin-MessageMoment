@@ -18,7 +18,6 @@ export default {
     extend: {
       colors: {
         "background-color": "var(--background-color)",
-        "contraction-background-color": "var(--contraction-background-color)",
 
         "primary-theme": "var(--primary-theme)",
         "secondary-theme": "var(--secondary-theme)",
@@ -49,6 +48,15 @@ export default {
           accent: "var(--sidebar-accent)",
           "accent-foreground": "var(--sidebar-accent-foreground)",
         },
+      },
+
+      boxShadow: {
+        "card-shadow-1": "0 0.375rem 1rem rgba(0, 0, 0, 0.1)",
+        "card-shadow-2": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+        "card-shadow-3":
+          "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+        "button-shadow":
+          "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
       },
 
       borderRadius: {
@@ -119,7 +127,10 @@ export default {
           marginBottom: "2rem",
         },
 
-        ".card-box-shadow": {
+        ".standard-card-styling": {
+          width: "100%",
+          borderRadius: "0.5rem",
+          border: "none",
           boxShadow: "0 0.375rem 1rem rgba(0, 0, 0, 0.1)",
         },
       });

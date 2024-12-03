@@ -3,17 +3,14 @@
 import React, { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import RealTimeMapActivities from "./real-time-map-activities";
 import { FilterButtons01 } from "@/components/partials/filter-buttons";
+import RealTimeMapActivities from "./real-time-map-activities";
 
 const RealTimeMonitoringMapCard = () => {
   const [selectedTab, setSelectedTab] = useState("sessions");
 
   return (
-    <Card
-      id="RealTimeMonitoringMapSection"
-      className="w-full !rounded-[0.5rem] !card-box-shadow"
-    >
+    <Card id="RealTimeMonitoringMapSection" className="!standard-card-styling">
       <CardHeader className="md:py-4 py-6 border-b border-border flex md:flex-row flex-col max-md:gap-4 items-center md:justify-between">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">

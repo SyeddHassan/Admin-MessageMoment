@@ -19,20 +19,20 @@ export const FilterButtons01 = ({
     <div className="flex max-sm:w-full font-inter font-medium">
       <Button
         onClick={() => setSelectedTab("sessions")}
-        className={`h-[40px] sm:w-[135px] w-full rounded-[6px_0_0_6px] border text-[14px] card-filter-button-box-shadow ${
+        className={`h-[40px] sm:w-[135px] w-full border-none rounded-[6px_0_0_6px] border text-[14px] !shadow-button-shadow ${
           selectedTab === "sessions"
             ? "bg-selected-color text-theme-heading-color"
-            : "bg-white hover:bg-general-hover text-heading-color"
+            : "bg-white dark:bg-background-color hover:bg-general-hover dark:hover:bg-primary-theme-hover text-heading-color"
         }`}
       >
         Sessions
       </Button>
       <Button
         onClick={() => setSelectedTab("users")}
-        className={`h-[40px] sm:w-[135px] w-full rounded-[0_6px_6px_0] border text-[14px] card-filter-button-box-shadow ${
+        className={`h-[40px] sm:w-[135px] w-full border-none rounded-[0_6px_6px_0] border text-[14px] !shadow-button-shadow ${
           selectedTab === "users"
             ? "bg-selected-color text-theme-heading-color"
-            : "bg-white hover:bg-general-hover text-heading-color"
+            : "bg-white dark:bg-background-color hover:bg-general-hover dark:hover:bg-primary-theme-hover text-heading-color"
         }`}
       >
         Users
@@ -49,7 +49,7 @@ export const FilterButtons02 = ({
     <div className="md:flex max-sm:w-full max-md:grid max-md:grid-cols-2 font-inter font-medium">
       <Button
         onClick={() => setSelectedTab("View All")}
-        className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+        className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
           selectedTab === "View All"
             ? "bg-selected-color text-theme-heading-color"
             : "bg-white hover:bg-general-hover text-heading-color"
@@ -60,7 +60,7 @@ export const FilterButtons02 = ({
 
       <Button
         onClick={() => setSelectedTab("Standard")}
-        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
           selectedTab === "Standard"
             ? "bg-selected-color text-theme-heading-color"
             : "bg-white hover:bg-general-hover text-heading-color"
@@ -71,7 +71,7 @@ export const FilterButtons02 = ({
 
       <Button
         onClick={() => setSelectedTab("Secure")}
-        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
           selectedTab === "Secure"
             ? "bg-selected-color text-theme-heading-color"
             : "bg-white hover:bg-general-hover text-heading-color"
@@ -82,7 +82,7 @@ export const FilterButtons02 = ({
 
       <Button
         onClick={() => setSelectedTab("Wallet")}
-        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+        className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
           selectedTab === "Wallet"
             ? "bg-selected-color text-theme-heading-color"
             : "bg-white hover:bg-general-hover text-heading-color"
@@ -106,7 +106,7 @@ export const FilterButtons03 = ({
       <div className="md:flex max-sm:w-full max-md:grid max-md:grid-cols-2 font-inter font-medium">
         <Button
           onClick={() => setSelectedTab("View All")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[6px_0_0_6px] rounded-[6px_0_0_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
             selectedTab === "View All"
               ? "bg-selected-color text-theme-heading-color"
               : "bg-white hover:bg-general-hover text-heading-color"
@@ -117,7 +117,7 @@ export const FilterButtons03 = ({
 
         <Button
           onClick={() => setSelectedTab("Standard")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_6px_0_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
             selectedTab === "Standard"
               ? "bg-selected-color text-theme-heading-color"
               : "bg-white hover:bg-general-hover text-heading-color"
@@ -128,7 +128,7 @@ export const FilterButtons03 = ({
 
         <Button
           onClick={() => setSelectedTab("Secure")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0] rounded-[0_0_0_6px] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
             selectedTab === "Secure"
               ? "bg-selected-color text-theme-heading-color"
               : "bg-white hover:bg-general-hover text-heading-color"
@@ -139,7 +139,7 @@ export const FilterButtons03 = ({
 
         <Button
           onClick={() => setSelectedTab("Wallet")}
-          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border text-[14px] card-filter-button-box-shadow max-md:col-span-1 ${
+          className={`h-[40px] sm:w-[135px] w-full md:rounded-[0_6px_6px_0] rounded-[0_0_6px_0] border text-[14px] !shadow-button-shadow max-md:col-span-1 ${
             selectedTab === "Wallet"
               ? "bg-selected-color text-theme-heading-color"
               : "bg-white hover:bg-general-hover text-heading-color"
@@ -162,7 +162,7 @@ export const FilterButtons03 = ({
           onClick={() => {
             setFilteredInput(filteredInput);
           }}
-          className="h-[40px] border hover:bg-general-hover text-heading-color card-filter-button-box-shadow"
+          className="h-[40px] border hover:bg-general-hover text-heading-color !shadow-button-shadow"
         >
           <ListFilter />
           <span className="text-[14px] font-inter tracking-wider">Filter</span>

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons03 } from "@/components/partials/filter-buttons";
 import { Badge } from "@/components/ui/badge";
-import RealTimeSessionMonitoringTable from "./real-time-session-monitoring-table";
+import RealTimeSessionMonitoringTable from "@/components/tables/real-time-session-monitoring-table";
 
 const RealTimeSessionMonitoringCard = () => {
   const [selectedTab, setSelectedTab] = useState("View All");
@@ -14,7 +14,7 @@ const RealTimeSessionMonitoringCard = () => {
   return (
     <Card
       id="RealTimeSessionMonitoringSection"
-      className="w-full !rounded-[0.5rem] !card-box-shadow"
+      className="!standard-card-styling"
     >
       <CardHeader className="py-4 border-b border-border flex items-center flex-row max-md:justify-center gap-4">
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">

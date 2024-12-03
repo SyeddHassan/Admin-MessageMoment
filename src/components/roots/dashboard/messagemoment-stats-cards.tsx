@@ -10,7 +10,7 @@ const MessageMomentStatsCards = () => {
       {MessageMomentStatsCardsData.map((data) => (
         <Card
           key={data.stats}
-          className={`w-full lg:h-[130px] h-[180px] cursor-pointer rounded-[0.75rem] card-box-showdow-02 !animation-standard flex-center ${
+          className={`w-full lg:h-[130px] h-[180px] cursor-pointer rounded-[0.75rem] shadow-card-shadow-1 hover:shadow-card-shadow-2 !animation-standard flex-center border-none ${
             data.stats === 1
               ? "lg:col-span-1 sm:col-span-2 col-span-1"
               : data.stats === 2

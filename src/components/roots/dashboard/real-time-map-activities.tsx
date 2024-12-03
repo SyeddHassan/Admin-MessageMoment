@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-import { RealTimeMapActivitiesProps } from "@/interfaces/dashboard-page-interfaces";
+import { RealTimeMapActivitiesProps } from "@/interfaces/dashboard-page-components-interfaces";
 
 import { RealTimeMapActivityData } from "@/constants/dashboard-page-data";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
-const RealTimeMap = dynamic(() => import("../../partials/real-time-map"), {
+const RealTimeMap = dynamic(() => import("../../map/real-time-map"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex-center text-secondary-theme">
