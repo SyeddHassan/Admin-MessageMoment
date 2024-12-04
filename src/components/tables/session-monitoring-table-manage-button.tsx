@@ -21,7 +21,7 @@ import { Separator } from "@/components/ui/separator";
 const SessionMonitoringTableManageButton = () => {
   return (
     <Popover>
-      <PopoverTrigger className="w-full h-[40px] max-lg:px-6 bg-white hover:bg-general-hover dark:bg-background-color dark:hover:bg-primary-theme-hover text-heading-color font-inter tracking-wide text-[14px] rounded-[6px] button-box-shadow">
+      <PopoverTrigger className="w-full h-[40px] max-lg:px-6 bg-white hover:bg-general-hover dark:bg-background-color dark:hover:bg-primary-theme-hover text-heading-color font-inter tracking-wide text-[14px] rounded-[6px] !shadow-button-shadow">
         Manage
       </PopoverTrigger>
       <PopoverContent className="bg-white dark:bg-background-color border-none p-6 flex flex-col gap-4">

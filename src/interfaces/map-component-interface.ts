@@ -1,4 +1,5 @@
 export interface RealTimeMapProps {
+  selectedTab: string;
   MapData: {
     countryName: string;
     countryCode: string;

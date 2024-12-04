@@ -40,9 +40,10 @@ const RealTimeMapActivities = ({ selectedTab }: RealTimeMapActivitiesProps) => {
     <>
       {/* REAL TIME MAP */}
       <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full">
-        {selectedTab === "sessions" ? (
-          <RealTimeMap MapData={RealTimeMapActivityData} />
-        ) : null}
+        <RealTimeMap
+          selectedTab={selectedTab}
+          MapData={RealTimeMapActivityData}
+        />
       </div>
 
       {/* REAL TIME MAP STATS */}

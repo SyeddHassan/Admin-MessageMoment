@@ -34,6 +34,7 @@ const RealTimeMap = ({ MapData }: RealTimeMapProps) => {
     );
 
     polygonSeries.mapPolygons.template.setAll({
+      tooltipText: "{name}",
       toggleKey: "active",
       interactive: true,
       fill: am5.color(0xe3e6e8),
