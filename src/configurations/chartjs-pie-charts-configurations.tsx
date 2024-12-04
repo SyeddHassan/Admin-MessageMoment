@@ -1,28 +1,11 @@
 import { ChartOptions, TooltipItem } from "chart.js";
 
-export const ChartJsDoughnutChart01Options = (): ChartOptions<"doughnut"> => {
-  return {
-    cutout: "85%",
-    plugins: {
-      tooltip: {
-        enabled: false,
-      },
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        display: false,
-      },
-    },
-  };
-};
-
-export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
+export const ChartJsPieChart01Options = (): ChartOptions<"doughnut"> => {
   return {
     responsive: true,
     plugins: {
       legend: {
-        position: "bottom" as const,
+        position: "right" as const,
         labels: {
           color: "#000",
           usePointStyle: true,
@@ -30,31 +13,15 @@ export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
           padding: 20,
           font: {
             family: "Inter",
-            size: 14,
-            weight: "normal",
+            size: 12,
+            weight: "bold",
           },
         },
       },
-
       tooltip: {
         enabled: true,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        borderWidth: 1,
-        cornerRadius: 8,
-        displayColors: false,
-        titleColor: "#000000",
-        titleFont: {
-          family: "Inter",
-          size: 14,
-          weight: "bold",
-        },
-        bodyFont: {
-          family: "Inter",
-          size: 12,
-        },
-        bodyColor: "#000000",
-        boxPadding: 5,
+        backgroundColor: "black",
+        cornerRadius: 2,
         callbacks: {
           label: function (tooltipItem: TooltipItem<"doughnut">) {
             const label = tooltipItem.label || "";
@@ -63,7 +30,6 @@ export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
           },
         },
       },
-
       datalabels: {
         display: true,
         color: "#fff",
@@ -75,6 +41,6 @@ export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
         },
       },
     },
-    cutout: "30%",
+    cutout: "0%",
   };
 };

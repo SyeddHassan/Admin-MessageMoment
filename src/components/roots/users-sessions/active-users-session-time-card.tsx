@@ -17,7 +17,7 @@ const ActiveUsersSessionTimeCard = () => {
       </CardHeader>
 
       {/* ACTIVE USERS AND SESSIONS BAR CHART */}
-      <CardContent className="h-[650px] pt-4 pb-12">
+      <CardContent className="h-[650px] py-4">
         <EChartsBarChart01 chartData={[10, 52, 200, 334, 390, 330, 220]} />
       </CardContent>
     </Card>

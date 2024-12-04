@@ -65,7 +65,7 @@ export const ChartJsDoughnutChart01 = ({
   );
 };
 
-export const DoughnutChart02 = ({ chartData }: ChartJsDoughnutChart02Props) => {
+export const ChartJsDoughnutChart02 = ({ chartData }: ChartJsDoughnutChart02Props) => {
   const data = {
     labels: chartData.map((data) => data.label),
     datasets: [
@@ -81,7 +81,7 @@ export const DoughnutChart02 = ({ chartData }: ChartJsDoughnutChart02Props) => {
   const options = ChartJsDoughnutChart02Options();
 
   return (
-    <div className="relative mx-auto aspect-square w-full">
+    <div className="relative mx-auto aspect-square lg:w-[400px]">
       <Doughnut data={data} options={options} />
     </div>
   );

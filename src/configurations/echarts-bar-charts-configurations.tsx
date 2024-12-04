@@ -57,12 +57,16 @@ export const EChartsBarChart01Options = (
       },
       axisLabel: {
         fontSize: 12,
+        fontFamily: "Inter",
+        color: "#000",
       },
     },
     yAxis: {
       type: "value",
       axisLabel: {
         fontSize: 12,
+        fontFamily: "Jetbrains mono",
+        color: "#000",
       },
     },
     series: [
@@ -72,12 +76,13 @@ export const EChartsBarChart01Options = (
         barWidth: "60%",
         data: data,
         itemStyle: {
-          color: "#5470C6",
+          color: "#16A34A",
         },
         label: {
           show: true,
           position: "top",
           fontSize: 12,
+          fontFamily: "Jetbrains mono",
         },
       },
     ],
