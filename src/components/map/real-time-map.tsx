@@ -10,7 +10,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import * as am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 
-import { RealTimeMapProps } from "@/interfaces/map-component-interface";
+import { RealTimeMapProps } from "@/interfaces/map/map-component-interface";
 
 const RealTimeMap = ({ MapData }: RealTimeMapProps) => {
   useEffect(() => {

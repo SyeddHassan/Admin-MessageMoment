@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 
-import { RealTimeSessionMonitoringTableProps } from "@/interfaces/table-components-interfaces";
+import { RealTimeSessionMonitoringTableProps } from "@/interfaces/tables/table-components-interfaces";
 
 import { RealTimeSessionMonitoringTableData } from "@/constants/dashboard-page-data";
 

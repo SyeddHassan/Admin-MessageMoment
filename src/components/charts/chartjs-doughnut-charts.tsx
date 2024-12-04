@@ -2,9 +2,15 @@
 
 import React, { useMemo } from "react";
 
-import { ChartJsDoughnutChart01Props } from "@/interfaces/charts/chartjs-doughnut-charts-interfaces";
+import {
+  ChartJsDoughnutChart01Props,
+  ChartJsDoughnutChart02Props,
+} from "@/interfaces/charts/chartjs-doughnut-charts-interfaces";
 
-import { ChartJsDoughnutChart01Options } from "@/configurations/chartjs-doughnut-charts-configuration";
+import {
+  ChartJsDoughnutChart01Options,
+  ChartJsDoughnutChart02Options,
+} from "@/configurations/chartjs-doughnut-charts-configuration";
 
 import { Doughnut } from "react-chartjs-2";
 import {
@@ -14,8 +20,15 @@ import {
   DoughnutController,
   Chart as ChartJS,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend, DoughnutController);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  DoughnutController,
+  ChartDataLabels
+);
 
 export const ChartJsDoughnutChart01 = ({
   percentage,
@@ -48,6 +61,28 @@ export const ChartJsDoughnutChart01 = ({
         </span>
         <span className="text-[46px] font-bold">{percentage}%</span>
       </div>
+    </div>
+  );
+};
+
+export const DoughnutChart02 = ({ chartData }: ChartJsDoughnutChart02Props) => {
+  const data = {
+    labels: chartData.map((data) => data.label),
+    datasets: [
+      {
+        data: chartData.map((data) => data.percentage),
+        backgroundColor: chartData.map((data) => data.color),
+        borderColor: "#fff",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const options = ChartJsDoughnutChart02Options();
+
+  return (
+    <div className="relative mx-auto aspect-square w-full">
+      <Doughnut data={data} options={options} />
     </div>
   );
 };
