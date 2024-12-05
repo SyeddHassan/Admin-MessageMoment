@@ -8,3 +8,8 @@ export interface AmChartsBarChart01Props {
     projectMode: number;
   }[];
 }
+
+export interface AmChartsBarChart02Props {
+  chartId?: string;
+  data: { month: string; sessions: number; activations: number }[];
+}

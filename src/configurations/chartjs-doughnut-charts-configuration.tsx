@@ -71,7 +71,7 @@ export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
         font: {
           family: "JetBrains Mono, sans-serif",
           size: 12,
-          weight: "bold",
+          weight: "normal",
         },
       },
     },

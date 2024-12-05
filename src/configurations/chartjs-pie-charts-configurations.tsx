@@ -37,7 +37,7 @@ export const ChartJsPieChart01Options = (): ChartOptions<"doughnut"> => {
         font: {
           family: "JetBrains Mono, sans-serif",
           size: 12,
-          weight: "bold",
+          weight: "normal",
         },
       },
     },

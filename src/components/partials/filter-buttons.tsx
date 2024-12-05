@@ -4,6 +4,7 @@ import {
   FilterButtons01Props,
   FilterButtons02Props,
   FilterButtons03Props,
+  FilterButtons04Props,
 } from "@/interfaces/partials-components-interfaces";
 
 import { Button } from "../ui/button";
@@ -168,6 +169,36 @@ export const FilterButtons03 = ({
           <span className="text-[14px] font-inter tracking-wider">Filter</span>
         </Button>
       </div>
+    </div>
+  );
+};
+
+export const FilterButtons04 = ({
+  selectedTab,
+  setSelectedTab,
+}: FilterButtons04Props) => {
+  return (
+    <div className="flex max-sm:w-full font-inter font-medium">
+      <Button
+        onClick={() => setSelectedTab("heatmap")}
+        className={`h-[40px] sm:w-[135px] w-full border-none rounded-[6px_0_0_6px] border text-[14px] !shadow-button-shadow ${
+          selectedTab === "heatmap"
+            ? "bg-selected-color text-theme-heading-color"
+            : "bg-white dark:bg-background-color hover:bg-general-hover dark:hover:bg-primary-theme-hover text-heading-color"
+        }`}
+      >
+        Heatmap
+      </Button>
+      <Button
+        onClick={() => setSelectedTab("barChart")}
+        className={`h-[40px] sm:w-[135px] w-full border-none rounded-[0_6px_6px_0] border text-[14px] !shadow-button-shadow ${
+          selectedTab === "barChart"
+            ? "bg-selected-color text-theme-heading-color"
+            : "bg-white dark:bg-background-color hover:bg-general-hover dark:hover:bg-primary-theme-hover text-heading-color"
+        }`}
+      >
+        Bar Chart
+      </Button>
     </div>
   );
 };

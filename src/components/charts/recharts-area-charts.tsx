@@ -76,25 +76,25 @@ export const ReChartsAreaChart01 = ({
               type="monotone"
               dataKey="standard"
               name="Standard"
-              stroke="#4338CA"
+              stroke="#434edd"
               strokeWidth={3}
-              fill="rgba(108, 93, 211, 0.3)"
+              fill="rgba(67, 78, 221, 0.2)"
             />
             <Area
               type="monotone"
               dataKey="secure"
               name="Secure"
-              stroke="#C53030"
+              stroke="#2b7d6b"
               strokeWidth={3}
-              fill="rgba(255, 92, 141, 0.3)"
+              fill="rgba(43, 125, 107, 0.2)"
             />
             <Area
               type="monotone"
               dataKey="wallet"
               name="Wallet"
-              stroke="#0F766E"
+              stroke="#FF9800"
               strokeWidth={3}
-              fill="rgba(52, 211, 153, 0.3)"
+              fill="rgba(255, 152, 0, 0.2)"
             />
           </AreaChart>
         </ResponsiveContainer>

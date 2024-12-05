@@ -16,6 +16,10 @@ export interface FilterButtons03Props {
   filteredInput: string;
   setFilteredInput: (input: string) => void;
 }
+export interface FilterButtons04Props {
+  selectedTab: string;
+  setSelectedTab: (tab: string) => void;
+}
 
 // SECTIONAL HEADING
 export interface SectionalHeadingProps {

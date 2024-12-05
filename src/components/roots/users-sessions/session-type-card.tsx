@@ -9,17 +9,17 @@ const SessionTypeCard = () => {
       <CardHeader className="lg:py-[30px] py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Files Status
+          Session Type
         </CardTitle>
       </CardHeader>
 
-      {/* FILE STATUS DOUGHNUT CHART */}
+      {/* SESSION TYPE DOUGHNUT CHART */}
       <CardContent className="pb-[5rem] h-full md:w-[80%] flex-center mx-auto">
         <ChartJsDoughnutChart02
           chartData={[
-            { label: "Standard", percentage: 30, color: "#00C49A" },
-            { label: "Secure", percentage: 20, color: "#FF6B6B" },
-            { label: "Wallet", percentage: 50, color: "#4C9AFF" },
+            { label: "Standard", percentage: 30, color: "#5ebce1" },
+            { label: "Secure", percentage: 20, color: "#3a56af" },
+            { label: "Wallet", percentage: 70, color: "#ab40e8" },
           ]}
         />
       </CardContent>

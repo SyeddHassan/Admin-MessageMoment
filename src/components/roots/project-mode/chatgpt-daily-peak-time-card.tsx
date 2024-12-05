@@ -1,47 +1,41 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartJsLineChart01 } from "../../charts/chartjs-line-charts";
+import { ChartJsLineChart01 } from "@/components/charts/chartjs-line-charts";
 
-const ActiveRegionSessionsCard = () => {
+const ChatGPTDailyPeakTimeCard = () => {
   return (
     <Card
-      id="ActiveRegionSessionsSection"
+      id="ChatGPTDailyPeakTimeSection"
       className="!standard-card-styling col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Most Active Regions (Sessions)
+          ChatGPT Daily Peak Time
         </CardTitle>
       </CardHeader>
 
-      {/* ACTIVE REGION SESSIONS LINE CHART */}
+      {/* CHATGPT DAILY PEAK TIME LINE CHART */}
       <CardContent className="pb-[5rem] h-full flex-center mx-auto">
         <ChartJsLineChart01
           chartData={[
             {
-              name: "Europe",
-              value: "14:00",
-              color: "#434edd",
+              name: "Morning",
+              value: "09:00",
+              color: "#FFA500",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
-              name: "America",
-              value: "09:40",
-              color: "#2b7d6b",
-              data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
-            },
-            {
-              name: "Asia",
+              name: "Afternoon",
               value: "14:30",
-              color: "#FF9800",
+              color: "#FF6347",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
-              name: "Oceania",
-              value: "14:30",
-              color: "#cb3d40",
+              name: "Nigth",
+              value: "22:45",
+              color: "#4169E1",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
           ]}
@@ -51,4 +45,4 @@ const ActiveRegionSessionsCard = () => {
   );
 };
 
-export default ActiveRegionSessionsCard;
+export default ChatGPTDailyPeakTimeCard;

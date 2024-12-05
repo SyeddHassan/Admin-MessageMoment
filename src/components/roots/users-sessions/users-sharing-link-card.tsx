@@ -20,12 +20,12 @@ const UsersSharingLinkCard = () => {
       <CardContent className="py-4 lg:h-[650px] lg:flex-center mx-auto">
         <ChartJsPieChart01
           chartData={[
-            { label: "Message", percentage: 20, color: "#495057" },
-            { label: "Mail", percentage: 25, color: "#FF7043" },
-            { label: "Whatsapp", percentage: 15, color: "#7E57C2" },
-            { label: "Telegram", percentage: 15, color: "#0288D1" },
-            { label: "Instagram", percentage: 15, color: "#43A047" },
-            { label: "Other", percentage: 20, color: "#FBC02D" },
+            { label: "Message", percentage: 20, color: "#2285f2" },
+            { label: "Mail", percentage: 25, color: "#d83b82" },
+            { label: "Whatsapp", percentage: 15, color: "#ab40e8" },
+            { label: "Telegram", percentage: 15, color: "#5e37ed" },
+            { label: "Instagram", percentage: 15, color: "#4dd992" },
+            { label: "Other", percentage: 20, color: "#f02f1d" },
           ]}
         />
       </CardContent>

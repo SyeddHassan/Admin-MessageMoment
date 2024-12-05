@@ -20,19 +20,19 @@ const PeakTimesCard = () => {
             {
               name: "Standard",
               value: "14:00",
-              color: "#FFC107",
+              color: "#434edd",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
               name: "Secure",
               value: "09:40",
-              color: "#9C27B0",
+              color: "#2b7d6b",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
             {
               name: "Wallet",
               value: "14:30",
-              color: "#00BCD4",
+              color: "#FF9800",
               data: [40, 50, 45, 55, 45, 50, 40, 55, 45],
             },
           ]}

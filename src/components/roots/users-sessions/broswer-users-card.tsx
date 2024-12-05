@@ -20,11 +20,11 @@ const BroswerUsersCard = () => {
       <CardContent className="py-4 mx-auto lg:h-[500px] lg:flex-center">
         <ChartJsPieChart01
           chartData={[
-            { label: "Chrome", percentage: 20, color: "#A5D6A7" },
-            { label: "Safari", percentage: 25, color: "#90CAF9" },
-            { label: "Firefox", percentage: 15, color: "#E6EE9C" },
-            { label: "Explorer", percentage: 15, color: "#FFCC80" },
-            { label: "Other", percentage: 20, color: "#B39DDB" },
+            { label: "Chrome", percentage: 20, color: "#2285f2" },
+            { label: "Safari", percentage: 25, color: "#d83b82" },
+            { label: "Firefox", percentage: 15, color: "#ab40e8" },
+            { label: "Explorer", percentage: 15, color: "#5e37ed" },
+            { label: "Other", percentage: 20, color: "#4dd992" },
           ]}
         />
       </CardContent>

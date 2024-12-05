@@ -76,7 +76,7 @@ export const EChartsBarChart01Options = (
         barWidth: "60%",
         data: data,
         itemStyle: {
-          color: "#16A34A",
+          color: "#2075c5",
         },
         label: {
           show: true,

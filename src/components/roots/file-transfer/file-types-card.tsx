@@ -20,12 +20,12 @@ const FileTypesCard = () => {
       <CardContent className="mx-auto md:w-[80%] w-full py-8">
         <ChartJsPieChart01
           chartData={[
-            { label: "Image", percentage: 50, color: "#FFD54F" },
-            { label: "Audio", percentage: 30, color: "#4FC3F7" },
-            { label: "Zip", percentage: 20, color: "#FF8A65" },
-            { label: "Video", percentage: 16, color: "#BA68C8" },
-            { label: "Documents", percentage: 13, color: "#81C784" },
-            { label: "Other", percentage: 19, color: "#E57373" },
+            { label: "Image", percentage: 50, color: "#2285f2" },
+            { label: "Audio", percentage: 30, color: "#d83b82" },
+            { label: "Zip", percentage: 20, color: "#ab40e8" },
+            { label: "Video", percentage: 16, color: "#5e37ed" },
+            { label: "Documents", percentage: 13, color: "#4dd992" },
+            { label: "Other", percentage: 19, color: "#f02f1d" },
           ]}
         />
       </CardContent>

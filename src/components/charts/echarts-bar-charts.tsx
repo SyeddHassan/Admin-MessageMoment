@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import * as echarts from "echarts";
 
 import { EChartsBarChart01Options } from "@/configurations/echarts-bar-charts-configurations";
+
 import { EChartsBarChart01Props } from "@/interfaces/charts/echarts-bar-charts-interfaces";
 
 export const EChartsBarChart01 = ({ chartData }: EChartsBarChart01Props) => {
