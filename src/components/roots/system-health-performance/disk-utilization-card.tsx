@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/partials/loader";
-const AmChartsLineChart02 = dynamic(
+const AmChartsGaugeChart01 = dynamic(
   () =>
-    import("../../charts/amcharts-line-charts").then(
-      (mod) => mod.AmChartsLineChart02
+    import("../../charts/amcharts-gauge-charts").then(
+      (mod) => mod.AmChartsGaugeChart01
     ),
   {
     ssr: false,
@@ -24,36 +24,30 @@ const AmChartsLineChart02 = dynamic(
 
 import { LoaderCircle } from "lucide-react";
 
-const UsersAvgInactivityCard = () => {
+const DiskUtilizationCard = () => {
   return (
     <Card
-      id="UsersAvgInactivitySection"
+      id="DiskUtilizationSection"
       className="!standard-card-styling col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Avg. Inactivity by User
+          Disk Utilization (%)
         </CardTitle>
       </CardHeader>
 
-      {/* AVERAGE INACTIVITY BY USERS LINE CHART */}
-      <CardContent className="py-4 h-[500px] max-md:px-2">
-        <AmChartsLineChart02
-          chartId="UsersAvgInactivityLineChart"
-          data={[
-            { date: "2023-12-01", value: 150 },
-            { date: "2023-12-02", value: 230 },
-            { date: "2023-12-03", value: 224 },
-            { date: "2023-12-04", value: 218 },
-            { date: "2023-12-05", value: 135 },
-            { date: "2023-12-06", value: 147 },
-            { date: "2023-12-07", value: 260 },
-          ]}
+      {/* DISK UTILIZATION GAUGE CHART */}
+      <CardContent className="h-[400px]">
+        <AmChartsGaugeChart01
+          chartId="DiskUtilizationGaugeChart"
+          value={89}
+          axisRange0Color="#2196F3"
+          axisRange1Color="#dbdbdb"
         />
       </CardContent>
     </Card>
   );
 };
 
-export default UsersAvgInactivityCard;
+export default DiskUtilizationCard;

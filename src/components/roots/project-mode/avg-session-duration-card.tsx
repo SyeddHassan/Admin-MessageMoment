@@ -1,7 +1,28 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EChartsLineChart01 } from "@/components/charts/echarts-line-charts";
+import Loading from "@/components/partials/loader";
+const AmChartsLineChart02 = dynamic(
+  () =>
+    import("../../charts/amcharts-line-charts").then(
+      (mod) => mod.AmChartsLineChart02
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Loading
+        Icon={LoaderCircle}
+        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
+        containerClassName="w-full h-full"
+      />
+    ),
+  }
+);
+
+import { LoaderCircle } from "lucide-react";
 
 const AvgSessionDurationCard = () => {
   return (
@@ -17,10 +38,10 @@ const AvgSessionDurationCard = () => {
       </CardHeader>
 
       {/* AVERAGE SESSION DURATION LINE CHART */}
-      <CardContent className="py-8 h-[550px] max-md:px-2">
-        <EChartsLineChart01
+      <CardContent className="py-8 pb-12 h-[550px] max-md:px-2">
+        <AmChartsLineChart02
           chartId="AvgSessionDurationChart"
-          chartData={[
+          data={[
             { date: "2024-01-01", value: 150 },
             { date: "2024-02-01", value: 60 },
             { date: "2024-03-01", value: 30 },

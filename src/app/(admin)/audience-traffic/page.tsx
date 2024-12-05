@@ -1,14 +1,9 @@
 import React from "react";
 
-// import AudienceTrafficPage from "../../../pages/audience-traffic-page";
+import AudienceTrafficPage from "../../../pages/audience-traffic-page";
 
 const page = () => {
-  return (
-    <>
-      hey
-      {/* <AudienceTrafficPage /> */}
-    </>
-  );
+  return <AudienceTrafficPage />;
 };
 
 export default page;
