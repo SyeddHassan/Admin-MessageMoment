@@ -6,3 +6,8 @@ export interface ChartJsDoughnutChart01Props {
 export interface ChartJsDoughnutChart02Props {
   chartData: { label: string; percentage: number; color: string }[];
 }
+
+export interface ChartJsDoughnutChart03Props {
+  label: string;
+  percentage: number;
+}

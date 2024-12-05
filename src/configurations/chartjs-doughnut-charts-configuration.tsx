@@ -78,3 +78,20 @@ export const ChartJsDoughnutChart02Options = (): ChartOptions<"doughnut"> => {
     cutout: "30%",
   };
 };
+
+export const ChartJsDoughnutChart03Options = (): ChartOptions<"doughnut"> => {
+  return {
+    cutout: "85%",
+    plugins: {
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        display: false,
+      },
+      datalabels: {
+        display: false,
+      },
+    },
+  };
+};
