@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 
@@ -18,19 +18,6 @@ const AudienceTrafficPage = () => {
     from: new Date(),
     to: addDays(new Date(), 7),
   });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      import("hammerjs")
-        .then((Hammer) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const hammerInstance = new Hammer.default(document.body);
-        })
-        .catch((err) => {
-          console.error("Failed to load Hammer.js", err);
-        });
-    }
-  }, []);
 
   return (
     <main className="page-layout-standard section-margin-standard">
