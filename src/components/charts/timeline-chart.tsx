@@ -6,12 +6,7 @@ import { TimelineChartProps } from "@/interfaces/charts/timline-charts-interface
 
 import { Badge } from "@/components/ui/badge";
 
-import {
-  CheckCircle,
-  AlertCircle,
-  AlertTriangle,
-  SquarePlus,
-} from "lucide-react";
+import { AlertCircle, SquarePlus } from "lucide-react";
 
 const TimelineChart = ({ data }: TimelineChartProps) => {
   const [timelineData, setTimelineData] = useState<
