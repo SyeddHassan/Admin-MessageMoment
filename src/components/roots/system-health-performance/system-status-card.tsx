@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import SystemStatusChart from "./system-status-chart";
+import TimelineChart from "@/components/charts/timeline-chart";
 
 const SystemStatusCard = () => {
   return (
@@ -18,7 +18,14 @@ const SystemStatusCard = () => {
 
       {/* SYSTEM STATUS CHART */}
       <CardContent className="p-8 py-10">
-        {/* <SystemStatusChart /> */}
+        <TimelineChart
+          data={[
+            { name: "Server status", status: "operational" },
+            { name: "File Uploading", status: "major" },
+            { name: "ChatGPT Integration", status: "partial" },
+            { name: "Chat Function", status: "operational" },
+          ]}
+        />
       </CardContent>
     </Card>
   );

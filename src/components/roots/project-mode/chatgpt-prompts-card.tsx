@@ -21,8 +21,8 @@ const ChatGPTPromptsCard = () => {
         <ChartJsPieChart01
           chartData={[
             {
-              label: "Advice and Guidance",
-              percentage: 70,
+              label: "Advice & Guidance",
+              percentage: 10,
               color: "#2285f2",
             },
             { label: "Problem Solving", percentage: 30, color: "#d83b82" },
@@ -32,7 +32,7 @@ const ChatGPTPromptsCard = () => {
               color: "#ab40e8",
             },
             {
-              label: "Entertainment and Fun",
+              label: "Entertainment & Fun",
               percentage: 40,
               color: "#5e37ed",
             },
