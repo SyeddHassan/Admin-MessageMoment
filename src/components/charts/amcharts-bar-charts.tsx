@@ -40,6 +40,8 @@ export const AmChartsBarChart01 = ({
         panY: true,
         wheelX: "panX",
         wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
         layout: root.verticalLayout,
       })
     );

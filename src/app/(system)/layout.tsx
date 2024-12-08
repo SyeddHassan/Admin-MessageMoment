@@ -18,7 +18,7 @@ export default function RootLayout({
     >
       <SidebarProvider>
         <AppSidebar />
-        <main className="w-full overflow-x-hidden">
+        <main className="w-full">
           <AppHeader />
           {children}
         </main>
