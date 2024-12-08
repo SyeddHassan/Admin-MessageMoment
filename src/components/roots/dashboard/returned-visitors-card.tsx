@@ -17,7 +17,7 @@ const ReturnedVisitorsCard = () => {
       </CardHeader>
 
       {/* RETURNED VISITORS DOUGHNUT CHART */}
-      <CardContent className="h-[500px] flex-center mx-auto">
+      <CardContent className="md:h-[500px] h-full max-md:pb-[5rem] flex-center mx-auto">
         <ChartJsDoughnutChart01
           backgroundColor={["#f04c3d", "#f2f2f2"]}
           label="Returning Visitors"

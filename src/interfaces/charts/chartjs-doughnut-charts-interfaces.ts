@@ -4,3 +4,7 @@ export interface ChartJsDoughnutChart01Props {
   labelColor: string;
   percentage: number;
 }
+
+export interface ChartJsDoughnutChart02Props {
+  chartData: { label: string; percentage: number; color: string }[];
+}

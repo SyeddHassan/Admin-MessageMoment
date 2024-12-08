@@ -10,7 +10,10 @@ import * as am5exporting from "@amcharts/amcharts5/plugins/exporting";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5themes_Dark from "@amcharts/amcharts5/themes/Dark";
 
-import { AmChartsBarChart01Props } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
+import {
+  AmChartsBarChart01Props,
+  AmChartsBarChart02Props,
+} from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
   chartId = uuidv4(),
@@ -85,7 +88,7 @@ export const AmChartsBarChart01 = ({
           minGridDistance: 30,
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
-          strokeOpacity: 0.5,
+          strokeOpacity: 0.1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -94,7 +97,7 @@ export const AmChartsBarChart01 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          strokeOpacity: 0.5,
+          strokeOpacity: 0.1,
         }),
       })
     );
@@ -114,9 +117,7 @@ export const AmChartsBarChart01 = ({
     xAxis.get("renderer").grid.template.set("visible", false);
 
     yAxis.get("renderer").grid.template.setAll({
-      strokeDasharray: [2, 2],
-      stroke: am5.color(0x363c4f),
-      strokeOpacity: 0.35,
+      strokeOpacity: 0.1,
     });
 
     const usersSeries = chart.series.push(
@@ -242,6 +243,179 @@ export const AmChartsBarChart01 = ({
     sessionsSeries.data.setAll(data);
     projectModeSeries.data.setAll(data);
 
+    chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart02 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart02Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+        paddingLeft: 10,
+        paddingRight: 1,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    cursor.lineY.set("visible", false);
+
+    const xRenderer = am5xy.AxisRendererX.new(root, {
+      minGridDistance: 30,
+      minorGridEnabled: true,
+    });
+
+    xRenderer.labels.template.setAll({
+      rotation: -90,
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 15,
+    });
+
+    xRenderer.grid.template.setAll({
+      visible: false,
+    });
+
+    const xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        maxDeviation: 0.3,
+        categoryField: "time",
+        renderer: xRenderer,
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+
+    const yRenderer = am5xy.AxisRendererY.new(root, {
+      strokeOpacity: 0.1,
+      inversed: false,
+    });
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        maxDeviation: 0.3,
+        renderer: yRenderer,
+      })
+    );
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: "Sessions",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: "sessions",
+        sequencedInterpolation: true,
+        categoryXField: "time",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY}",
+        }),
+      })
+    );
+
+    series.columns.template.setAll({
+      cornerRadiusTL: 5,
+      cornerRadiusTR: 5,
+      strokeOpacity: 0,
+      fill: am5.color("#2075C5"),
+      stroke: am5.color("#2075C5"),
+    });
+
+    series.bullets.push(() =>
+      am5.Bullet.new(root, {
+        locationY: 1,
+        sprite: am5.Label.new(root, {
+          text: "{valueY}",
+          centerY: am5.p0,
+          centerX: am5.p50,
+          dy: -28,
+          populateText: true,
+          fontSize: "14px",
+          fontFamily: "Inter",
+          fontWeight: "normal",
+        }),
+      })
+    );
+
+    xAxis.data.setAll(data);
+    series.data.setAll(data);
+
+    series.appear(1000);
     chart.appear(1000, 100);
 
     return () => {
