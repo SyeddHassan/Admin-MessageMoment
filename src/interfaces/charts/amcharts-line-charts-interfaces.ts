@@ -10,16 +10,6 @@ export interface AmChartsLineChart01Props {
 }
 
 export interface AmChartsLineChart02Props {
-  chartId?: string;
-  data: {
-    date: string;
-    standard: number;
-    secure: number;
-    wallet: number;
-  }[];
-}
-
-export interface AmChartsLineChart03Props {
   chartId: string;
   data: { date: string; value: number }[];
 }

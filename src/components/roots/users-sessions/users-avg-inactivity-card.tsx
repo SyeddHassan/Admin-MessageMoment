@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/partials/loader";
-const AmChartsLineChart03 = dynamic(
+const AmChartsLineChart02 = dynamic(
   () =>
     import("../../charts/amcharts-line-charts").then(
-      (mod) => mod.AmChartsLineChart03
+      (mod) => mod.AmChartsLineChart02
     ),
   {
     ssr: false,
@@ -39,7 +39,7 @@ const UsersAvgInactivityCard = () => {
 
       {/* AVERAGE INACTIVITY BY USERS LINE CHART */}
       <CardContent className="py-4 h-[500px] max-md:px-2">
-        <AmChartsLineChart03
+        <AmChartsLineChart02
           chartId="UsersAvgInactivityLineChart"
           data={[
             { date: "2023-12-01", value: 150 },

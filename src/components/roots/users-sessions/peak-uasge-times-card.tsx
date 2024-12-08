@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/partials/loader";
-const AmChartsLineChart02 = dynamic(
+const AmChartsAreaChart01 = dynamic(
   () =>
-    import("../../charts/amcharts-line-charts").then(
-      (mod) => mod.AmChartsLineChart02
+    import("../../charts/amcharts-area-charts").then(
+      (mod) => mod.AmChartsAreaChart01
     ),
   {
     ssr: false,
@@ -39,8 +39,8 @@ const PeakUsageTimesCard = () => {
 
       {/* PEAK USAGE TIMES AREA CHART */}
       <CardContent className="h-[500px] flex flex-col justify-center py-12">
-        <AmChartsLineChart02
-          chartId="PeakUasgeTimesLineChart"
+        <AmChartsAreaChart01
+          chartId="PeakUasgeTimesAreaChart"
           data={[
             { date: "2024-01-01", standard: 10, secure: 16, wallet: 13 },
             { date: "2024-01-02", standard: 10.5, secure: 16.2, wallet: 13.5 },

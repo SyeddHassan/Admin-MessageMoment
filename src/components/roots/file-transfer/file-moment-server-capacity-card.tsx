@@ -7,7 +7,7 @@ const FileMomentServerCapacityCard = () => {
   return (
     <Card
       id="FileMomentServerCapacitySection"
-      className="w-full h-full !rounded-[0.5rem] !card-box-shadow col-span-1"
+      className="!standard-card-styling col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
