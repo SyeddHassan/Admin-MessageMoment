@@ -24,31 +24,30 @@ const AmChartsLineChart02 = dynamic(
 
 import { LoaderCircle } from "lucide-react";
 
-const UsersAvgMessagesCard = () => { 
+const AvgSessionDurationProjectModeCard = () => {
   return (
     <Card
-      id="UsersAvgMessagesSection"
-      className="!standard-card-styling col-span-1"
+      id="AvgSessionDurationProjectModeSection"
+      className="!standard-card-styling lg:col-span-2 md:col-span-4 col-span-1"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Avg. Messages by User
+          Average Session Duration (Project Mode)
         </CardTitle>
       </CardHeader>
 
-      {/* AVERAGE MESSAGES BY USERS LINE CHART */}
+      {/* AVERAGE SESSION DURATION LINE CHART */}
       <CardContent className="py-4 h-[500px] max-md:px-2">
         <AmChartsLineChart02
-          chartId="UsersAvgMessagesLineChart"
+          chartId="AvgSessionDurationProjectModeLineChart"
           data={[
-            { date: "2023-12-01", value: 250 },
-            { date: "2023-12-02", value: 430 },
-            { date: "2023-12-03", value: 214 },
-            { date: "2023-12-04", value: 21 },
-            { date: "2023-12-05", value: 195 },
-            { date: "2023-12-06", value: 147 },
-            { date: "2023-12-07", value: 20 },
+            { date: "2024-01-01", value: 150 },
+            { date: "2024-02-01", value: 60 },
+            { date: "2024-03-01", value: 30 },
+            { date: "2024-04-01", value: 25 },
+            { date: "2024-05-01", value: 35 },
+            { date: "2024-06-01", value: 20 },
           ]}
         />
       </CardContent>
@@ -56,4 +55,4 @@ const UsersAvgMessagesCard = () => {
   );
 };
 
-export default UsersAvgMessagesCard;
+export default AvgSessionDurationProjectModeCard;

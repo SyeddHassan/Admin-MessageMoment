@@ -13,6 +13,7 @@ import am5themes_Dark from "@amcharts/amcharts5/themes/Dark";
 import {
   AmChartsBarChart01Props,
   AmChartsBarChart02Props,
+  AmChartsBarChart03Props,
 } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
@@ -418,6 +419,169 @@ export const AmChartsBarChart02 = ({
     series.appear(1000);
     chart.appear(1000, 100);
 
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart03 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart03Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const legend = chart.children.unshift(
+      am5.Legend.new(root, {
+        centerX: am5.p50,
+        x: am5.p50,
+        layout: root.horizontalLayout,
+        paddingBottom: 20,
+      })
+    );
+
+    legend.labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "month",
+        renderer: am5xy.AxisRendererX.new(root, {
+          cellStartLocation: 0.1,
+          cellEndLocation: 0.9,
+        }),
+      })
+    );
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 0.1,
+        }),
+      })
+    );
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    xAxis.data.setAll(data);
+
+    const makeSeries = (name: string, fieldName: string, color: am5.Color) => {
+      const series = chart.series.push(
+        am5xy.ColumnSeries.new(root, {
+          name: name,
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueYField: fieldName,
+          categoryXField: "month",
+          tooltip: am5.Tooltip.new(root, {
+            labelText: "{name}, {categoryX}: {valueY}",
+          }),
+        })
+      );
+
+      series.columns.template.setAll({
+        fill: color,
+        strokeOpacity: 0,
+        width: am5.percent(80),
+      });
+
+      series.data.setAll(data);
+
+      series.bullets.push(() =>
+        am5.Bullet.new(root, {
+          locationY: 0,
+          sprite: am5.Label.new(root, {
+            text: "{valueY}",
+            fill: root.interfaceColors.get("alternativeText"),
+            centerY: 0,
+            centerX: am5.p50,
+          }),
+        })
+      );
+
+      legend.data.push(series);
+    };
+
+    makeSeries("Sessions", "sessions", am5.color(0x34a853));
+    makeSeries("Project Mode Activation", "activations", am5.color(0xfbbc05));
+
+    chart.appear(1000, 100);
     return () => {
       exporting.dispose();
       root.dispose();

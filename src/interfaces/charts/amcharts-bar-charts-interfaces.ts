@@ -16,3 +16,8 @@ export interface AmChartsBarChart02Props {
     sessions: number;
   }[];
 }
+
+export interface AmChartsBarChart03Props {
+  chartId?: string;
+  data: { month: string; sessions: number; activations: number }[];
+}
