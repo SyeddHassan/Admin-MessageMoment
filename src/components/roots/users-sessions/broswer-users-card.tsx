@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { ChartJsPieChart01 } from "@/components/charts/chartjs-pie-charts";
+import { ChartJsPieChart01 } from "@/components/charts/chartjs-pie-charts";
 
 const BroswerUsersCard = () => {
   return (
@@ -17,8 +17,8 @@ const BroswerUsersCard = () => {
       </CardHeader>
 
       {/* BROWSER USERS PIE CHART */}
-      <CardContent className="py-4 mx-auto lg:h-[500px] lg:flex-center">
-        {/* <ChartJsPieChart01
+      <CardContent className="py-4 mx-auto lg:h-[500px] lg:flex-center max-lg:py-12">
+        <ChartJsPieChart01
           chartData={[
             { label: "Chrome", percentage: 20, color: "#2285f2" },
             { label: "Safari", percentage: 25, color: "#d83b82" },
@@ -26,7 +26,7 @@ const BroswerUsersCard = () => {
             { label: "Explorer", percentage: 15, color: "#5e37ed" },
             { label: "Other", percentage: 20, color: "#4dd992" },
           ]}
-        /> */}
+        />
       </CardContent>
     </Card>
   );

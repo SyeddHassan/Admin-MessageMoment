@@ -1,25 +1,7 @@
 import { ChartOptions, TooltipItem } from "chart.js";
 import { useTheme } from "next-themes";
 
-export const ChartJsDoughnutChart01Cofigurations =
-  (): ChartOptions<"doughnut"> => {
-    return {
-      cutout: "85%",
-      plugins: {
-        tooltip: {
-          enabled: false,
-        },
-        legend: {
-          display: false,
-        },
-        datalabels: {
-          display: false,
-        },
-      },
-    };
-  };
-
-export const ChartJsDoughnutChart02Cofigurations = (): ChartOptions<"doughnut"> => {
+export const ChartJsPieChart01Cofigurations = (): ChartOptions<"doughnut"> => {
   const { theme } = useTheme();
   const isDarkTheme = theme === "dark";
 
@@ -27,7 +9,7 @@ export const ChartJsDoughnutChart02Cofigurations = (): ChartOptions<"doughnut"> 
     responsive: true,
     plugins: {
       legend: {
-        position: "bottom" as const,
+        position: "right" as const,
         labels: {
           color: isDarkTheme ? "#ffffff" : "#000000",
           usePointStyle: true,
@@ -35,8 +17,8 @@ export const ChartJsDoughnutChart02Cofigurations = (): ChartOptions<"doughnut"> 
           padding: 20,
           font: {
             family: "Inter",
-            size: 14,
-            weight: "normal",
+            size: 12,
+            weight: "bold",
           },
         },
       },
@@ -77,20 +59,6 @@ export const ChartJsDoughnutChart02Cofigurations = (): ChartOptions<"doughnut"> 
         },
       },
     },
-    cutout: "30%",
-    elements: {
-      arc: {
-        borderWidth: 5,
-        borderColor: isDarkTheme ? "#000000" : "#ffffff",
-        hoverBackgroundColor: (ctx) => {
-          const raw = ctx.raw as { backgroundColor: string };
-          return raw.backgroundColor;
-        },
-        hoverBorderColor: (ctx) => {
-          const raw = ctx.raw as { borderColor: string };
-          return raw.borderColor;
-        },
-      },
-    },
+    cutout: "0%",
   };
 };

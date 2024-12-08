@@ -2,7 +2,7 @@ import React from "react";
 
 import { ChartJsLineChart01Props } from "@/interfaces/charts/chartjs-line-charts-interfaces";
 
-import { ChartJsLineChart01Options } from "@/configurations/chartjs-line-charts-configurations";
+import { ChartJsLineChart01Cofigurations } from "@/configurations/chartjs-line-charts-configurations";
 
 import {
   Chart as ChartJS,
@@ -42,7 +42,7 @@ export const ChartJsLineChart01 = ({ chartData }: ChartJsLineChart01Props) => {
     ],
   });
 
-  const options = ChartJsLineChart01Options();
+  const options = ChartJsLineChart01Cofigurations();
 
   return (
     <div className="h-full w-full  flex justify-center flex-col gap-8">

@@ -9,7 +9,7 @@ import {
 
 import {
   ChartJsDoughnutChart01Cofigurations,
-  ChartJsDoughnutChart02Options,
+  ChartJsDoughnutChart02Cofigurations,
 } from "@/configurations/chartjs-doughnut-charts-configuration";
 
 import { Doughnut } from "react-chartjs-2";
@@ -83,7 +83,7 @@ export const ChartJsDoughnutChart02 = ({
     ],
   };
 
-  const options = ChartJsDoughnutChart02Options();
+  const options = ChartJsDoughnutChart02Cofigurations();
 
   return (
     <div className="relative mx-auto aspect-square lg:w-[350px] w-[300px]">

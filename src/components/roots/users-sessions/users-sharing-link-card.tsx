@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { ChartJsPieChart01 } from "@/components/charts/chartjs-pie-charts";
+import { ChartJsPieChart01 } from "@/components/charts/chartjs-pie-charts";
 
 const UsersSharingLinkCard = () => {
   return (
@@ -17,8 +17,8 @@ const UsersSharingLinkCard = () => {
       </CardHeader>
 
       {/* USERS SHARING LINK PIE CHART */}
-      <CardContent className="py-4 lg:h-[650px] lg:flex-center mx-auto">
-        {/* <ChartJsPieChart01
+      <CardContent className="py-4 mx-auto lg:h-[650px] lg:flex-center max-lg:py-12">
+        <ChartJsPieChart01
           chartData={[
             { label: "Message", percentage: 20, color: "#2285f2" },
             { label: "Mail", percentage: 25, color: "#d83b82" },
@@ -27,7 +27,7 @@ const UsersSharingLinkCard = () => {
             { label: "Instagram", percentage: 15, color: "#4dd992" },
             { label: "Other", percentage: 20, color: "#f02f1d" },
           ]}
-        /> */}
+        />
       </CardContent>
     </Card>
   );
