@@ -2,11 +2,9 @@
 
 import React, { useState, useMemo } from "react";
 
-import { RealTimeSessionMonitoringTableProps } from "@/interfaces/table-interfces";
+import { RealTimeFileTransferTableProps } from "@/interfaces/table-interfces";
 
-import { RealTimeSessionMonitoringTableData } from "@/constants/dashboard-page-components-data";
-
-import { FormateDuration } from "@/utils/formate-duration";
+import { RealTimeFileTransferStatusTableData } from "@/constants/file-transfer-page-components-data";
 
 import {
   flexRender,
@@ -24,16 +22,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import SessionMonitoringTableManageButton from "../roots/dashboard/session-monitoring-table-manage-button";
 
-import { ArrowRight, Clock, FileText, MapPin, Users } from "lucide-react";
+import {
+  AArrowUp,
+  ArrowRight,
+  ChartSpline,
+  FileText,
+  Paperclip,
+} from "lucide-react";
 
-const RealTimeSessionMonitoringTable = ({
+const RealTimeFileTransferTable = ({
   selectedTab,
   filteredInput,
-}: RealTimeSessionMonitoringTableProps) => {
-  const [data] = useState(RealTimeSessionMonitoringTableData);
+}: RealTimeFileTransferTableProps) => {
+  const [data] = useState(RealTimeFileTransferStatusTableData);
 
   const filteredData = useMemo(() => {
     let filtered =
@@ -51,7 +53,7 @@ const RealTimeSessionMonitoringTable = ({
   }, [data, selectedTab, filteredInput]);
 
   const columns: ColumnDef<
-    (typeof RealTimeSessionMonitoringTableData)[number]
+    (typeof RealTimeFileTransferStatusTableData)[number]
   >[] = [
     {
       accessorKey: "sessionId",
@@ -65,85 +67,69 @@ const RealTimeSessionMonitoringTable = ({
     },
 
     {
-      accessorKey: "participants",
+      accessorKey: "file",
       header: () => (
         <div className="w-full flex items-center gap-4">
-          <span className="font-semibold text-[14px]">Participants</span>
-          <Users size={16} />
+          <span className="font-semibold text-[14px]">File Name</span>
+          <Paperclip size={16} />
         </div>
       ),
-      cell: ({ row }) => {
-        const totalParticipants = 10;
-        const currentParticipants = row.original.participants;
-
-        const percentage = (currentParticipants / totalParticipants) * 100;
-
-        return (
-          <div className="flex items-center lg:gap-8 gap-4">
-            <span className="md:text-[14px] text-[12px]">
-              {currentParticipants}/{totalParticipants}
-            </span>
-            <Progress
-              value={percentage}
-              className="h-[7px] max-lg:w-[200px] bg-[#e9ecef]"
-              indicatorClassName="bg-[#FFC107] rounded-[50rem]"
-            />
-            <p className="md:text-[14px] text-[12px]">{percentage}%</p>
-          </div>
-        );
-      },
     },
 
     {
-      accessorKey: "sessionType",
+      accessorKey: "fileType",
       header: () => (
         <div className="w-full flex items-center gap-4">
-          <span className="font-semibold text-[14px] ">Type</span>
+          <span className="font-semibold text-[14px] ">File Type</span>
           <ArrowRight size={16} />
         </div>
       ),
     },
 
     {
-      accessorKey: "location",
+      accessorKey: "status",
       header: () => (
         <div className="w-full flex items-center gap-4">
-          <span className="font-semibold text-[14px]">Location</span>
-          <MapPin size={16} />
+          <span className="font-semibold text-[14px]">File Status</span>
+          <ChartSpline size={16} />
         </div>
       ),
       cell: ({ row }) => {
-        const location = row.original.location;
-        const locationCode = row.original.locationCode.toLowerCase();
-        return (
-          <div className="flex items-center gap-4">
-            <span
-              className={`w-[30px] h-[20px] rounded-full fi fi-${locationCode} flag-shadow !bg-cover`}
-            />
-            <span className="w-[calc(100%-30px)]">{location}</span>
-          </div>
-        );
+        const status = row.getValue<string>("status");
+        const statusColor =
+          status === "Successful"
+            ? "text-green-600"
+            : status === "Failed"
+            ? "text-red-700"
+            : "text-yellow-600";
+
+        return <span className={`${statusColor}`}>{status}</span>;
       },
     },
 
     {
-      accessorKey: "duration",
+      accessorKey: "size",
       header: () => (
         <div className="w-full flex items-center gap-4">
-          <span className="font-semibold text-[14px]">Duration</span>
-          <Clock size={16} />
+          <span className="font-semibold text-[14px]">File Size</span>
+          <AArrowUp size={16} />
         </div>
       ),
-      cell: ({ row }) => {
-        const durationInSeconds = row.getValue("duration") as number;
-        return <span>{FormateDuration(durationInSeconds)}</span>;
-      },
     },
 
     {
       id: "actions",
       header: "",
-      cell: () => <SessionMonitoringTableManageButton />,
+      cell: () => (
+        <div className="w-full flex items-center gap-4">
+          <Button className="w-full bg-transparent text-secondary-theme hover:text-secondary-theme-hover underline font-inter tracking-wide text-[14px]">
+            View File
+          </Button>
+          <Button className="w-full bg-white dark:bg-background-color hover:bg-general-hover dark:hover:bg-primary-theme-hover text-heading-color font-inter tracking-wide text-[14px] rounded-[6px] shadow-button-shadow">
+            Download File
+          </Button>
+        </div>
+      ),
     },
   ];
 
@@ -167,16 +153,16 @@ const RealTimeSessionMonitoringTable = ({
                     key={header.id}
                     className={`max-lg:!w-[180px] ${
                       header.column.id === "actions"
-                        ? "lg:w-[250px]"
+                        ? "lg:w-[350px]"
                         : header.column.id === "sessionId"
                         ? "lg:w-[200px]"
-                        : header.column.id === "participants"
-                        ? "lg:w-[500px]"
-                        : header.column.id === "sessionType"
-                        ? "lg:w-[180px] lg:pl-14"
-                        : header.column.id === "location"
+                        : header.column.id === "file"
+                        ? "lg:w-[300px]"
+                        : header.column.id === "fileType"
                         ? "lg:w-[200px]"
-                        : header.column.id === "duration"
+                        : header.column.id === "status"
+                        ? "lg:w-[200px]"
+                        : header.column.id === "size"
                         ? "lg:w-[200px]"
                         : ""
                     }`}
@@ -197,12 +183,7 @@ const RealTimeSessionMonitoringTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} className="border-border">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className={`${
-                        cell.column.id === "sessionType" && "lg:pl-14"
-                      }`}
-                    >
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -236,14 +217,14 @@ const RealTimeSessionMonitoringTable = ({
           <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="font-inter text-heading-color border hover:bg-general-hover text-[14px] tracking-wider !shadow-button-shadow"
+            className="font-inter text-heading-color border hover:bg-general-hover text-[14px] tracking-wider"
           >
             Previous
           </Button>
           <Button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="font-inter bg-secondary-theme text-theme-heading-color hover:bg-secondary-theme-hover text-[14px] tracking-wider !shadow-button-shadow"
+            className="font-inter bg-secondary-theme text-theme-heading-color hover:bg-secondary-theme-hover text-[14px] tracking-wider"
           >
             Next
           </Button>
@@ -253,4 +234,4 @@ const RealTimeSessionMonitoringTable = ({
   );
 };
 
-export default RealTimeSessionMonitoringTable;
+export default RealTimeFileTransferTable;

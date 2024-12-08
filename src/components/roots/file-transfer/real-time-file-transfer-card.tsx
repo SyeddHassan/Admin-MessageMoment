@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons03 } from "@/components/partials/filter-buttons";
-// import RealTimeFileTransferTable from "@/components/tables/real-time-file-transfer-table";
+import RealTimeFileTransferTable from "@/components/tables/real-time-file-transfer-table";
 
 const RealTimeFileTransferCard = () => {
   const [selectedTab, setSelectedTab] = useState("View All");
@@ -27,10 +27,10 @@ const RealTimeFileTransferCard = () => {
         />
 
         {/* REAL TIME FILE TRANSFER STATUS TABLE */}
-        {/* <RealTimeFileTransferTable
+        <RealTimeFileTransferTable
           filteredInput={filteredInput}
           selectedTab={selectedTab}
-        /> */}
+        />
       </CardContent>
     </Card>
   );
