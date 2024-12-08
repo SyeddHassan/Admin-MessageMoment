@@ -40,16 +40,18 @@ const TrafficOverTimeCard = () => {
       {/* TRAFFIC OVERTIME AREA CHART */}
       <CardContent className="py-12 h-[650px] max-md:px-2">
         {/* <AmChartsAreaChart02
+          chartId="TrafficOverTimeAreaChart"
           data={[
-            { date: "2024-12-01", value: 10 },
-            { date: "2024-12-02", value: 15 },
-            { date: "2024-12-03", value: 18 },
-            { date: "2024-12-04", value: 20 },
-            { date: "2024-12-05", value: 67 },
-            { date: "2024-12-06", value: 65 },
-            { date: "2024-12-07", value: 54 },
-            { date: "2024-12-08", value: 43 },
-            { date: "2024-12-09", value: 12 },
+            { date: "2024-02-01", value: 2 },
+            { date: "2024-02-02", value: 4 },
+            { date: "2024-02-03", value: 3 },
+            { date: "2024-02-04", value: 6 },
+            { date: "2024-02-05", value: 5 },
+            { date: "2024-02-06", value: 8 },
+            { date: "2024-02-07", value: 7 },
+            { date: "2024-02-08", value: 4 },
+            { date: "2024-02-09", value: 6 },
+            { date: "2024-02-10", value: 8 },
           ]}
         /> */}
       </CardContent>

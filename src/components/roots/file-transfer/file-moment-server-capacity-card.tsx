@@ -1,9 +1,15 @@
+"use client";
+
 import React from "react";
+import { useTheme } from "next-themes";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartJsDoughnutChart01 } from "@/components/charts/chartjs-doughnut-charts";
 
 const FileMomentServerCapacityCard = () => {
+  const { theme } = useTheme();
+  const isDarkTheme = theme === "dark";
+
   return (
     <Card
       id="FileMomentServerCapacitySection"
@@ -19,7 +25,10 @@ const FileMomentServerCapacityCard = () => {
       {/* FILEMOMENT SERVER CAPACITY DOUGHNUT CHART */}
       <CardContent className="h-[500px] flex-center mx-auto">
         <ChartJsDoughnutChart01
-          backgroundColor={["#f04c3d", "#f2f2f2"]}
+          backgroundColor={[
+            "#f04c3d",
+            `${isDarkTheme ? "#121212" : "#f2f2f2"}`,
+          ]}
           label="Server Space (Capacity)"
           labelColor="text-[#f04c3d]"
           percentage={54}
