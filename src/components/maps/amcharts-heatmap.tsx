@@ -141,6 +141,7 @@ export const AmChartsHeatmap = ({
     });
 
     series.columns.template.events.on("pointerover", function (event) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const di = event.target.dataItem as any;
       if (di) {
         heatLegend.showValue(di.get("value", 0));
