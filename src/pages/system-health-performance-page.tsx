@@ -11,7 +11,7 @@ import ServerActivityCard from "@/components/roots/system-health-performance/ser
 import CpuUtilizationCard from "@/components/roots/system-health-performance/cpu-utilization-card";
 import MemoryUtilizationCard from "@/components/roots/system-health-performance/memory-utilization-card";
 import DiskUtilizationCard from "@/components/roots/system-health-performance/disk-utilization-card";
-import AnnomaliesEvolutionCard from "@/components/roots/system-health-performance/annomalies-evolution-card";
+import AnomaliesEvolutionCard from "@/components/roots/system-health-performance/anomalies-evolution-card";
 import TrasationsPerSecondCard from "@/components/roots/system-health-performance/trasations-per-second-card";
 import CpuUsageCard from "@/components/roots/system-health-performance/cpu-usage-card";
 
@@ -53,7 +53,7 @@ const SystemHealthPerformancePage = () => {
       </div>
 
       {/* ANNOMALIES EVOLUTION CARD */}
-      <AnnomaliesEvolutionCard />
+      <AnomaliesEvolutionCard />
 
       <div className="w-full grid md:grid-cols-2 grid-cols-1 md:gap-4 gap-8">
         {/* TRANSACTIONS PER SECOND CARD */}

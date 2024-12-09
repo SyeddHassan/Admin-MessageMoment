@@ -36,8 +36,8 @@ export const HeatMapData = () => {
   ];
 
   const data = [];
-  for (let weekday of weekdays) {
-    for (let hour of hours) {
+  for (const weekday of weekdays) {
+    for (const hour of hours) {
       data.push({
         hour: hour,
         weekday: weekday,

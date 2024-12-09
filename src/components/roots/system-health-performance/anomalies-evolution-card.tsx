@@ -24,23 +24,23 @@ const AmChartsLineChart02 = dynamic(
 
 import { LoaderCircle } from "lucide-react";
 
-const AnnomaliesEvolutionCard = () => {
+const AnomaliesEvolutionCard = () => {
   return (
     <Card
-      id="AnnomaliesEvolutionSection"
+      id="AnomaliesEvolutionSection"
       className="!standard-card-styling"
     >
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Annomalies Evolution
+          Anomalies Evolution
         </CardTitle>
       </CardHeader>
 
       {/* ANNOMALIES EVOLUTION LINE CHART */}
       <CardContent className="py-8 pb-12 h-[550px] max-md:px-2">
         <AmChartsLineChart02
-          chartId="AnnomaliesEvolutionChart"
+          chartId="AnomaliesEvolutionChart"
           data={[
             { date: "2024-01-01", value: 150 },
             { date: "2024-02-01", value: 60 },
@@ -55,4 +55,4 @@ const AnnomaliesEvolutionCard = () => {
   );
 };
 
-export default AnnomaliesEvolutionCard;
+export default AnomaliesEvolutionCard;
