@@ -40,7 +40,7 @@ const ActiveUsersSessionTimeCard = () => {
       {/* ACTIVE USERS AND SESSIONS BAR CHART */}
       <CardContent className="pt-[5rem] h-[650px] max-md:px-2">
         <AmChartsBarChart02
-          chartId="ActiveUsersSessionTimeLineChart"
+          chartId="ActiveUsersSessionTimeBarChart"
           data={[
             { time: "1m 0s - 6m 0s", sessions: 951 },
             { time: "6m 0s - 11m 0s", sessions: 383 },

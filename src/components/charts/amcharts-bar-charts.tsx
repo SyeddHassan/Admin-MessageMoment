@@ -14,6 +14,9 @@ import {
   AmChartsBarChart01Props,
   AmChartsBarChart02Props,
   AmChartsBarChart03Props,
+  AmChartsBarChart04Props,
+  AmChartsBarChart05ChartDataProps,
+  AmChartsBarChart05Props,
 } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
@@ -582,6 +585,367 @@ export const AmChartsBarChart03 = ({
     makeSeries("Project Mode Activation", "activations", am5.color(0xfbbc05));
 
     chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart04 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart04Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+        paddingRight: 0,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const yAxis = chart.yAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "category",
+        renderer: am5xy.AxisRendererY.new(root, {
+          minGridDistance: 30,
+          strokeOpacity: 0.1,
+          strokeWidth: 1,
+        }),
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+    yAxis.get("renderer").grid.template.setAll({ visible: false });
+
+    yAxis.data.setAll(data);
+
+    const xAxis = chart.xAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererX.new(root, {
+          strokeOpacity: 0.1,
+          strokeWidth: 1,
+        }),
+      })
+    );
+    xAxis.get("renderer").grid.template.setAll({ visible: false });
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: "Values",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueXField: "value",
+        categoryYField: "category",
+        tooltip: am5.Tooltip.new(root, {
+          pointerOrientation: "horizontal",
+          labelText: "{valueX}",
+        }),
+      })
+    );
+
+    series.columns.template.setAll({
+      cornerRadiusTR: 4,
+      cornerRadiusBR: 4,
+      strokeOpacity: 0,
+      fillOpacity: 1,
+      fill: am5.color("#2E90FA"),
+    });
+
+    series.bullets.push(() =>
+      am5.Bullet.new(root, {
+        locationX: 1,
+        locationY: 0.5,
+        sprite: am5.Label.new(root, {
+          centerY: am5.p50,
+          text: "{valueX}",
+          populateText: true,
+          fontSize: 14,
+          fontFamily: "Inter",
+          paddingLeft: 10,
+        }),
+      })
+    );
+
+    series.data.setAll(data);
+
+    series.appear(1000);
+    chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart05 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart05Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+        paddingRight: 0,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const yAxis = chart.yAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "category",
+        renderer: am5xy.AxisRendererY.new(root, {
+          inversed: true,
+          cellStartLocation: 0.1,
+          cellEndLocation: 0.9,
+          minGridDistance: 30,
+          strokeOpacity: 0.1,
+          strokeWidth: 1,
+        }),
+      })
+    );
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    yAxis.data.setAll(data);
+
+    const xAxis = chart.xAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererX.new(root, {
+          strokeOpacity: 0.1,
+          strokeWidth: 1,
+          minGridDistance: 50,
+        }),
+        min: 0,
+      })
+    );
+
+    xAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    function createSeries(
+      field: keyof AmChartsBarChart05ChartDataProps,
+      name: string,
+      color: string
+    ) {
+      let series = chart.series.push(
+        am5xy.ColumnSeries.new(root, {
+          name: name,
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueXField: field,
+          categoryYField: "category",
+          sequencedInterpolation: true,
+          tooltip: am5.Tooltip.new(root, {
+            pointerOrientation: "horizontal",
+            labelText: "{name}[/]\n{categoryY}: {valueX}",
+            background: am5.RoundedRectangle.new(root, {
+              fill: am5.color(0x000000),
+              fillOpacity: 0.8,
+            }),
+          }),
+        })
+      );
+
+      series.columns.template.setAll({
+        height: am5.p100,
+        fill: am5.color(color),
+        strokeOpacity: 0,
+        cornerRadiusTR: 5,
+        cornerRadiusBR: 5,
+        shadowBlur: 5,
+        shadowOffsetX: 2,
+        shadowOffsetY: 2,
+        shadowOpacity: 0.2,
+      });
+
+      series.bullets.push(() =>
+        am5.Bullet.new(root, {
+          locationX: 1,
+          locationY: 0.5,
+          sprite: am5.Label.new(root, {
+            centerY: am5.p50,
+            text: "{valueX}",
+            populateText: true,
+            fontSize: 14,
+            fontFamily: "Inter",
+          }),
+        })
+      );
+
+      series.data.setAll(data);
+      series.appear(1000);
+    }
+
+    createSeries("sources", "Sources", "#2D88E5");
+    createSeries("chatCreations", "Chat Creations", "#AB40E8");
+
+    const legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerX: am5.p50,
+        x: am5.p50,
+        marginTop: 15,
+        marginBottom: 15,
+      })
+    );
+    legend.labels.template.setAll({
+      fontSize: 14,
+      fontFamily: "Inter",
+    });
+    legend.data.setAll(chart.series.values);
+
+    chart.set(
+      "cursor",
+      am5xy.XYCursor.new(root, {
+        behavior: "zoomY",
+      })
+    );
+
+    chart.appear(1000, 100);
+
     return () => {
       exporting.dispose();
       root.dispose();

@@ -1,6 +1,28 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Loading from "@/components/partials/loader";
+const AmChartsBarChart05 = dynamic(
+  () =>
+    import("../../charts/amcharts-bar-charts").then(
+      (mod) => mod.AmChartsBarChart05
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Loading
+        Icon={LoaderCircle}
+        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
+        containerClassName="w-full h-full"
+      />
+    ),
+  }
+);
+
+import { LoaderCircle } from "lucide-react";
 
 const TrafficSourceVsChatCreationCard = () => {
   return (
@@ -16,7 +38,16 @@ const TrafficSourceVsChatCreationCard = () => {
       </CardHeader>
 
       {/* TRAFFIC SOURCE VS CHAT CREATION BAR CHART */}
-      <CardContent className="pt-[5rem] h-[500px] max-md:px-2"></CardContent>
+      <CardContent className="py-4 h-[500px] max-md:px-2">
+        <AmChartsBarChart05
+          chartId="TrafficSourceVsChatCreationBarChart"
+          data={[
+            { category: "Direct", sources: 119, chatCreations: 15 },
+            { category: "Twitter", sources: 6, chatCreations: 20 },
+            { category: "Google.com", sources: 4, chatCreations: 25 },
+          ]}
+        />
+      </CardContent>
     </Card>
   );
 };
