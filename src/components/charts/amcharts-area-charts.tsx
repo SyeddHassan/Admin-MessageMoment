@@ -370,6 +370,7 @@ export const AmChartsAreaChart03 = ({
         wheelY: "zoomX",
         pinchZoomX: true,
         layout: root.verticalLayout,
+        paddingLeft: 0,
       })
     );
 
@@ -405,17 +406,33 @@ export const AmChartsAreaChart03 = ({
       });
     }
 
+    const cursor = chart.set(
+      "cursor",
+      am5xy.XYCursor.new(root, {
+        behavior: "none",
+      })
+    );
+    cursor.lineY.set("visible", false);
+
     const xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
-        maxDeviation: 0.1,
-        baseInterval: { timeUnit: "day", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        maxDeviation: 0.2,
+        baseInterval: {
+          timeUnit: "day",
+          count: 1,
+        },
+        renderer: am5xy.AxisRendererX.new(root, {
+          minorGridEnabled: true,
+        }),
+        tooltip: am5.Tooltip.new(root, {}),
       })
     );
 
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
+        renderer: am5xy.AxisRendererY.new(root, {
+          pan: "zoom",
+        }),
       })
     );
 
@@ -431,15 +448,11 @@ export const AmChartsAreaChart03 = ({
       fontWeight: "normal",
     });
 
-    xAxis.get("renderer").grid.template.setAll({
-      strokeOpacity: 0,
-    });
-
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
-        name: "Usage Frequency",
-        xAxis,
-        yAxis,
+        name: "Series",
+        xAxis: xAxis,
+        yAxis: yAxis,
         valueYField: "value",
         valueXField: "date",
         tooltip: am5.Tooltip.new(root, {
@@ -448,21 +461,19 @@ export const AmChartsAreaChart03 = ({
       })
     );
 
-    series.strokes.template.setAll({
-      strokeWidth: 3,
-      stroke: am5.color(0x4d89e1),
-    });
+     series.strokes.template.setAll({
+       strokeWidth: 2,
+     });
 
     series.fills.template.setAll({
-      fillOpacity: 0.1,
+      fillOpacity: 0.2,
       visible: true,
     });
 
-    series.data.setAll(
-      data.map((item) => ({ ...item, date: new Date(item.date).getTime() }))
-    );
+    series.data.setAll(data);
 
-    chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    series.appear(1000);
+    chart.appear(1000, 100);
 
     return () => {
       exporting.dispose();
