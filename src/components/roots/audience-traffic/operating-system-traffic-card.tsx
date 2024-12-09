@@ -12,7 +12,7 @@ const OperatingSystemTrafficCard = () => {
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Traffice by Operation System
+          Traffic by Operation System
         </CardTitle>
       </CardHeader>
 

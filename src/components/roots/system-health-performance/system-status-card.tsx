@@ -20,7 +20,7 @@ const SystemStatusCard = () => {
       <CardContent className="p-8 py-10">
         <TimelineChart
           data={[
-            { name: "Server status", status: "operational" },
+            { name: "Server Status", status: "operational" },
             { name: "File Uploading", status: "major" },
             { name: "ChatGPT Integration", status: "partial" },
             { name: "Chat Function", status: "operational" },

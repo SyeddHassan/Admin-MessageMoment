@@ -14,7 +14,7 @@ const RealTimeFileTransferCard = () => {
     <Card id="RealTimeFileTransferSection" className="!standard-card-styling">
       <CardHeader className="py-6 border-b border-border">
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Real Time File Transfer Status
+          Real-Time File Transfer Status
         </CardTitle>
       </CardHeader>
 
