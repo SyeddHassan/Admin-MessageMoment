@@ -1047,6 +1047,7 @@ export const AmChartsBarChart06 = ({
       })
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (yAxis as any).set("step", 1);
 
     yAxis.get("renderer").labels.template.setAll({
