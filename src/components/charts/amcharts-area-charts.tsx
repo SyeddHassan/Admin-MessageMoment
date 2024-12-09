@@ -6,11 +6,16 @@ import { useTheme } from "next-themes";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
+import * as d3 from "d3-shape";
 import * as am5exporting from "@amcharts/amcharts5/plugins/exporting";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5themes_Dark from "@amcharts/amcharts5/themes/Dark";
 
-import { AmChartsAreaChart01Props } from "@/interfaces/charts/amcharts-area-charts-interfaces";
+import {
+  AmChartsAreaChart01Props,
+  AmChartsAreaChart02Props,
+  AmChartsAreaChart03Props,
+} from "@/interfaces/charts/amcharts-area-charts-interfaces";
 
 export const AmChartsAreaChart01 = ({
   chartId = uuidv4(),
@@ -192,6 +197,272 @@ export const AmChartsAreaChart01 = ({
     legend.data.setAll(chart.series.values);
 
     chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsAreaChart02 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsAreaChart02Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: false,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.DateAxis.new(root, {
+        maxDeviation: 0.1,
+        baseInterval: { timeUnit: "day", count: 1 },
+        renderer: am5xy.AxisRendererX.new(root, {}),
+      })
+    );
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0,
+    });
+
+    const series = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: "Traffic",
+        xAxis,
+        yAxis,
+        valueYField: "value",
+        valueXField: "date",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY}",
+        }),
+        curveFactory: d3.curveMonotoneX,
+      })
+    );
+
+    series.strokes.template.setAll({
+      strokeWidth: 3,
+    });
+
+    series.fills.template.setAll({
+      fillOpacity: 0.5,
+      visible: true,
+    });
+
+    series.data.setAll(
+      data.map((item) => ({ ...item, date: new Date(item.date).getTime() }))
+    );
+
+    chart.set("cursor", am5xy.XYCursor.new(root, {}));
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsAreaChart03 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsAreaChart03Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: false,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.DateAxis.new(root, {
+        maxDeviation: 0.1,
+        baseInterval: { timeUnit: "day", count: 1 },
+        renderer: am5xy.AxisRendererX.new(root, {}),
+      })
+    );
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0,
+    });
+
+    const series = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: "Usage Frequency",
+        xAxis,
+        yAxis,
+        valueYField: "value",
+        valueXField: "date",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY}",
+        }),
+      })
+    );
+
+    series.strokes.template.setAll({
+      strokeWidth: 3,
+      stroke: am5.color(0x4d89e1),
+    });
+
+    series.fills.template.setAll({
+      fillOpacity: 0.1,
+      visible: true,
+    });
+
+    series.data.setAll(
+      data.map((item) => ({ ...item, date: new Date(item.date).getTime() }))
+    );
+
+    chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
     return () => {
       exporting.dispose();

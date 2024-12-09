@@ -12,3 +12,8 @@ export interface AmChartsAreaChart02Props {
   chartId?: string;
   data: { date: string; value: number }[];
 }
+
+export interface AmChartsAreaChart03Props {
+  chartId?: string;
+  data: { date: string; value: number }[];
+}
