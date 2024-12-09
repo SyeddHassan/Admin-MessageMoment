@@ -15,6 +15,7 @@ import {
   AmChartsAreaChart01Props,
   AmChartsAreaChart02Props,
   AmChartsAreaChart03Props,
+  AmChartsAreaChart04Props,
 } from "@/interfaces/charts/amcharts-area-charts-interfaces";
 
 export const AmChartsAreaChart01 = ({
@@ -461,9 +462,9 @@ export const AmChartsAreaChart03 = ({
       })
     );
 
-     series.strokes.template.setAll({
-       strokeWidth: 2,
-     });
+    series.strokes.template.setAll({
+      strokeWidth: 2,
+    });
 
     series.fills.template.setAll({
       fillOpacity: 0.2,
@@ -474,6 +475,255 @@ export const AmChartsAreaChart03 = ({
 
     series.appear(1000);
     chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsAreaCharts04 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsAreaChart04Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const colorPalette = am5.ColorSet.new(root, {
+      colors: [am5.color(0xff6b3d), am5.color(0x84b761), am5.color(0x4a90e2)],
+    });
+    chart.set("colors", colorPalette);
+
+    const cursor = chart.set(
+      "cursor",
+      am5xy.XYCursor.new(root, {
+        behavior: "zoomX",
+      })
+    );
+
+    cursor.lineY.setAll({
+      stroke: am5.color(0x888888),
+      strokeDasharray: [3, 3],
+      strokeOpacity: 0.5,
+    });
+    cursor.lineX.setAll({
+      stroke: am5.color(0x888888),
+      strokeDasharray: [3, 3],
+      strokeOpacity: 0.5,
+    });
+
+    // Create axes with improved styling
+    const xAxis = chart.xAxes.push(
+      am5xy.DateAxis.new(root, {
+        maxDeviation: 0.3,
+        baseInterval: { timeUnit: "minute", count: 1 },
+        renderer: am5xy.AxisRendererX.new(root, {
+          minorGridEnabled: true,
+          strokeOpacity: 0.1,
+        }),
+        tooltip: am5.Tooltip.new(root, {
+          themeTags: ["axis"],
+          animationDuration: 200,
+        }),
+      })
+    );
+    xAxis.get("renderer").grid.template.setAll({ visible: false });
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        maxDeviation: 0.3,
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 0.1,
+          inversed: false,
+        }),
+        tooltip: am5.Tooltip.new(root, {
+          themeTags: ["axis"],
+          animationDuration: 200,
+        }),
+      })
+    );
+    yAxis.get("renderer").grid.template.setAll({ visible: false });
+
+    const yAxis2 = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {
+          opposite: true,
+          strokeOpacity: 0.1,
+        }),
+      })
+    );
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const processedData = data.map((item) => ({
+      ...item,
+      timestamp: item.timestamp.getTime(),
+    }));
+
+    const responseSeries = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: "Response Time (ms)",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: "responseTime",
+        valueXField: "timestamp",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY} ms",
+          themeTags: ["series"],
+        }),
+      })
+    );
+
+    responseSeries.strokes.template.setAll({
+      strokeWidth: 3,
+      strokeGradient: am5.LinearGradient.new(root, {
+        stops: [{ color: am5.color(0xff6b3d) }, { color: am5.color(0xffa07a) }],
+      }),
+    });
+
+    responseSeries.fills.template.setAll({
+      visible: true,
+      fillGradient: am5.LinearGradient.new(root, {
+        stops: [
+          { color: am5.color(0xff6b3d), opacity: 0.2 },
+          { color: am5.color(0xffa07a), opacity: 0.1 },
+        ],
+      }),
+    });
+
+    const contentSeries = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: "Content Length (kb)",
+        xAxis: xAxis,
+        yAxis: yAxis2,
+        valueYField: "contentLength",
+        valueXField: "timestamp",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY} kb",
+          themeTags: ["series"],
+        }),
+      })
+    );
+
+    contentSeries.strokes.template.setAll({
+      strokeWidth: 3,
+      strokeDasharray: [4, 2],
+      strokeGradient: am5.LinearGradient.new(root, {
+        stops: [{ color: am5.color(0x84b761) }, { color: am5.color(0xa5d6a7) }],
+      }),
+    });
+
+    contentSeries.fills.template.setAll({
+      visible: true,
+      fillGradient: am5.LinearGradient.new(root, {
+        stops: [
+          { color: am5.color(0x84b761), opacity: 0.2 },
+          { color: am5.color(0xa5d6a7), opacity: 0.1 },
+        ],
+      }),
+    });
+
+    root.dateFormatter.setAll({
+      dateFormat: "yyyy-MM-dd HH:mm",
+      dateFields: ["valueX"],
+    });
+
+    responseSeries.data.setAll(processedData);
+    contentSeries.data.setAll(processedData);
+
+    const legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerX: am5.p50,
+        x: am5.p50,
+        layout: root.horizontalLayout,
+        paddingTop: 20,
+        paddingBottom: 20,
+      })
+    );
+    legend.data.setAll(chart.series.values);
+    legend.labels.template.setAll({
+      fontSize: 14,
+      fill: am5.color(0x333333),
+    });
+    legend.markers.template.setAll({
+      width: 20,
+      height: 20,
+    });
+
+    responseSeries.appear(1500, 100);
+    contentSeries.appear(1500, 100);
+    chart.appear(1500, 100);
 
     return () => {
       exporting.dispose();

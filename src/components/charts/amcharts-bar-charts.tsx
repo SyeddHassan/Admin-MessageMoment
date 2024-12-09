@@ -17,6 +17,7 @@ import {
   AmChartsBarChart04Props,
   AmChartsBarChart05ChartDataProps,
   AmChartsBarChart05Props,
+  AmChartsBarChart06Props,
 } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
@@ -944,6 +945,162 @@ export const AmChartsBarChart05 = ({
       })
     );
 
+    chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart06 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart06Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "hour",
+        renderer: am5xy.AxisRendererX.new(root, {
+          minGridDistance: 30,
+        }),
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+    xAxis.get("renderer").grid.template.setAll({ visible: false });
+
+    xAxis.data.setAll(data);
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {}),
+        min: 0,
+        max: 10,
+        strictMinMax: true,
+        numberFormat: "#",
+        extraMin: 0,
+        extraMax: 0,
+      })
+    );
+
+    (yAxis as any).set("step", 1);
+
+    yAxis.get("renderer").labels.template.setAll({
+      text: "{valueY.formatNumber('#')}",
+      forceHidden: false,
+    });
+
+    yAxis.get("renderer").grid.template.setAll({
+      forceHidden: false,
+    });
+
+    yAxis.get("renderer").set("minGridDistance", 30);
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: "Sessions",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: "sessions",
+        categoryXField: "hour",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY} sessions",
+        }),
+        fill: am5.color("#2D88E5"),
+      })
+    );
+
+    series.columns.template.setAll({
+      cornerRadiusTL: 8,
+      cornerRadiusTR: 8,
+      strokeOpacity: 0,
+      fillOpacity: 0.9,
+      shadowColor: am5.color("#000"),
+      shadowBlur: 10,
+      shadowOffsetX: 2,
+      shadowOffsetY: 2,
+      shadowOpacity: 0.2,
+    });
+
+    series.data.setAll(data);
+
+    series.appear(1000);
     chart.appear(1000, 100);
 
     return () => {

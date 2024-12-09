@@ -17,3 +17,12 @@ export interface AmChartsAreaChart03Props {
   chartId?: string;
   data: { date: number; value: number }[];
 }
+
+export interface AmChartsAreaChart04Props {
+  chartId?: string;
+  data: {
+    timestamp: Date;
+    responseTime: number;
+    contentLength: number;
+  }[];
+}

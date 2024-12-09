@@ -40,3 +40,11 @@ export interface AmChartsBarChart05Props {
   chartId?: string;
   data: AmChartsBarChart05ChartDataProps[];
 }
+
+export interface AmChartsBarChart06Props {
+  chartId?: string;
+  data: {
+    hour: string;
+    sessions: number;
+  }[];
+}

@@ -1,4 +1,4 @@
-export const HeatMapData = () => {
+export const AmChartsHeatmapData = () => {
   const weekdays = [
     "Sunday",
     "Monday",
@@ -8,6 +8,7 @@ export const HeatMapData = () => {
     "Friday",
     "Saturday",
   ];
+  
   const hours = [
     "12am",
     "6am",
@@ -41,7 +42,7 @@ export const HeatMapData = () => {
       data.push({
         hour: hour,
         weekday: weekday,
-        value: Math.floor(Math.random() * 10) + 1, // Random values between 1 and 10
+        value: Math.floor(Math.random() * 10) + 1,
       });
     }
   }
