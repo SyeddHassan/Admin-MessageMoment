@@ -871,7 +871,7 @@ export const AmChartsBarChart05 = ({
       name: string,
       color: string
     ) {
-      let series = chart.series.push(
+      const series = chart.series.push(
         am5xy.ColumnSeries.new(root, {
           name: name,
           xAxis: xAxis,
