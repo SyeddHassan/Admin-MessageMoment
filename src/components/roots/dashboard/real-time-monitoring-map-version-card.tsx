@@ -13,7 +13,7 @@ const RealTimeMonitoringMapVersionCard = () => {
       <CardHeader className="md:py-4 py-6 border-b border-border flex md:flex-row flex-col max-md:gap-4 items-center md:justify-between">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Real Time Global Activity
+          Real-Time Global Activity
         </CardTitle>
 
         {/* FILTER BUTTONS */}

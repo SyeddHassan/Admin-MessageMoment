@@ -16,7 +16,7 @@ const RealTimeMonitoringTableVersionCard = () => {
       <CardHeader className="py-4 border-b border-border flex items-center flex-row max-md:justify-center gap-4">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Real Time Session Monitoring
+          Real-Time Session Monitoring
         </CardTitle>
         <Badge className="w-[40px] h-[25px] rounded-full bg-secondary-theme text-theme-heading-color flex-center text-[12px] -translate-y-[2px]">
           240

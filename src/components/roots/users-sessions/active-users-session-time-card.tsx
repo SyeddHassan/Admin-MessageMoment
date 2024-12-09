@@ -33,7 +33,7 @@ const ActiveUsersSessionTimeCard = () => {
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Session time by Active Users
+          Session Time by Active Users
         </CardTitle>
       </CardHeader>
 
