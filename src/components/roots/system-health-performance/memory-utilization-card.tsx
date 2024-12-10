@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartJsGaugeChart } from "@/components/charts/chartjs-gauge-charts";
 
 const MemoryUtilizationCard = () => {
   return (
@@ -16,7 +17,9 @@ const MemoryUtilizationCard = () => {
       </CardHeader>
 
       {/* MEMORY UTILIZATION GAUGE CHART */}
-      <CardContent className="h-[500px]"></CardContent>
+      <CardContent className="md:h-[500px] h-full max-md:pb-[5rem] flex-center mx-auto">
+        <ChartJsGaugeChart percentage={55} />
+      </CardContent>
     </Card>
   );
 };
