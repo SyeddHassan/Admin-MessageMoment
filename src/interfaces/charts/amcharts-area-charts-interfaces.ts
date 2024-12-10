@@ -26,3 +26,15 @@ export interface AmChartsAreaChart04Props {
     contentLength: number;
   }[];
 }
+
+export interface AmChartsAreaChart05Props {
+  chartId?: string;
+  data: {
+    timestamp: Date;
+    ASPState: number;
+    DBADMIN: number;
+    master: number;
+    msdb: number;
+    tempdb: number;
+  }[];
+}

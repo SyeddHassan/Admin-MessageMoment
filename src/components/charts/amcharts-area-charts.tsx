@@ -16,6 +16,7 @@ import {
   AmChartsAreaChart02Props,
   AmChartsAreaChart03Props,
   AmChartsAreaChart04Props,
+  AmChartsAreaChart05Props,
 } from "@/interfaces/charts/amcharts-area-charts-interfaces";
 
 export const AmChartsAreaChart01 = ({
@@ -724,6 +725,205 @@ export const AmChartsAreaCharts04 = ({
     responseSeries.appear(1500, 100);
     contentSeries.appear(1500, 100);
     chart.appear(1500, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsAreaCharts05 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsAreaChart05Props) => {
+  const { theme } = useTheme();
+  const chartRef = useRef<am5.Root | null>(null);
+
+  const chartConfig = [
+    { name: "ASPState", color: "#2A2A2A" },
+    { name: "DBADMIN", color: "#4A4A4A" },
+    { name: "master", color: "#89CFF0" },
+    { name: "msdb", color: "#0096FF", opposite: true },
+    { name: "tempdb", color: "#333333", opposite: true },
+  ];
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    root.setThemes([
+      theme === "dark"
+        ? am5themes_Dark.new(root)
+        : am5themes_Animated.new(root),
+    ]);
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        focusable: true,
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        layout: root.verticalLayout,
+        paddingLeft: 0,
+        dy: 10,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.DateAxis.new(root, {
+        maxDeviation: 0.1,
+        groupData: false,
+        baseInterval: { timeUnit: "minute", count: 15 },
+        renderer: am5xy.AxisRendererX.new(root, {
+          minGridDistance: 80,
+          minorGridEnabled: true,
+        }),
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+
+    chartConfig.forEach((metric) => {
+      const yRenderer = am5xy.AxisRendererY.new(root, {
+        opposite: metric.opposite,
+      });
+
+      const yAxis = chart.yAxes.push(
+        am5xy.ValueAxis.new(root, {
+          maxDeviation: 1,
+          renderer: yRenderer,
+        })
+      );
+
+      xAxis.get("renderer").labels.template.setAll({
+        fontSize: "14px",
+        fontFamily: "Inter",
+        fontWeight: "normal",
+      });
+
+      yAxis.get("renderer").labels.template.setAll({
+        fontSize: "14px",
+        fontFamily: "Inter",
+        fontWeight: "normal",
+      });
+
+      if (chart.yAxes.indexOf(yAxis) > 0) {
+        yAxis.set(
+          "syncWithAxis",
+          chart.yAxes.getIndex(0) as am5xy.ValueAxis<am5xy.AxisRenderer>
+        );
+      }
+
+      const series = chart.series.push(
+        am5xy.LineSeries.new(root, {
+          name: metric.name,
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueYField: metric.name,
+          valueXField: "timestamp",
+          fill: am5.color(metric.color),
+          stroke: am5.color(metric.color),
+          tooltip: am5.Tooltip.new(root, {
+            pointerOrientation: "horizontal",
+            labelText: `${metric.name}: {valueY}`,
+          }),
+        })
+      );
+
+      series.strokes.template.setAll({
+        strokeWidth: 2,
+      });
+
+      series.fills.template.setAll({
+        fillOpacity: 0.1,
+        visible: true,
+      });
+
+      yRenderer.grid.template.setAll({
+        strokeOpacity: 0.05,
+      });
+
+      yRenderer.labels.template.setAll({
+        fill: series.get("fill"),
+        fontSize: 14,
+      });
+    });
+
+    const legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerX: am5.p50,
+        x: am5.p50,
+        centerY: am5.p0,
+        y: am5.p0,
+        marginTop: 10,
+        marginBottom: 10,
+        layout: root.horizontalLayout,
+        useDefaultMarker: true,
+        dy: -30,
+        dx: 40,
+      })
+    );
+
+    legend.data.setAll(chart.series.values);
+
+    chart.set(
+      "cursor",
+      am5xy.XYCursor.new(root, {
+        behavior: "none",
+        xAxis: xAxis,
+      })
+    );
+
+    const formattedData = data.map((item) => ({
+      ...item,
+      timestamp: item.timestamp.getTime(),
+    }));
+
+    chart.series.values.forEach((series) => {
+      series.data.setAll(formattedData);
+    });
+
+    chart.appear(1000, 100);
 
     return () => {
       exporting.dispose();

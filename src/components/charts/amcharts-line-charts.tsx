@@ -13,6 +13,7 @@ import am5themes_Dark from "@amcharts/amcharts5/themes/Dark";
 import {
   AmChartsLineChart01Props,
   AmChartsLineChart02Props,
+  AmChartsLineChart03Props,
 } from "@/interfaces/charts/amcharts-line-charts-interfaces";
 
 export const AmChartsLineChart01 = ({
@@ -353,6 +354,132 @@ export const AmChartsLineChart02 = ({
       root.dispose();
     };
   }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsLineChart03 = ({
+  chartId = uuidv4(),
+  chart_config,
+  generateCPUData,
+}: AmChartsLineChart03Props) => {
+  const { theme } = useTheme();
+  const chartRef = useRef<am5.Root | null>(null);
+  const seriesRef = useRef<am5xy.LineSeries | null>(null);
+  const intervalRef = useRef<number | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: "chart",
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    const xAxis = chart.xAxes.push(
+      am5xy.DateAxis.new(root, {
+        baseInterval: { timeUnit: "second", count: 1 },
+        renderer: am5xy.AxisRendererX.new(root, {}),
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        min: chart_config.min_value,
+        max: chart_config.max_value,
+        strictMinMax: true,
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    const series = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: "CPU Usage",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: "value",
+        valueXField: "date",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY}%",
+        }),
+        stroke: am5.color(chart_config.color),
+      })
+    );
+
+    const data: { date: number; value: number }[] = [];
+    const now = Date.now();
+    let lastValue = 10;
+
+    for (let i = 0; i < chart_config.data_point; i++) {
+      lastValue = generateCPUData(lastValue);
+      data.push({
+        date: now - (chart_config.data_point - i) * 1000,
+        value: lastValue,
+      });
+    }
+
+    series.data.setAll(data);
+    seriesRef.current = series;
+
+    intervalRef.current = window.setInterval(() => {
+      if (!seriesRef.current) return;
+
+      const newDate = Date.now();
+      lastValue = generateCPUData(lastValue);
+
+      data.shift();
+      data.push({
+        date: newDate,
+        value: lastValue,
+      });
+
+      seriesRef.current.data.setAll(data);
+      xAxis.zoomToDates(
+        new Date(newDate - chart_config.data_point * 1000),
+        new Date(newDate)
+      );
+    }, chart_config.update_interval);
+
+    series.appear(1000);
+    chart.appear(1000, 100);
+
+    return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, theme, generateCPUData]);
 
   return <div id={chartId} className="w-full h-full" />;
 };
