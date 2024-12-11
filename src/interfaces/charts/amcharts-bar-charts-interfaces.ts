@@ -56,3 +56,11 @@ export interface AmChartsBarChart07Props {
     value: number;
   }[];
 }
+
+export interface AmChartsBarChart08Props {
+  chartId?: string;
+  data: {
+    name: string;
+    value: number;
+  }[];
+}

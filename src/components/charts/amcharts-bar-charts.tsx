@@ -19,6 +19,7 @@ import {
   AmChartsBarChart05Props,
   AmChartsBarChart06Props,
   AmChartsBarChart07Props,
+  AmChartsBarChart08Props,
 } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
@@ -1246,6 +1247,150 @@ export const AmChartsBarChart07 = ({
           centerY: am5.p50,
           populateText: true,
           dy: 3,
+        }),
+      });
+    });
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart08 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart08Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomY",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: chartId,
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "name",
+        renderer: am5xy.AxisRendererX.new(root, {
+          cellStartLocation: 0.1,
+          cellEndLocation: 0.9,
+        }),
+      })
+    );
+
+    xAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        min: 0,
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      forceHidden: true,
+    });
+
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: "value",
+        categoryXField: "name",
+        tooltip: am5.Tooltip.new(root, {
+          pointerOrientation: "vertical",
+          labelText: "{categoryX}: {valueY}",
+        }),
+      })
+    );
+
+    series.columns.template.setAll({
+      fill: am5.color("#2D88E5"),
+    });
+
+    series.data.setAll(data);
+    xAxis.data.setAll(data);
+
+    series.bullets.push(() => {
+      return am5.Bullet.new(root, {
+        sprite: am5.Label.new(root, {
+          text: "{valueY}",
+          centerX: am5.p50,
+          centerY: am5.p50,
+          populateText: true,
+          dx: 3,
         }),
       });
     });

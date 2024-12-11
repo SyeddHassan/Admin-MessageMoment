@@ -1,6 +1,28 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Loading from "@/components/partials/loader";
+const AmChartsBarChart08 = dynamic(
+  () =>
+    import("../../charts/amcharts-bar-charts").then(
+      (mod) => mod.AmChartsBarChart08
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Loading
+        Icon={LoaderCircle}
+        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
+        containerClassName="w-full h-full"
+      />
+    ),
+  }
+);
+
+import { ArrowDown, ArrowUp, LoaderCircle } from "lucide-react";
 
 const RegionAdCampaignsCard = () => {
   return (
@@ -16,8 +38,16 @@ const RegionAdCampaignsCard = () => {
       </CardHeader>
 
       {/* REGION AD CAMPAIGNS BAR CHART */}
-      <CardContent className="py-4 mx-auto lg:h-[500px] lg:flex-center max-lg:py-12">
-
+      <CardContent className="h-[500px] py-12">
+        <AmChartsBarChart08
+          chartId="RegionAdCampaignsBarChart"
+          data={[
+            { name: "Worldwide", value: 387 },
+            { name: "Africa", value: 258 },
+            { name: "Australia", value: 214 },
+            { name: "Europe", value: 155 },
+          ]}
+        />
       </CardContent>
     </Card>
   );

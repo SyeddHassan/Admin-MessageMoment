@@ -40,7 +40,7 @@ const DeviceTrafficCard = () => {
       </CardHeader>
 
       {/* TRAFFIC BY DEVICE BAR CHART */}
-      <CardContent className="h-[700px] flex flex-col gap-4">
+      <CardContent className="h-[700px] flex flex-col gap-4"> 
         <div className="h-[400px]">
           <AmChartsBarChart07
             chartId="DeviceTrafficBarChart"
