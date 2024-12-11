@@ -47,7 +47,7 @@ export const AmChartsHeatmap = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {

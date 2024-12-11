@@ -18,6 +18,7 @@ import {
   AmChartsBarChart05ChartDataProps,
   AmChartsBarChart05Props,
   AmChartsBarChart06Props,
+  AmChartsBarChart07Props,
 } from "@/interfaces/charts/amcharts-bar-charts-interfaces";
 
 export const AmChartsBarChart01 = ({
@@ -55,7 +56,7 @@ export const AmChartsBarChart01 = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -296,7 +297,7 @@ export const AmChartsBarChart02 = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -482,7 +483,7 @@ export const AmChartsBarChart03 = ({
     });
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -632,7 +633,7 @@ export const AmChartsBarChart04 = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -787,7 +788,7 @@ export const AmChartsBarChart05 = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -991,7 +992,7 @@ export const AmChartsBarChart06 = ({
     );
 
     const exporting = am5exporting.Exporting.new(root, {
-      filePrefix: "chart",
+      filePrefix: chartId,
       pngOptions: { quality: 0.8 },
       pdfOptions: { addURL: true },
       menu: am5exporting.ExportingMenu.new(root, {
@@ -1103,6 +1104,151 @@ export const AmChartsBarChart06 = ({
 
     series.appear(1000);
     chart.appear(1000, 100);
+
+    return () => {
+      exporting.dispose();
+      root.dispose();
+    };
+  }, [chartId, data, theme]);
+
+  return <div id={chartId} className="w-full h-full" />;
+};
+
+export const AmChartsBarChart07 = ({
+  chartId = uuidv4(),
+  data,
+}: AmChartsBarChart07Props) => {
+  const { theme } = useTheme();
+
+  const chartRef = useRef<am5.Root | null>(null);
+
+  useLayoutEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+
+    const root = am5.Root.new(chartId);
+    chartRef.current = root;
+
+    if (theme === "dark") {
+      root.setThemes([am5themes_Dark.new(root)]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: true,
+        panY: true,
+        wheelX: "panX",
+        wheelY: "zoomX",
+        pinchZoomX: true,
+        pinchZoomY: true,
+        layout: root.verticalLayout,
+      })
+    );
+
+    const exporting = am5exporting.Exporting.new(root, {
+      filePrefix: chartId,
+      pngOptions: { quality: 0.8 },
+      pdfOptions: { addURL: true },
+      menu: am5exporting.ExportingMenu.new(root, {
+        align: "right",
+        valign: "top",
+      }),
+    });
+
+    if (exporting) {
+      exporting.get("menu")?.setAll({
+        items: [
+          {
+            type: "format",
+            label: "Save as PNG",
+            format: "png",
+          },
+          {
+            type: "format",
+            label: "Save as PDF",
+            format: "pdf",
+          },
+          {
+            type: "format",
+            label: "Export Data as CSV",
+            format: "csv",
+          },
+        ],
+      });
+    }
+
+    const yAxis = chart.yAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "name",
+        renderer: am5xy.AxisRendererY.new(root, {
+          inversed: true,
+          cellStartLocation: 0.1,
+          cellEndLocation: 0.9,
+        }),
+      })
+    );
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    const xAxis = chart.xAxes.push(
+      am5xy.ValueAxis.new(root, {
+        min: 0,
+        renderer: am5xy.AxisRendererX.new(root, {}),
+      })
+    );
+
+    xAxis.get("renderer").grid.template.setAll({
+      strokeWidth: 0,
+      strokeOpacity: 0,
+    });
+
+    xAxis.get("renderer").labels.template.setAll({
+      forceHidden: true,
+    });
+
+    yAxis.get("renderer").labels.template.setAll({
+      fontSize: "14px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    const series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueXField: "value",
+        categoryYField: "name",
+        tooltip: am5.Tooltip.new(root, {
+          pointerOrientation: "horizontal",
+          labelText: "{categoryY}: {valueX}",
+        }),
+      })
+    );
+
+    series.columns.template.setAll({
+      fill: am5.color("#2D88E5"),
+    });
+
+    series.data.setAll(data);
+    yAxis.data.setAll(data);
+
+    series.bullets.push(() => {
+      return am5.Bullet.new(root, {
+        sprite: am5.Label.new(root, {
+          text: "{valueX}",
+          centerX: am5.p50,
+          centerY: am5.p50,
+          populateText: true,
+          dy: 3,
+        }),
+      });
+    });
 
     return () => {
       exporting.dispose();

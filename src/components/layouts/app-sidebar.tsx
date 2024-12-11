@@ -40,13 +40,13 @@ const AppSidebar = () => {
         <Image
           src={state === "collapsed" ? MiniLogo : Logo}
           alt="MessageMoment"
-          className={`w-full max-md:hidden ${
-            state === "collapsed" ? "h-[45px]" : "w-[200px]"
+          className={`w-full max-lg:hidden ${
+            state === "collapsed" ? "h-[45px]" : "w-[190px]"
           }`}
           priority
         />
 
-        <div className="w-[90%] mx-auto flex items-center justify-between md:hidden">
+        <div className="w-[90%] mx-auto flex items-center justify-between lg:hidden">
           <Image src={Logo} alt="MessageMoment" />
 
           <ArrowLeftToLine
@@ -58,7 +58,7 @@ const AppSidebar = () => {
 
       <SidebarContent className="mt-4">
         <SidebarGroup>
-          {/* LARGE AND MIDDLE SCREENS SIDEBAR  */}
+          {/* LARGE SCREENS SIDEBAR  */}
           <SidebarGroupContent>
             {state === "expanded" ? (
               <SidebarMenu className="md:gap-10 gap-8">

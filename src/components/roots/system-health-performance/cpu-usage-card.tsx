@@ -3,11 +3,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import {
-  chart_config,
-  generateCPUData,
-} from "@/constants/system-health-performance-page-components-data";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/partials/loader";
 const AmChartsLineChart03 = dynamic(
@@ -40,11 +35,23 @@ const CpuUsageCard = () => {
       </CardHeader>
 
       {/* CPU USAGE LINE CHART */}
-      <CardContent className="py-8 h-[500px] max-md:px-2">
+      <CardContent className="py-8 h-[600px] max-md:px-2">
         <AmChartsLineChart03
           chartId="CpuUsageLineChart"
-          chart_config={chart_config}
-          generateCPUData={generateCPUData}
+          data={[
+            { timestamp: "2009-03-30 18:45", usage: 10 },
+            { timestamp: "2009-03-30 18:50", usage: 6 },
+            { timestamp: "2009-03-30 18:55", usage: 18 },
+            { timestamp: "2009-03-30 19:00", usage: 8 },
+            { timestamp: "2009-03-30 19:05", usage: 32 },
+            { timestamp: "2009-03-30 19:10", usage: 9 },
+            { timestamp: "2009-03-30 19:15", usage: 31 },
+            { timestamp: "2009-03-30 19:20", usage: 8 },
+            { timestamp: "2009-03-30 19:25", usage: 15 },
+            { timestamp: "2009-03-30 19:30", usage: 11 },
+            { timestamp: "2009-03-30 19:35", usage: 39 },
+            { timestamp: "2009-03-30 19:40", usage: 25 },
+          ]}
         />
       </CardContent>
     </Card>

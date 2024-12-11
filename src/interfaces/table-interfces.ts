@@ -7,3 +7,13 @@ export interface RealTimeFileTransferTableProps {
   selectedTab: string;
   filteredInput: string;
 }
+
+export interface DeviceTrafficTableProps {
+  data: {
+    deviceType: string;
+    pageViews: number;
+    siteSessions: number;
+    uniqueVisitors: number;
+    isTotal?: boolean;
+  }[];
+}

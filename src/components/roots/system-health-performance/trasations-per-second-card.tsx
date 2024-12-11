@@ -6,10 +6,10 @@ import dynamic from "next/dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import Loading from "@/components/partials/loader";
-const AmChartsAreaCharts05 = dynamic(
+const AmChartsLineChart05 = dynamic(
   () =>
-    import("../../charts/amcharts-area-charts").then(
-      (mod) => mod.AmChartsAreaCharts05
+    import("../../charts/amcharts-line-charts").then(
+      (mod) => mod.AmChartsLineChart05
     ),
   {
     ssr: false,
@@ -39,8 +39,8 @@ const TrasationsPerSecondCard = () => {
       </CardHeader>
 
       {/* TRANSACTIONS PER SECOND AREA CHART */}
-      <CardContent className="pt-12 h-[500px] max-md:px-2">
-        <AmChartsAreaCharts05
+      <CardContent className="pt-12 h-[600px] max-md:px-2">
+        <AmChartsLineChart05
           chartId="TrasationsPerSecondAreaChart"
           data={[
             {

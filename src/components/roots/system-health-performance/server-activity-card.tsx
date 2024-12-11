@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/partials/loader";
-const AmChartsAreaCharts04 = dynamic(
+const AmChartsLineChart04 = dynamic(
   () =>
-    import("../../charts/amcharts-area-charts").then(
-      (mod) => mod.AmChartsAreaCharts04
+    import("../../charts/amcharts-line-charts").then(
+      (mod) => mod.AmChartsLineChart04
     ),
   {
     ssr: false,
@@ -36,7 +36,7 @@ const ServerActivityCard = () => {
 
       {/* SERVER ACTIVITY LINE CHART */}
       <CardContent className="h-[700px] py-8 pb-12">
-        <AmChartsAreaCharts04
+        <AmChartsLineChart04
           chartId="ServerActivityAreaChart"
           data={[
             {

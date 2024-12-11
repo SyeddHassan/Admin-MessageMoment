@@ -16,12 +16,29 @@ export interface AmChartsLineChart02Props {
 
 export interface AmChartsLineChart03Props {
   chartId: string;
-  chart_config: {
-    data_point: number;
-    update_interval: number;
-    min_value: number;
-    max_value: number;
-    color: number;
-  };
-  generateCPUData: (lastValue: number) => number;
+  data: {
+    timestamp: string;
+    usage: number;
+  }[];
+}
+
+export interface AmChartsLineChart04Props {
+  chartId?: string;
+  data: {
+    timestamp: Date;
+    responseTime: number;
+    contentLength: number;
+  }[];
+}
+
+export interface AmChartsLineChart05Props {
+  chartId?: string;
+  data: {
+    timestamp: Date;
+    ASPState: number;
+    DBADMIN: number;
+    master: number;
+    msdb: number;
+    tempdb: number;
+  }[];
 }

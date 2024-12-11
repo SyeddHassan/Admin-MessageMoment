@@ -48,3 +48,11 @@ export interface AmChartsBarChart06Props {
     sessions: number;
   }[];
 }
+
+export interface AmChartsBarChart07Props {
+  chartId?: string;
+  data: {
+    name: string;
+    value: number;
+  }[];
+}
