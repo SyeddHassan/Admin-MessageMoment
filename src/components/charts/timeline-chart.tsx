@@ -6,7 +6,7 @@ import { TimelineChartProps } from "@/interfaces/charts/timline-charts-interface
 
 import { Badge } from "@/components/ui/badge";
 
-import { AlertCircle, LoaderCircle } from "lucide-react";
+import { AlertCircle, LayoutPanelTop } from "lucide-react";
 
 const TimelineChart = ({ data }: TimelineChartProps) => {
   const [timelineData, setTimelineData] = useState<
@@ -93,7 +93,7 @@ const TimelineChart = ({ data }: TimelineChartProps) => {
       <div className="space-y-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between">
           <div className="flex items-center gap-2 ml-3 mb-2 sm:mb-0">
-            <LoaderCircle className="h-4 w-4 sm:h-5 sm:w-5 text-heading-color animate-spin" />
+            <LayoutPanelTop className="h-4 w-4 sm:h-5 sm:w-5 text-heading-color" />
             <h3 className="text-sm sm:text-base font-inter text-heading-color font-semibold">
               Site Loading
             </h3>

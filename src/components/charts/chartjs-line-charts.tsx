@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import { ChartJsLineChart01Props } from "@/interfaces/charts/chartjs-line-charts-interfaces";

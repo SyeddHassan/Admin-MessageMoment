@@ -5,15 +5,15 @@ import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons03 } from "@/components/partials/filter-buttons";
 
-const Card1 = () => {
+const AdvertisementCampaignsCard = () => {
   const [selectedTab, setSelectedTab] = useState("View All");
   const [filteredInput, setFilteredInput] = useState("");
 
   return (
-    <Card id="Card1Section" className="!standard-card-styling">
+    <Card id="AdvertisementCampaignsSection" className="!standard-card-styling">
       <CardHeader className="py-6 border-b border-border">
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Card 1
+          Advertisement Campaigns
         </CardTitle>
       </CardHeader>
 
@@ -25,10 +25,10 @@ const Card1 = () => {
           setFilteredInput={setFilteredInput}
         />
 
-        {/* CARD 1 TABLE */}
+        {/* ADVERTISEMENTS CAMPAGIGNS TABLE */}
       </CardContent>
     </Card>
   );
 };
 
-export default Card1;
+export default AdvertisementCampaignsCard;

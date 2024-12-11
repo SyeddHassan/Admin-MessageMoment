@@ -41,7 +41,7 @@ const AppSidebar = () => {
           src={state === "collapsed" ? MiniLogo : Logo}
           alt="MessageMoment"
           className={`w-full max-lg:hidden ${
-            state === "collapsed" ? "h-[45px]" : "w-[190px]"
+            state === "collapsed" ? "h-[45px]" : "w-[185px]"
           }`}
           priority
         />
