@@ -831,12 +831,10 @@ export const AmChartsLineChart05 = ({
         })
       );
 
-      // Set the stroke width for the series
       series.strokes.template.setAll({
         strokeWidth: 2,
       });
 
-      // Add bullets to the series with hover state
       series.bullets.push(function () {
         const bullet = am5.Bullet.new(root, {
           sprite: am5.Circle.new(root, {
@@ -847,10 +845,7 @@ export const AmChartsLineChart05 = ({
           }),
         });
 
-        // Create hover state for bullets
-        bullet.states.create("hover", {
-          // scale: 1.5,
-        });
+        bullet.states.create("hover", {});
 
         return bullet;
       });
@@ -873,7 +868,7 @@ export const AmChartsLineChart05 = ({
       exporting.dispose();
       root.dispose();
     };
-  }, [chartId, data, theme]);
+  }, [chartId, data, theme, chartConfig]);
 
   return <div id={chartId} className="w-full h-full" />;
 };
