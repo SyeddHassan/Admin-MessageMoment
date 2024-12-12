@@ -36,7 +36,7 @@ const AdvertisementCampaignsTable = ({
     let filtered =
       selectedTab === "View All"
         ? data
-        : data.filter((row) => row.campaignType === selectedTab);
+        : data.filter((row) => row.campaignDisplay === selectedTab);
 
     if (filteredInput) {
       filtered = filtered.filter((row) =>
@@ -109,11 +109,9 @@ const AdvertisementCampaignsTable = ({
           </div>
         ),
         cell: ({ row }) => {
-            const projectMode = row.getValue("projectMode") as boolean;
-                return <span>{
-                    projectMode ? "ON" : "OFF"
-                    }</span>;
-        }
+          const projectMode = row.getValue("projectMode") as boolean;
+          return <span>{projectMode ? "ON" : "OFF"}</span>;
+        },
       },
 
       {
@@ -157,7 +155,18 @@ const AdvertisementCampaignsTable = ({
                     key={header.id}
                     className={`max-lg:!w-[180px] ${
                       header.column.id === "switch"
-                        ? "lg:w-[180px]" : header.column.id === "campaignId" ? "lg:w-[200px]" : header.column.id === "timestamp" ? "lg:w-[240px]" : header.column.id === "campaignType" ? "lg:w-[180px]" : header.column.id === "campaignDisplay" ? "lg:w-[180px]" : header.column.id === "projectMode" ? "lg:w-[180px]" :  ""
+                        ? "lg:w-[180px]"
+                        : header.column.id === "campaignId"
+                        ? "lg:w-[200px]"
+                        : header.column.id === "timestamp"
+                        ? "lg:w-[240px]"
+                        : header.column.id === "campaignType"
+                        ? "lg:w-[180px]"
+                        : header.column.id === "campaignDisplay"
+                        ? "lg:w-[180px]"
+                        : header.column.id === "projectMode"
+                        ? "lg:w-[180px]"
+                        : ""
                     }`}
                   >
                     {header.isPlaceholder

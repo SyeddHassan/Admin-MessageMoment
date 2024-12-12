@@ -32,6 +32,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
 
     // Initialize root and themes
     const root = am5.Root.new(chartRef.current);
+
     root.setThemes([am5themes_Animated.new(root)]);
 
     const chart = root.container.children.push(

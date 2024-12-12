@@ -42,6 +42,123 @@ export const MessageMomentStatsCardsData = [
   },
 ];
 
+export const RealTimeMapSessionsStatsData = [
+  {
+    countryName: "Germany",
+    countryCode: "DE",
+    session: 300,
+  },
+  {
+    countryName: "United States",
+    countryCode: "US",
+    session: 450,
+  },
+  {
+    countryName: "India",
+    countryCode: "IN",
+    session: 620,
+  },
+  {
+    countryName: "Brazil",
+    countryCode: "BR",
+    session: 280,
+  },
+  {
+    countryName: "Australia",
+    countryCode: "AU",
+    session: 200,
+  },
+  {
+    countryName: "Canada",
+    countryCode: "CA",
+    session: 320,
+  },
+  {
+    countryName: "France",
+    countryCode: "FR",
+    session: 310,
+  },
+  {
+    countryName: "South Africa",
+    countryCode: "ZA",
+    session: 150,
+  },
+  {
+    countryName: "Japan",
+    countryCode: "JP",
+    session: 400,
+  },
+  {
+    countryName: "United Kingdom",
+    countryCode: "GB",
+    session: 370,
+  },
+  {
+    countryName: "Mexico",
+    countryCode: "MX",
+    session: 180,
+  },
+  {
+    countryName: "Italy",
+    countryCode: "IT",
+    session: 250,
+  },
+];
+
+export const RealTimeMapUsersStatsData = [
+  {
+    name: "United States",
+    countryCode: "us",
+    longitude: "-95.7129° W",
+    latitude: "37.0902° N",
+    states: [
+      { name: "California", users: 250 },
+      { name: "Texas", users: 340 },
+      { name: "Florida", users: 280 },
+      { name: "New York", users: 310 },
+    ],
+  },
+
+  {
+    name: "Canada",
+    countryCode: "ca",
+    longitude: "-106.3468° W",
+    latitude: "56.1304° N",
+    states: [
+      { name: "Ontario", users: 190 },
+      { name: "Quebec", users: 230 },
+      { name: "British Columbia", users: 210 },
+      { name: "Alberta", users: 160 },
+    ],
+  },
+
+  {
+    name: "United Kingdom",
+    countryCode: "gb",
+    longitude: "-3.4360° W",
+    latitude: "55.3781° N",
+    states: [
+      { name: "England", users: 270 },
+      { name: "Scotland", users: 150 },
+      { name: "Wales", users: 120 },
+      { name: "Northern Ireland", users: 80 },
+    ],
+  },
+
+  {
+    name: "Australia",
+    countryCode: "au",
+    longitude: "133.7751° E",
+    latitude: "25.2744° S",
+    states: [
+      { name: "New South Wales", users: 200 },
+      { name: "Victoria", users: 240 },
+      { name: "Queensland", users: 180 },
+      { name: "Western Australia", users: 140 },
+    ],
+  },
+];
+
 export const RealTimeSessionMonitoringTableData = [
   {
     sessionId: 12839712893712,
