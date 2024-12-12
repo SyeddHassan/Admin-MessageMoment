@@ -22,7 +22,7 @@ const AmChartsBarChart08 = dynamic(
   }
 );
 
-import { ArrowDown, ArrowUp, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 const RegionAdCampaignsCard = () => {
   return (
@@ -33,7 +33,7 @@ const RegionAdCampaignsCard = () => {
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Ads Campaign by Region
+          Ads Campaign by Regio
         </CardTitle>
       </CardHeader>
 

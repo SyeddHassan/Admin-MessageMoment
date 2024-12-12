@@ -11,6 +11,7 @@ export interface FilterButtons02Props {
   setSelectedTab: (tab: string) => void;
 }
 export interface FilterButtons03Props {
+  isCampaign?: boolean;
   selectedTab: string;
   setSelectedTab: (tab: string) => void;
   filteredInput: string;

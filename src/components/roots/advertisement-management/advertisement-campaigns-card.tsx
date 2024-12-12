@@ -19,6 +19,7 @@ const AdvertisementCampaignsCard = () => {
 
       <CardContent className="py-5 flex gap-12 flex-col">
         <FilterButtons03
+          isCampaign={true}
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           filteredInput={filteredInput}
