@@ -17,3 +17,8 @@ export interface DeviceTrafficTableProps {
     isTotal?: boolean;
   }[];
 }
+
+export interface AdvertismentCampaignTableProps {
+  selectedTab: string;
+  filteredInput: string;
+}

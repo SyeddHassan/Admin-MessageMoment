@@ -33,7 +33,7 @@ const RegionAdCampaignsCard = () => {
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
-          Ads Campaign by Regio
+          Ads Campaign by Region
         </CardTitle>
       </CardHeader>
 
