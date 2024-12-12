@@ -64,3 +64,8 @@ export interface AmChartsBarChart08Props {
     value: number;
   }[];
 }
+
+export interface AmChartsBarChart09Props {
+  chartId?: string;
+  data: { month: string; impressions: number; conversions: number }[];
+}
