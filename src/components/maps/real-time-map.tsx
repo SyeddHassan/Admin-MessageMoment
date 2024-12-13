@@ -2,14 +2,14 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 
-import { RealTimeSessionsMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
+import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
+export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
@@ -91,7 +91,7 @@ export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 20,
+          radius: 25,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
@@ -103,7 +103,7 @@ export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
-          text: "{sessions}",
+          text: selectedTab === "sessions" ? "{sessions}" : "{users}",
           fill: am5.color(0xffffff),
           fontSize: 8,
           fontFamily: "Jetbrains mono",
@@ -154,7 +154,7 @@ export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
     return () => {
       root.dispose();
     };
-  }, [data]);
+  }, [data, selectedTab]);
 
   return <div ref={chartRef} className="h-full w-full" />;
 };

@@ -42,15 +42,7 @@ export const MessageMomentStatsCardsData = [
   },
 ];
 
-export const RealTimeSessionsMapData = [
-  {
-    countryName: "Germany",
-    countryCode: "DE",
-    latitude: 51.1657,
-    longitude: 10.4515,
-    session: 10234,
-    users: 180790,
-  },
+export const RealTimeMapData = [
   {
     countryName: "United States",
     countryCode: "US",
@@ -58,7 +50,63 @@ export const RealTimeSessionsMapData = [
     longitude: -95.7129,
     session: 15320,
     users: 203691,
+    states: [
+      {
+        name: "California",
+        latitude: 36.7783,
+        longitude: -119.4179,
+        session: 6000,
+        users: 70000,
+      },
+      {
+        name: "Texas",
+        latitude: 31.9686,
+        longitude: -99.9018,
+        session: 5000,
+        users: 50000,
+      },
+      {
+        name: "New York",
+        latitude: 40.7128,
+        longitude: -74.006,
+        session: 4320,
+        users: 63691,
+      },
+    ],
   },
+
+  {
+    countryName: "Germany",
+    countryCode: "DE",
+    latitude: 51.1657,
+    longitude: 10.4515,
+    session: 10234,
+    users: 180790,
+    states: [
+      {
+        name: "Bavaria",
+        latitude: 48.7904,
+        longitude: 11.4979,
+        session: 4200,
+        users: 80000,
+      },
+      {
+        name: "North Rhine-Westphalia",
+        latitude: 51.4332,
+        longitude: 7.6616,
+        session: 3600,
+        users: 65000,
+      },
+      {
+        name: "Berlin",
+        latitude: 52.52,
+        longitude: 13.405,
+        session: 2434,
+        users: 35800,
+      },
+    ],
+  },
+
   {
     countryName: "India",
     countryCode: "IN",
@@ -66,131 +114,28 @@ export const RealTimeSessionsMapData = [
     longitude: 78.9629,
     session: 23678,
     users: 166360,
-  },
-  {
-    countryName: "Brazil",
-    countryCode: "BR",
-    latitude: -14.235,
-    longitude: -51.9253,
-    session: 11845,
-    users: 882486,
-  },
-  {
-    countryName: "Australia",
-    countryCode: "AU",
-    latitude: -25.2744,
-    longitude: 133.7751,
-    session: 10456,
-    users: 882486,
-  },
-  {
-    countryName: "Canada",
-    countryCode: "CA",
-    latitude: 56.1304,
-    longitude: -106.3468,
-    session: 12567,
-    users: 504690,
-  },
-  {
-    countryName: "France",
-    countryCode: "FR",
-    latitude: 46.6034,
-    longitude: 1.8883,
-    session: 11234,
-    users: 428757,
-  },
-  {
-    countryName: "South Africa",
-    countryCode: "ZA",
-    latitude: -30.5595,
-    longitude: 22.9375,
-    session: 9578,
-    users: 184996,
-  },
-  {
-    countryName: "Japan",
-    countryCode: "JP",
-    latitude: 36.2048,
-    longitude: 138.2529,
-    session: 14567,
-    users: 581197,
-  },
-  {
-    countryName: "United Kingdom",
-    countryCode: "GB",
-    latitude: 55.3781,
-    longitude: -3.436,
-    session: 12345,
-    users: 403283,
-  },
-  {
-    countryName: "Mexico",
-    countryCode: "MX",
-    latitude: 23.6345,
-    longitude: -102.5528,
-    session: 10894,
-    users: 485836,
-  },
-  {
-    countryName: "Italy",
-    countryCode: "IT",
-    latitude: 41.8719,
-    longitude: 12.5674,
-    session: 12750,
-    users: 728219,
-  },
-];
-
-export const RealTimeMapUsersStatsData = [
-  {
-    name: "United States",
-    countryCode: "us",
-    longitude: "-95.7129° W",
-    latitude: "37.0902° N",
     states: [
-      { name: "California", users: 250 },
-      { name: "Texas", users: 340 },
-      { name: "Florida", users: 280 },
-      { name: "New York", users: 310 },
-    ],
-  },
-
-  {
-    name: "Canada",
-    countryCode: "ca",
-    longitude: "-106.3468° W",
-    latitude: "56.1304° N",
-    states: [
-      { name: "Ontario", users: 190 },
-      { name: "Quebec", users: 230 },
-      { name: "British Columbia", users: 210 },
-      { name: "Alberta", users: 160 },
-    ],
-  },
-
-  {
-    name: "United Kingdom",
-    countryCode: "gb",
-    longitude: "-3.4360° W",
-    latitude: "55.3781° N",
-    states: [
-      { name: "England", users: 270 },
-      { name: "Scotland", users: 150 },
-      { name: "Wales", users: 120 },
-      { name: "Northern Ireland", users: 80 },
-    ],
-  },
-
-  {
-    name: "Australia",
-    countryCode: "au",
-    longitude: "133.7751° E",
-    latitude: "25.2744° S",
-    states: [
-      { name: "New South Wales", users: 200 },
-      { name: "Victoria", users: 240 },
-      { name: "Queensland", users: 180 },
-      { name: "Western Australia", users: 140 },
+      {
+        name: "Maharashtra",
+        latitude: 19.7515,
+        longitude: 75.7139,
+        session: 9200,
+        users: 60000,
+      },
+      {
+        name: "Karnataka",
+        latitude: 15.3173,
+        longitude: 75.7139,
+        session: 8600,
+        users: 56000,
+      },
+      {
+        name: "Delhi",
+        latitude: 28.7041,
+        longitude: 77.1025,
+        session: 5880,
+        users: 50360,
+      },
     ],
   },
 ];
