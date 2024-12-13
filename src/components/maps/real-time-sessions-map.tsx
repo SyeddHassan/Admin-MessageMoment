@@ -88,6 +88,7 @@ export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
         })
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
           radius: 20,
