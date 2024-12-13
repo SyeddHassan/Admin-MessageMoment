@@ -100,6 +100,7 @@ export const RealTimeSessionsMap = ({ data }: RealTimeSessionsMapProps) => {
         })
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
           text: "{sessions}",
