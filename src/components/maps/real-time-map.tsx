@@ -1,16 +1,28 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
-
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
-
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
+
 export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
+
+  const getCircleSize = (value: number) => {
+
+    const minSize = 10;
+    const maxSize = 40;
+    const minValue = Math.min(...data.map((d) => Math.min(d.session, d.users)));
+    const maxValue = Math.max(...data.map((d) => Math.max(d.session, d.users)));
+
+    const scale =
+      (Math.log(value) - Math.log(minValue)) /
+      (Math.log(maxValue) - Math.log(minValue));
+    return minSize + scale * (maxSize - minSize);
+  };
 
   useLayoutEffect(() => {
     if (!chartRef.current) return;
@@ -46,66 +58,51 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       fill: am5.color(0x494af8),
     });
 
-    polygonSeries.mapPolygons.template.setAll({
-      fill: am5.color("#e6e6e6"),
-      stroke: am5.color("#ffffff"),
-    });
-
     let previousPolygon: am5map.MapPolygon | null = null;
 
-    polygonSeries.mapPolygons.template.on(
-      "active",
-      function (active, target: am5map.MapPolygon | undefined) {
-        if (!target) return;
-
-        if (previousPolygon && previousPolygon !== target) {
-          previousPolygon.set("active", false);
-        }
-
-        const dataItem =
-          target.dataItem as am5.DataItem<am5map.IMapPolygonSeriesDataItem> | null;
-
-        if (target.get("active") && dataItem) {
-          polygonSeries.zoomToDataItem(dataItem);
-        } else {
-          chart.goHome();
-        }
-
-        previousPolygon = target;
-      }
-    );
+   
 
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
-    pointSeries.bullets.push(() => {
+    pointSeries.bullets.push((root, dataItem: any) => {
       const container = am5.Container.new(root, {});
+      const value =
+        selectedTab === "sessions"
+          ? dataItem.dataContext.sessions
+          : dataItem.dataContext.users;
+      const circleSize = getCircleSize(value);
 
       const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: 10,
+          radius: circleSize * 0.3,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 35,
+          radius: circleSize,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
           tooltipText:
             "[bold]{name}\n[bold]Sessions: [normal]{sessions}\n[bold]Users: [normal]{users}",
+          interactive: true,
+          cursorOverStyle: "pointer",
         })
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      outerCircle.states.create("hover", {
+        scale: 1.1,
+      });
+
+      
       const label = container.children.push(
         am5.Label.new(root, {
           text: selectedTab === "sessions" ? "{sessions}" : "{users}",
           fill: am5.color(0xffffff),
-          fontSize: 14,
+          fontSize: 12,
           fontFamily: "Jetbrains mono",
           populateText: true,
           centerX: am5.p50,
@@ -137,8 +134,8 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       });
     });
 
-    pointSeries.data.setAll(
-      data.map((item) => ({
+    const getCountryData = () => {
+      return data.map((item) => ({
         geometry: {
           type: "Point",
           coordinates: [item.longitude, item.latitude],
@@ -146,8 +143,12 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         name: item.countryName,
         sessions: item.session,
         users: item.users,
-      }))
-    );
+      }));
+    };
+
+
+    // Initial data setup
+    pointSeries.data.setAll(getCountryData());
 
     chart.appear(1000, 100);
 
@@ -158,3 +159,4 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
   return <div ref={chartRef} className="h-full w-full" />;
 };
+
