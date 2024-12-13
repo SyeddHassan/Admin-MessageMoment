@@ -64,7 +64,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
-    pointSeries.bullets.push((root, dataItem: any) => {
+    pointSeries.bullets.push((root, series, dataItem: any) => {
       const container = am5.Container.new(root, {});
       const value =
         selectedTab === "sessions"
