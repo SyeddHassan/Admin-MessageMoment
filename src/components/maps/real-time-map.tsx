@@ -82,7 +82,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: 7,
+          radius: 10,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
@@ -91,7 +91,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 25,
+          radius: 35,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
@@ -105,7 +105,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         am5.Label.new(root, {
           text: selectedTab === "sessions" ? "{sessions}" : "{users}",
           fill: am5.color(0xffffff),
-          fontSize: 8,
+          fontSize: 14,
           fontFamily: "Jetbrains mono",
           populateText: true,
           centerX: am5.p50,
