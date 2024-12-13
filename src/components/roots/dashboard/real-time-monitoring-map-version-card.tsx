@@ -1,12 +1,35 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
+
+import { Country } from "@/interfaces/pages/dashboard-page-components-interface";
+
+import { RealTimeSessionsMapData } from "@/constants/dashboard-page-components-data";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons01 } from "@/components/partials/filter-buttons";
 import RealTimeMapSessionsStats from "./real-time-map-sessions-stats";
 import RealTimeMapUsersStats from "./real-time-map-users-stats";
-import { Country } from "@/interfaces/pages/dashboard-page-components-interface";
+import Loading from "@/components/partials/loader";
+const RealTimeSessionsMap = dynamic(
+  () =>
+    import("../../maps/real-time-sessions-map").then(
+      (mod) => mod.RealTimeSessionsMap
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Loading
+        Icon={LoaderCircle}
+        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
+        containerClassName="w-full h-full"
+      />
+    ),
+  }
+);
+
+import { LoaderCircle } from "lucide-react";
 
 const RealTimeMonitoringMapVersionCard = () => {
   const [selectedTab, setSelectedTab] = useState("sessions");
@@ -27,16 +50,20 @@ const RealTimeMonitoringMapVersionCard = () => {
       </CardHeader>
 
       {/* REAL TIME MAP ACTIVITIES & STATS */}
-      <CardContent className="py-5 lg:px-[1.5rem] px-1 lg:h-[550px] flex gap-6 md:flex-row flex-col">
+      <CardContent className="py-5 md:px-[1.5rem] px-1 md:h-[550px] h-[900px] flex md:flex-row flex-col">
         {/* REAL TIME MAP */}
-        <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full bg-black">
-          {selectedTab === "sessions" ? <></> : <></>}
+        <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full">
+          {selectedTab === "sessions" ? (
+            <RealTimeSessionsMap data={RealTimeSessionsMapData} />
+          ) : (
+            <></>
+          )}
         </div>
 
         {/* REAL TIME MAP STATS */}
-        <div className="lg:w-[calc(100%-66.66666667%)] md:w-[calc(100%-55%)] w-full lg:h-full h-[400px]">
+        <div className="lg:w-[calc(100%-66.66666667%)] md:w-[calc(100%-55%)] w-full md:h-full h-[400px]">
           {selectedTab === "sessions" ? (
-            <RealTimeMapSessionsStats />
+            <RealTimeMapSessionsStats data={RealTimeSessionsMapData} />
           ) : (
             <RealTimeMapUsersStats
               selectedCountry={selectedCountry}
