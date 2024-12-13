@@ -461,7 +461,6 @@ export const AmChartsLineChart03 = ({
       })
     );
 
-
     series.strokes.template.setAll({
       stroke: am5.color(0x2196f3),
       strokeWidth: 2,
@@ -686,14 +685,6 @@ export const AmChartsLineChart05 = ({
   const { theme } = useTheme();
   const chartRef = useRef<am5.Root | null>(null);
 
-  const chartConfig = [
-    { name: "ASPState", color: "#FF6B6B" },
-    { name: "DBADMIN", color: "#4ECDC4" },
-    { name: "master", color: "#45B7D1" },
-    { name: "msdb", color: "#F7B731" },
-    { name: "tempdb", color: "#5D5D5D" },
-  ];
-
   useLayoutEffect(() => {
     if (chartRef.current) {
       chartRef.current.dispose();
@@ -814,6 +805,14 @@ export const AmChartsLineChart05 = ({
       fontWeight: "400",
     });
 
+    const chartConfig = [
+      { name: "ASPState", color: "#FF6B6B" },
+      { name: "DBADMIN", color: "#4ECDC4" },
+      { name: "master", color: "#45B7D1" },
+      { name: "msdb", color: "#F7B731" },
+      { name: "tempdb", color: "#5D5D5D" },
+    ];
+
     chartConfig.forEach((metric) => {
       const series = chart.series.push(
         am5xy.LineSeries.new(root, {
@@ -868,7 +867,7 @@ export const AmChartsLineChart05 = ({
       exporting.dispose();
       root.dispose();
     };
-  }, [chartId, data, theme, chartConfig]);
+  }, [chartId, data, theme]);
 
   return <div id={chartId} className="w-full h-full" />;
 };

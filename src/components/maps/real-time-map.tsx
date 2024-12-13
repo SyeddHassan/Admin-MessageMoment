@@ -3,6 +3,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 
 import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
+import { MapDataContextInterface } from "@/interfaces/map-interfaces";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
@@ -64,17 +65,18 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    pointSeries.bullets.push((root, series, dataItem: any) => {
+    pointSeries.bullets.push((root, series, dataItem) => {
+      const typedDataItem = dataItem as MapDataContextInterface;
       const container = am5.Container.new(root, {});
       const value =
         selectedTab === "sessions"
-          ? dataItem.dataContext.sessions
-          : dataItem.dataContext.users;
+          ? typedDataItem.dataContext.sessions
+          : typedDataItem.dataContext.users;
       const circleSize = getCircleSize(value);
 
       const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize * 0.4,
+          radius: circleSize * 0.35,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
@@ -82,7 +84,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize + 5,
+          radius: circleSize + 3,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
@@ -153,7 +155,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
     return () => {
       root.dispose();
     };
-  }, [data, selectedTab]);
+  }, [data, selectedTab, getCircleSize]);
 
   return <div ref={chartRef} className="h-full w-full" />;
 };
