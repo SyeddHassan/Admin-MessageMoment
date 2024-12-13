@@ -64,7 +64,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let previousPolygon: am5map.MapPolygon | null = null;
+    const previousPolygon: am5map.MapPolygon | null = null;
 
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
