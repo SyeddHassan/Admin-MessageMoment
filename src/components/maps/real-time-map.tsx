@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef } from "react";
+
 import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
+
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-
 export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   const getCircleSize = (value: number) => {
-
     const minSize = 10;
     const maxSize = 40;
     const minValue = Math.min(...data.map((d) => Math.min(d.session, d.users)));
@@ -58,12 +58,12 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       fill: am5.color(0x494af8),
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let previousPolygon: am5map.MapPolygon | null = null;
-
-   
 
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     pointSeries.bullets.push((root, series, dataItem: any) => {
       const container = am5.Container.new(root, {});
       const value =
@@ -74,7 +74,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize * 0.3,
+          radius: circleSize * 0.4,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
@@ -82,7 +82,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize,
+          radius: circleSize + 5,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
@@ -97,7 +97,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         scale: 1.1,
       });
 
-      
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
           text: selectedTab === "sessions" ? "{sessions}" : "{users}",
@@ -146,8 +146,6 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       }));
     };
 
-
-    // Initial data setup
     pointSeries.data.setAll(getCountryData());
 
     chart.appear(1000, 100);
@@ -159,4 +157,3 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
   return <div ref={chartRef} className="h-full w-full" />;
 };
-

@@ -6,3 +6,10 @@ export interface AmChartsHeatmapProps {
     value: number;
   }[];
 }
+
+export interface MapDataContextInterface {
+  dataContext: {
+    sessions: number;
+    users: number;
+  };
+}
