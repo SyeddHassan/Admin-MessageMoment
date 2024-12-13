@@ -13,19 +13,23 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
 
-  const getCircleSize = (value: number) => {
-    const minSize = 10;
-    const maxSize = 40;
-    const minValue = Math.min(...data.map((d) => Math.min(d.session, d.users)));
-    const maxValue = Math.max(...data.map((d) => Math.max(d.session, d.users)));
-
-    const scale =
-      (Math.log(value) - Math.log(minValue)) /
-      (Math.log(maxValue) - Math.log(minValue));
-    return minSize + scale * (maxSize - minSize);
-  };
-
   useLayoutEffect(() => {
+    const getCircleSize = (value: number) => {
+      const minSize = 10;
+      const maxSize = 40;
+      const minValue = Math.min(
+        ...data.map((d) => Math.min(d.session, d.users))
+      );
+      const maxValue = Math.max(
+        ...data.map((d) => Math.max(d.session, d.users))
+      );
+
+      const scale =
+        (Math.log(value) - Math.log(minValue)) /
+        (Math.log(maxValue) - Math.log(minValue));
+      return minSize + scale * (maxSize - minSize);
+    };
+
     if (!chartRef.current) return;
 
     const root = am5.Root.new(chartRef.current);
@@ -155,7 +159,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
     return () => {
       root.dispose();
     };
-  }, [data, selectedTab, getCircleSize]);
+  }, [data, selectedTab]);
 
   return <div ref={chartRef} className="h-full w-full" />;
 };
