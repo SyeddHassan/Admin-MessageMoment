@@ -13,6 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 const AppHeaderProfileMenu = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const AppHeaderProfileMenu = () => {
             View Profile
           </DropdownMenuItem>
           <DropdownMenuItem className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color">
-            Settings
+            <Link href={"/settings"}>Settings</Link>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={HandleLogoOut}

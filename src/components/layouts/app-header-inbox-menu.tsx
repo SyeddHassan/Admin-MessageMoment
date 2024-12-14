@@ -37,7 +37,7 @@ const AppHeaderInboxMenu = () => {
             <p className="text-[12px] text-secondary-theme cursor-pointer hover:underline font-inter">
               View All
             </p>
-            <p className="text-[12px] text-secondary-theme dark:text-paragraph-color cursor-pointer hover:underline font-inter">
+            <p className="text-[12px] text-secondary-theme cursor-pointer hover:underline font-inter">
               Mark As Read
             </p>
           </div>
