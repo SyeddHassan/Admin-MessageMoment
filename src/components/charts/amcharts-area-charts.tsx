@@ -100,6 +100,7 @@ export const AmChartsAreaChart01 = ({
           minGridDistance: 50,
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -109,6 +110,7 @@ export const AmChartsAreaChart01 = ({
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
           opposite: false,
+          strokeOpacity: 1,
         }),
         min: 8,
         max: 22,
@@ -126,6 +128,12 @@ export const AmChartsAreaChart01 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const createSeries = (name: string, field: string, color: am5.Color) => {
@@ -276,13 +284,17 @@ export const AmChartsAreaChart02 = ({
       am5xy.DateAxis.new(root, {
         maxDeviation: 0.1,
         baseInterval: { timeUnit: "day", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, {
+          strokeOpacity: 1,
+        }),
       })
     );
 
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 1,
+        }),
       })
     );
 
@@ -298,8 +310,10 @@ export const AmChartsAreaChart02 = ({
       fontWeight: "normal",
     });
 
-    xAxis.get("renderer").grid.template.setAll({
-      strokeOpacity: 0,
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const series = chart.series.push(
@@ -423,6 +437,7 @@ export const AmChartsAreaChart03 = ({
         },
         renderer: am5xy.AxisRendererX.new(root, {
           minorGridEnabled: true,
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -431,7 +446,7 @@ export const AmChartsAreaChart03 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          pan: "zoom",
+          strokeOpacity: 1,
         }),
       })
     );
@@ -446,6 +461,12 @@ export const AmChartsAreaChart03 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const series = chart.series.push(

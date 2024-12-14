@@ -336,6 +336,7 @@ export const AmChartsBarChart02 = ({
     const xRenderer = am5xy.AxisRendererX.new(root, {
       minGridDistance: 30,
       minorGridEnabled: true,
+      strokeOpacity: 1,
     });
 
     xRenderer.labels.template.setAll({
@@ -359,7 +360,7 @@ export const AmChartsBarChart02 = ({
     );
 
     const yRenderer = am5xy.AxisRendererY.new(root, {
-      strokeOpacity: 0.1,
+      strokeOpacity: 1,
       inversed: false,
     });
 
@@ -380,6 +381,10 @@ export const AmChartsBarChart02 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const series = chart.series.push(
@@ -522,6 +527,7 @@ export const AmChartsBarChart03 = ({
         renderer: am5xy.AxisRendererX.new(root, {
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -529,7 +535,7 @@ export const AmChartsBarChart03 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -544,6 +550,12 @@ export const AmChartsBarChart03 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     xAxis.data.setAll(data);
@@ -671,7 +683,7 @@ export const AmChartsBarChart04 = ({
         categoryField: "category",
         renderer: am5xy.AxisRendererY.new(root, {
           minGridDistance: 30,
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
           strokeWidth: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
@@ -684,7 +696,7 @@ export const AmChartsBarChart04 = ({
     const xAxis = chart.xAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
           strokeWidth: 1,
         }),
       })
@@ -829,8 +841,7 @@ export const AmChartsBarChart05 = ({
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
           minGridDistance: 30,
-          strokeOpacity: 0.1,
-          strokeWidth: 1,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -845,8 +856,7 @@ export const AmChartsBarChart05 = ({
     const xAxis = chart.xAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {
-          strokeOpacity: 0.1,
-          strokeWidth: 1,
+          strokeOpacity: 1,
           minGridDistance: 50,
         }),
         min: 0,
@@ -1492,6 +1502,7 @@ export const AmChartsBarChart09 = ({
         renderer: am5xy.AxisRendererX.new(root, {
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -1499,7 +1510,7 @@ export const AmChartsBarChart09 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -1514,6 +1525,12 @@ export const AmChartsBarChart09 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     xAxis.data.setAll(data);

@@ -308,7 +308,10 @@ export const AmChartsLineChart02 = ({
     const xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
         baseInterval: { timeUnit: "day", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, { minorGridEnabled: true }),
+        renderer: am5xy.AxisRendererX.new(root, {
+          minorGridEnabled: true,
+          strokeOpacity: 1,
+        }),
       })
     );
 
@@ -320,7 +323,9 @@ export const AmChartsLineChart02 = ({
 
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 1,
+        }),
       })
     );
 
@@ -328,6 +333,12 @@ export const AmChartsLineChart02 = ({
       fontSize: "14px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const series = chart.series.push(
@@ -440,7 +451,7 @@ export const AmChartsLineChart03 = ({
         baseInterval: { timeUnit: "minute", count: 1 },
         renderer: am5xy.AxisRendererX.new(root, {
           minGridDistance: 50,
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -452,10 +463,16 @@ export const AmChartsLineChart03 = ({
         max: 40,
         strictMinMax: true,
         renderer: am5xy.AxisRendererY.new(root, {
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
       })
     );
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
+    });
 
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
@@ -579,21 +596,26 @@ export const AmChartsLineChart04 = ({
     const xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
         baseInterval: { timeUnit: "minute", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, {
+          strokeOpacity: 1,
+        }),
         tooltip: am5.Tooltip.new(root, {}),
       })
     );
 
-    xAxis.get("renderer").grid.template.setAll({
-      strokeWidth: 0,
-      strokeOpacity: 0,
-    });
-
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 1,
+        }),
       })
     );
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
+    });
 
     xAxis.get("renderer").labels.template.setAll({
       fontSize: "14px",
@@ -790,7 +812,7 @@ export const AmChartsLineChart05 = ({
         baseInterval: { timeUnit: "minute", count: 15 },
         renderer: am5xy.AxisRendererX.new(root, {
           minGridDistance: 50,
-          pan: "zoom",
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -804,7 +826,7 @@ export const AmChartsLineChart05 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          pan: "zoom",
+          strokeOpacity: 1,
         }),
       })
     );
@@ -812,6 +834,12 @@ export const AmChartsLineChart05 = ({
     yAxis.get("renderer").labels.template.setAll({
       fontSize: 12,
       fontWeight: "400",
+    });
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
     });
 
     const chartConfig = [
