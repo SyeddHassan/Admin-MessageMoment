@@ -63,8 +63,30 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       fill: am5.color(0x494af8),
     });
 
+    let previousPolygon: am5map.MapPolygon | null = null;
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const previousPolygon: am5map.MapPolygon | null = null;
+    polygonSeries.mapPolygons.template.on(
+      "active",
+      function (active, target: am5map.MapPolygon | undefined) {
+        if (!target) return;
+
+        if (previousPolygon && previousPolygon !== target) {
+          previousPolygon.set("active", false);
+        }
+
+        const dataItem =
+          target.dataItem as am5.DataItem<am5map.IMapPolygonSeriesDataItem> | null;
+
+        if (target.get("active") && dataItem) {
+          polygonSeries.zoomToDataItem(dataItem);
+        } else {
+          chart.goHome();
+        }
+
+        previousPolygon = target;
+      }
+    );
 
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
