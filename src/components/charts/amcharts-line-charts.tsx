@@ -96,6 +96,7 @@ export const AmChartsLineChart01 = ({
           minGridDistance: 30,
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -111,9 +112,17 @@ export const AmChartsLineChart01 = ({
         min: 0,
         max: maxYValue + 10,
         strictMinMax: true,
-        renderer: am5xy.AxisRendererY.new(root, {}),
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 1,
+        }),
       })
     );
+
+    xAxis.get("renderer").grid.template.set("visible", false);
+
+    yAxis.get("renderer").grid.template.setAll({
+      strokeOpacity: 0.2,
+    });
 
     xAxis.get("renderer").labels.template.setAll({
       fontSize: "14px",

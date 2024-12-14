@@ -96,7 +96,7 @@ export const AmChartsBarChart01 = ({
           minGridDistance: 30,
           cellStartLocation: 0.1,
           cellEndLocation: 0.9,
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
         tooltip: am5.Tooltip.new(root, {}),
       })
@@ -105,7 +105,7 @@ export const AmChartsBarChart01 = ({
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {
-          strokeOpacity: 0.1,
+          strokeOpacity: 1,
         }),
       })
     );
@@ -125,7 +125,7 @@ export const AmChartsBarChart01 = ({
     xAxis.get("renderer").grid.template.set("visible", false);
 
     yAxis.get("renderer").grid.template.setAll({
-      strokeOpacity: 0.1,
+      strokeOpacity: 0.2,
     });
 
     const usersSeries = chart.series.push(
