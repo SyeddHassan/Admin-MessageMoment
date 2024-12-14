@@ -38,7 +38,7 @@ const ActiveUsersSessionTimeCard = () => {
       </CardHeader>
 
       {/* ACTIVE USERS AND SESSIONS BAR CHART */}
-      <CardContent className="pt-[5rem] h-[650px] max-md:px-2">
+      <CardContent className="pt-[2rem] h-[650px] max-md:px-2">
         <AmChartsBarChart02
           chartId="ActiveUsersSessionTimeBarChart"
           data={[

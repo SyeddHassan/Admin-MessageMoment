@@ -64,7 +64,7 @@ export const ChartJsLineChart01 = ({ chartData }: ChartJsLineChart01Props) => {
             <p className="font-bold text-[14px]">{data.value}</p>
           </div>
 
-          <div className="relative h-12 w-full">
+          <div className="relative h-12 w-full pt-1">
             <Line
               data={createChartData(data.data, data.color)}
               options={options}

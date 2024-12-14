@@ -50,7 +50,7 @@ export const AmChartsAreaChart01 = ({
         layout: root.verticalLayout,
         paddingLeft: 20,
         paddingRight: 20,
-        paddingTop: 20,
+        paddingTop: 30,
         paddingBottom: 60,
       })
     );
@@ -189,11 +189,11 @@ export const AmChartsAreaChart01 = ({
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
-        marginTop: 15,
-        marginBottom: 25,
         layout: root.horizontalLayout,
-        dy: -30,
-        position: "absolute",
+        height: am5.percent(10),
+        verticalScrollbar: am5.Scrollbar.new(root, {
+          orientation: "vertical",
+        }),
       })
     );
 
@@ -202,6 +202,32 @@ export const AmChartsAreaChart01 = ({
       fontFamily: "Inter",
     });
 
+    // Make legend responsive
+    chart.onPrivate("width", function (width: number | undefined) {
+      if (width !== undefined && width > 0) {
+        if (width < 500) {
+          legend.set("layout", root.verticalLayout);
+          legend.set("x", am5.p50);
+          legend.set("centerX", am5.p50);
+          legend.set("y", am5.p100);
+          legend.set("centerY", am5.p100);
+          legend.set("height", undefined);
+        } else {
+          legend.set("layout", root.horizontalLayout);
+          legend.set("y", 0);
+          legend.set("centerY", 0);
+          legend.set("height", am5.percent(10));
+        }
+      }
+    });
+
+    // Add cursor
+    chart.set(
+      "cursor",
+      am5xy.XYCursor.new(root, {
+        behavior: "none",
+      })
+    );
     legend.data.setAll(chart.series.values);
 
     chart.appear(1000, 100);

@@ -294,7 +294,7 @@ export const AmChartsBarChart02 = ({
         pinchZoomY: true,
         layout: root.verticalLayout,
         paddingLeft: 10,
-        paddingRight: 1,
+        paddingTop: 30,
       })
     );
 
