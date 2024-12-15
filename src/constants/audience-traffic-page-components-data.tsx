@@ -1,50 +1,47 @@
-export const AmChartsHeatmapData = () => {
-  const weekdays = [
+export const trafficData = {
+  hours: [
+    "12:00 AM",
+    "1:00 AM",
+    "2:00 AM",
+    "3:00 AM",
+    "4:00 AM",
+    "5:00 AM",
+    "6:00 AM",
+    "7:00 AM",
+    "8:00 AM",
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM",
+    "5:00 PM",
+    "6:00 PM",
+    "7:00 PM",
+    "8:00 PM",
+    "9:00 PM",
+    "10:00 PM",
+    "11:00 PM",
+  ],
+  days: [
+    "Sunday",
     "Sunday",
     "Monday",
+    "Monday",
+    "Tuesday",
     "Tuesday",
     "Wednesday",
+    "Wednesday",
+    "Thursday",
     "Thursday",
     "Friday",
+    "Friday",
     "Saturday",
-  ];
-  
-  const hours = [
-    "12am",
-    "6am",
-    "12pm",
-    "6pm",
-    "1am",
-    "7am",
-    "1pm",
-    "7pm",
-    "2am",
-    "8am",
-    "2pm",
-    "8pm",
-    "3am",
-    "9am",
-    "3pm",
-    "9pm",
-    "4am",
-    "10am",
-    "4pm",
-    "10pm",
-    "5am",
-    "11am",
-    "5pm",
-    "11pm",
-  ];
-
-  const data = [];
-  for (const weekday of weekdays) {
-    for (const hour of hours) {
-      data.push({
-        hour: hour,
-        weekday: weekday,
-        value: Math.floor(Math.random() * 10) + 1,
-      });
-    }
-  }
-  return data;
+    "Saturday",
+  ],
+  trafficData: Array.from({ length: 24 }, () =>
+    Array.from({ length: 14 }, () => Math.floor(Math.random() * 5))
+  ),
 };

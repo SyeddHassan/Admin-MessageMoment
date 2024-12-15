@@ -270,6 +270,7 @@ export const AmChartsLineChart02 = ({
         pinchZoomX: true,
         pinchZoomY: true,
         layout: root.verticalLayout,
+        paddingTop: -10
       })
     );
 
@@ -282,6 +283,7 @@ export const AmChartsLineChart02 = ({
         valign: "top",
       }),
     });
+
 
     if (exporting) {
       exporting.get("menu")?.setAll({

@@ -1123,7 +1123,7 @@ export const AmChartsBarChart06 = ({
     };
   }, [chartId, data, theme]);
 
-  return <div id={chartId} className="w-full h-full" />;
+  return <div id={chartId} className="w-full h-[600px]" />;
 };
 
 export const AmChartsBarChart07 = ({
@@ -1258,6 +1258,7 @@ export const AmChartsBarChart07 = ({
           centerY: am5.p50,
           populateText: true,
           dy: 3,
+          dx: 30
         }),
       });
     });

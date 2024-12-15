@@ -3,14 +3,13 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
-import { AmChartsHeatmapData } from "@/constants/audience-traffic-page-components-data";
+import { trafficData } from "@/constants/audience-traffic-page-components-data";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons04 } from "@/components/partials/filter-buttons";
 import Loading from "@/components/partials/loader";
 const AmChartsHeatmap = dynamic(
-  () =>
-    import("../../maps/amcharts-heatmap").then((mod) => mod.AmChartsHeatmap),
+  () => import("../../maps/amcharts-heatmap").then((mod) => mod),
   {
     ssr: false,
     loading: () => (
@@ -40,6 +39,7 @@ const AmChartsBarChart06 = dynamic(
 );
 
 import { LoaderCircle } from "lucide-react";
+import HeatMapTable from "../../maps/amcharts-heatmap";
 
 const TrafficTimeDaysCard = () => {
   const [selectedTab, setSelectedTab] = useState("heatmap");
@@ -60,12 +60,9 @@ const TrafficTimeDaysCard = () => {
       </CardHeader>
 
       {/* TRAFFIC BY TIME OF DAYS HEATMAP & BAR CHART */}
-      <CardContent className="h-[700px] w-full py-4">
+      <CardContent className="">
         {selectedTab === "heatmap" ? (
-          <AmChartsHeatmap
-            chartId="RealTimeMonitoringHeatmap"
-            data={AmChartsHeatmapData()}
-          />
+          <HeatMapTable data={trafficData} />
         ) : (
           <AmChartsBarChart06
             chartId="RealTimeMonitoringBarChart"
