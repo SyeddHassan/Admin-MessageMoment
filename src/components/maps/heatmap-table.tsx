@@ -1,7 +1,7 @@
-// Use dynamic import to avoid hydration issues
 "use client";
 
 import dynamic from "next/dynamic";
+
 import {
   Table,
   TableBody,
@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 type TableProps = {
@@ -20,45 +21,44 @@ type TableProps = {
   };
 };
 
-// Wrap the HeatMapTable logic inside a dynamically loaded component
 const HeatMapTableContent = ({ data }: TableProps) => {
   const { hours, days, trafficData } = data;
 
   const getBackgroundColor = (value: number) => {
     switch (value) {
       case 0:
-        return "bg-blue-50";
+        return "bg-blue-50 !text-black";
       case 1:
-        return "bg-blue-100";
+        return "bg-blue-100 !text-black";
       case 2:
-        return "bg-blue-200";
+        return "bg-blue-200 !text-black";
       case 3:
-        return "bg-blue-300";
+        return "bg-blue-300 !text-black";
       default:
-        return "bg-blue-400";
+        return "bg-blue-400 !text-black";
     }
   };
 
   return (
     <Table className="w-full h-full mt-6">
       <TableHeader>
-        <TableRow className="hover:bg-transparent bg-header-gray">
-          <TableHead className="w-20 border-r border-b border-gray-300 bg-header-gray p-0">
-            <div className="p-1 flex flex-col items-center">
+        <TableRow>
+          <TableHead className="w-20 border-r border-b border-border bg-secondary-theme p-0">
+            <div className="p-1 flex flex-col items-center text-theme-heading-color">
               <div className="flex items-center justify-center font-inter mb-0.5">
                 Day
-                <ChevronRight className="ml-1 h-3 w-3 text-muted-gray" />
+                <ChevronRight className="ml-1 h-3 w-3" />
               </div>
               <div className="flex items-center justify-center font-inter">
                 Hour
-                <ChevronDown className="ml-1 h-3 w-3 text-muted-gray" />
+                <ChevronDown className="ml-1 h-3 w-3" />
               </div>
             </div>
           </TableHead>
           {days.map((day, index) => (
             <TableHead
               key={`day-header-${index}`}
-              className="text-center border-r h-[24px] px-1 sm:px-2 font-inter"
+              className="text-center border-r border-border h-[24px] px-1 sm:px-2 font-inter text-heading-color"
             >
               {day}
             </TableHead>
@@ -68,14 +68,14 @@ const HeatMapTableContent = ({ data }: TableProps) => {
 
       <TableBody>
         {hours.map((hour, hourIndex) => (
-          <TableRow key={`hour-${hourIndex}`} className="hover:bg-light-gray">
-            <TableCell className="border-r sm:p-0 border-gray-300 font-inter bg-white">
+          <TableRow key={`hour-${hourIndex}`}>
+            <TableCell className="border-r sm:p-0 border-border border-b font-inter text-heading-color">
               {hour}
             </TableCell>
             {days.map((_, dayIndex) => (
               <TableCell
                 key={`cell-${hourIndex}-${dayIndex}`}
-                className={`border-r border-gray-300 text-center p-1 sm:p-2 font-inter ${getBackgroundColor(
+                className={`border-r border-border text-center p-1 sm:p-2 border-b font-jetbrains_mono ${getBackgroundColor(
                   trafficData[hourIndex][dayIndex]
                 )}`}
               >
@@ -89,7 +89,6 @@ const HeatMapTableContent = ({ data }: TableProps) => {
   );
 };
 
-// Dynamically import the HeatMapTableContent component
 const HeatMapTable = dynamic(() => Promise.resolve(HeatMapTableContent), {
   ssr: false,
 });

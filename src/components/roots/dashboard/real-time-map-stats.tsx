@@ -4,24 +4,38 @@ import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-i
 
 import { Progress } from "@/components/ui/progress";
 
-const RealTimeMapStats = ({ selectedTab, data }: RealTimeMapProps) => {
-  const total = data.reduce(
-    (sum, item) =>
-      sum + (selectedTab === "sessions" ? item.session : item.users),
-    0
-  );
+const RealTimeMapStats = ({
+  setSelectedCountry,
+  selectedTab,
+  data,
+}: RealTimeMapProps) => {
+  const total = data.reduce((sum, country) => {
+    const countryTotal = country.countryCities.reduce(
+      (citySum, city) =>
+        citySum +
+        (selectedTab === "sessions" ? city.citySessions : city.cityUsers),
+      0
+    );
+    return sum + countryTotal;
+  }, 0);
 
   return (
     <div className="w-full h-full flex flex-col gap-4 py-4 overflow-y-auto">
       {data.map((item, index) => {
-        const value = selectedTab === "sessions" ? item.session : item.users;
+        const value = item.countryCities.reduce(
+          (citySum, city) =>
+            citySum +
+            (selectedTab === "sessions" ? city.citySessions : city.cityUsers),
+          0
+        );
         const formattedValue = new Intl.NumberFormat().format(value);
         const percentage = ((value / total) * 100).toFixed(2);
 
         return (
           <div key={index} className="flex items-center gap-4 pl-4 pr-8">
             <span
-              className={`fi fi-${item.countryCode.toLowerCase()} !w-[25px] !h-[25px] rounded-full flag-shadow !bg-cover bg-[50%_50%]`}
+              onClick={() => setSelectedCountry?.(item.countryCode)}
+              className={`fi fi-${item.countryCode.toLowerCase()} !w-[25px] !h-[25px] rounded-full flag-shadow !bg-cover bg-[50%_50%] cursor-pointer`}
             />
 
             <div className="w-[calc(100%-40px)]">

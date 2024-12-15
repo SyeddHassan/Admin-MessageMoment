@@ -1,45 +1,35 @@
 "use client";
 
 import React, { useLayoutEffect, useRef } from "react";
-
-import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
-import { MapDataContextInterface } from "@/interfaces/map-interfaces";
-
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
+import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
+
 export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
-    const getCircleSize = (value: number) => {
-      const minSize = 10;
-      const maxSize = 40;
-      const minValue = Math.min(
-        ...data.map((d) => Math.min(d.session, d.users))
-      );
-      const maxValue = Math.max(
-        ...data.map((d) => Math.max(d.session, d.users))
-      );
-
-      const scale =
-        (Math.log(value) - Math.log(minValue)) /
-        (Math.log(maxValue) - Math.log(minValue));
-      return minSize + scale * (maxSize - minSize);
-    };
-
-    if (!chartRef.current) return;
-
-    const root = am5.Root.new(chartRef.current);
+    const root = am5.Root.new(chartRef.current!);
     root.setThemes([am5themes_Animated.new(root)]);
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         projection: am5map.geoMercator(),
+        cursorOverStyle: "pointer",
+        wheelable: true,
+        panX: "translateX",
+        panY: "translateY",
       })
     );
+
+    const zoomControl = chart.set(
+      "zoomControl",
+      am5map.ZoomControl.new(root, {})
+    );
+    zoomControl.homeButton.set("visible", true);
 
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
@@ -50,8 +40,6 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
     polygonSeries.mapPolygons.template.setAll({
       tooltipText: "{name}",
-      toggleKey: "active",
-      interactive: true,
       fill: am5.color(0xe3e6e8),
     });
 
@@ -59,50 +47,32 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       fill: am5.color(0xd4d5ff),
     });
 
-    polygonSeries.mapPolygons.template.states.create("active", {
-      fill: am5.color(0x494af8),
-    });
-
-    let previousPolygon: am5map.MapPolygon | null = null;
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    polygonSeries.mapPolygons.template.on(
-      "active",
-      function (active, target: am5map.MapPolygon | undefined) {
-        if (!target) return;
-
-        if (previousPolygon && previousPolygon !== target) {
-          previousPolygon.set("active", false);
-        }
-
-        const dataItem =
-          target.dataItem as am5.DataItem<am5map.IMapPolygonSeriesDataItem> | null;
-
-        if (target.get("active") && dataItem) {
-          polygonSeries.zoomToDataItem(dataItem);
-        } else {
-          chart.goHome();
-        }
-
-        previousPolygon = target;
-      }
-    );
-
     const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     pointSeries.bullets.push((root, series, dataItem) => {
-      const typedDataItem = dataItem as MapDataContextInterface;
+      const countryData = dataItem.dataContext as {
+        countryName: string;
+        aggregateSessions: number;
+        aggregateUsers: number;
+        countryCities: {
+          cityName: string;
+          citySessions: number;
+          cityUsers: number;
+          cityLongitude: number;
+          cityLatitude: number;
+        }[];
+      };
+
       const container = am5.Container.new(root, {});
+
       const value =
         selectedTab === "sessions"
-          ? typedDataItem.dataContext.sessions
-          : typedDataItem.dataContext.users;
-      const circleSize = getCircleSize(value);
+          ? countryData.aggregateSessions
+          : countryData.aggregateUsers;
 
-      const circle = container.children.push(
+      const innerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize * 0.35,
+          radius: 13,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
@@ -110,12 +80,11 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: circleSize + 3,
+          radius: 40,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
-          tooltipText:
-            "[bold]{name}\n[bold]Sessions: [normal]{sessions}\n[bold]Users: [normal]{users}",
+          tooltipText: `[bold]{countryName}\n\n[bold]Sessions: [normal]{aggregateSessions}\n[bold]Users: [normal]{aggregateUsers}`,
           interactive: true,
           cursorOverStyle: "pointer",
         })
@@ -128,7 +97,10 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
-          text: selectedTab === "sessions" ? "{sessions}" : "{users}",
+          text:
+            selectedTab === "sessions"
+              ? "{aggregateSessions}"
+              : "{aggregateUsers}",
           fill: am5.color(0xffffff),
           fontSize: 12,
           fontFamily: "Jetbrains mono",
@@ -139,7 +111,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         })
       );
 
-      circle.animate({
+      innerCircle.animate({
         key: "scale",
         from: 0.5,
         to: 5,
@@ -148,7 +120,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         loops: Infinity,
       });
 
-      circle.animate({
+      innerCircle.animate({
         key: "opacity",
         from: 0.5,
         to: 0.1,
@@ -162,26 +134,27 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       });
     });
 
-    const getCountryData = () => {
-      return data.map((item) => ({
+    pointSeries.data.setAll(
+      data.map((country) => ({
         geometry: {
           type: "Point",
-          coordinates: [item.longitude, item.latitude],
+          coordinates: [country.longitude, country.latitude],
         },
-        name: item.countryName,
-        sessions: item.session,
-        users: item.users,
-      }));
-    };
+        countryName: country.countryName,
+        aggregateSessions: country.countryCities.reduce(
+          (sum, city) => sum + city.citySessions,
+          0
+        ),
+        aggregateUsers: country.countryCities.reduce(
+          (sum, city) => sum + city.cityUsers,
+          0
+        ),
+        countryCities: country.countryCities,
+      }))
+    );
 
-    pointSeries.data.setAll(getCountryData());
+    return () => root.dispose();
+  }, [selectedTab, data]);
 
-    chart.appear(1000, 100);
-
-    return () => {
-      root.dispose();
-    };
-  }, [data, selectedTab]);
-
-  return <div ref={chartRef} className="h-full w-full" />;
+  return <div className="h-full w-full" ref={chartRef} />;
 };

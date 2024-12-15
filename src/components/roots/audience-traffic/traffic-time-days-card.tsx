@@ -8,19 +8,7 @@ import { trafficData } from "@/constants/audience-traffic-page-components-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons04 } from "@/components/partials/filter-buttons";
 import Loading from "@/components/partials/loader";
-const AmChartsHeatmap = dynamic(
-  () => import("../../maps/amcharts-heatmap").then((mod) => mod),
-  {
-    ssr: false,
-    loading: () => (
-      <Loading
-        Icon={LoaderCircle}
-        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
-        containerClassName="w-full h-full"
-      />
-    ),
-  }
-);
+import HeatMapTable from "../../maps/heatmap-table";
 const AmChartsBarChart06 = dynamic(
   () =>
     import("../../charts/amcharts-bar-charts").then(
@@ -39,13 +27,12 @@ const AmChartsBarChart06 = dynamic(
 );
 
 import { LoaderCircle } from "lucide-react";
-import HeatMapTable from "../../maps/amcharts-heatmap";
 
 const TrafficTimeDaysCard = () => {
   const [selectedTab, setSelectedTab] = useState("heatmap");
 
   return (
-    <Card id="RealTimeMonitoringMapSection" className="!standard-card-styling">
+    <Card id="TrafficTimeDaysSection" className="!standard-card-styling">
       <CardHeader className="md:py-4 py-6 border-b border-border flex md:flex-row flex-col max-md:gap-4 items-center md:justify-between">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
@@ -60,7 +47,7 @@ const TrafficTimeDaysCard = () => {
       </CardHeader>
 
       {/* TRAFFIC BY TIME OF DAYS HEATMAP & BAR CHART */}
-      <CardContent className="">
+      <CardContent>
         {selectedTab === "heatmap" ? (
           <HeatMapTable data={trafficData} />
         ) : (
