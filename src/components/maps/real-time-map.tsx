@@ -65,6 +65,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const container = am5.Container.new(root, {});
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const value =
         selectedTab === "sessions"
           ? countryData.aggregateSessions
