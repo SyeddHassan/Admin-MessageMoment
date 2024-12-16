@@ -202,16 +202,23 @@ export const AmChartsLineChart01 = ({
 
     const legend = chart.children.unshift(
       am5.Legend.new(root, {
-        centerX: am5.percent(50),
-        x: am5.percent(50),
+        centerX: am5.p50,
+        x: am5.p50,
+        y: 0,
         layout: root.horizontalLayout,
-        dy: -25,
+        paddingTop: 20,
       })
     );
 
     legend.labels.template.setAll({
-      fontSize: 14,
+      fontSize: "12px",
       fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -14,
+      marginRight: -14,
     });
 
     legend.data.setAll(chart.series.values);
@@ -224,6 +231,8 @@ export const AmChartsLineChart01 = ({
         yAxis: yAxis,
       })
     );
+
+    chart.set("paddingTop", 10);
 
     highSeries.data.setAll(data);
     lowSeries.data.setAll(data);
@@ -270,7 +279,7 @@ export const AmChartsLineChart02 = ({
         pinchZoomX: true,
         pinchZoomY: true,
         layout: root.verticalLayout,
-        paddingTop: -10
+        paddingTop: -10,
       })
     );
 
@@ -283,7 +292,6 @@ export const AmChartsLineChart02 = ({
         valign: "top",
       }),
     });
-
 
     if (exporting) {
       exporting.get("menu")?.setAll({
@@ -413,6 +421,8 @@ export const AmChartsLineChart03 = ({
         pinchZoomX: true,
         pinchZoomY: true,
         layout: root.verticalLayout,
+        paddingTop: 40,
+        paddingBottom: 40,
       })
     );
 
@@ -671,19 +681,30 @@ export const AmChartsLineChart04 = ({
 
     createSeries("Content Length", "contentLength", "#989B2C", "{valueY} kb");
 
-    const legend = chart.children.push(
+    const legend = chart.children.unshift(
       am5.Legend.new(root, {
-        position: "absolute",
-        marginTop: 20,
-        marginBottom: 20,
-        useDefaultMarker: true,
         centerX: am5.p50,
         x: am5.p50,
-        y: am5.p100,
+        y: 0,
+        layout: root.horizontalLayout,
+        paddingTop: 20,
       })
     );
 
+    legend.labels.template.setAll({
+      fontSize: "12px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -14,
+      marginRight: -14,
+    });
+
     legend.data.setAll(chart.series.values);
+
+    chart.set("paddingTop", 10);
 
     chart.set(
       "cursor",
@@ -741,6 +762,7 @@ export const AmChartsLineChart05 = ({
         pinchZoomX: true,
         paddingLeft: 0,
         paddingRight: 0,
+        paddingBottom: 40,
       })
     );
 
@@ -793,13 +815,27 @@ export const AmChartsLineChart05 = ({
         x: am5.p50,
         layout: root.horizontalLayout,
         useDefaultMarker: true,
+        paddingTop: 20,
       })
     );
 
-    legend.markers.template.setAll({
-      width: 10,
-      height: 10,
+    legend.labels.template.setAll({
+      fontSize: "12px",
+      fontFamily: "Inter",
+      fontWeight: "normal",
     });
+
+    legend.markers.template.setAll({
+      width: 12,
+      height: 12,
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -14,
+      marginRight: -14,
+    });
+
+    chart.set("paddingTop", 50);
 
     const cursor = chart.set(
       "cursor",
