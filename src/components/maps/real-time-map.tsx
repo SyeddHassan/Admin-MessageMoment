@@ -136,7 +136,7 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 35,
+          radius: 34,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
