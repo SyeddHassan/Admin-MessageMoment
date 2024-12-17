@@ -17,11 +17,9 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
-        projection: am5map.geoMercator(),
-        cursorOverStyle: "pointer",
-        wheelable: true,
-        panX: "translateX",
+        panX: "rotateX",
         panY: "translateY",
+        projection: am5map.geoMercator(),
       })
     );
 
@@ -47,29 +45,17 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       fill: am5.color(0xd4d5ff),
     });
 
-    const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+    const pointSeries = chart.series.push(
+      am5map.ClusteredPointSeries.new(root, {
+        calculateAggregates: true,
+        cursorOverStyle: "pointer",
+      })
+    );
 
-    pointSeries.bullets.push((root, series, dataItem) => {
-      const countryData = dataItem.dataContext as {
-        countryName: string;
-        aggregateSessions: number;
-        aggregateUsers: number;
-        countryCities: {
-          cityName: string;
-          citySessions: number;
-          cityUsers: number;
-          cityLongitude: number;
-          cityLatitude: number;
-        }[];
-      };
-
-      const container = am5.Container.new(root, {});
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const value =
-        selectedTab === "sessions"
-          ? countryData.aggregateSessions
-          : countryData.aggregateUsers;
+    pointSeries.set("clusteredBullet", function (root) {
+      const container = am5.Container.new(root, {
+        cursorOverStyle: "pointer",
+      });
 
       const innerCircle = container.children.push(
         am5.Circle.new(root, {
@@ -81,37 +67,100 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
 
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 40,
+          radius: 20,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
           tooltipText: `[bold]{countryName}\n\n[bold]Sessions: [normal]{aggregateSessions}\n[bold]Users: [normal]{aggregateUsers}`,
-          interactive: true,
-          cursorOverStyle: "pointer",
         })
       );
-
-      outerCircle.states.create("hover", {
-        scale: 1.1,
-      });
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
+          centerX: am5.p50,
+          centerY: am5.p50,
+          fill: am5.color(0xffffff),
+          populateText: true,
+          fontSize: 12,
+          fontFamily: "Jetbrains mono",
+          text: "{valueSum}",
+        })
+      );
+
+      // Hover effect for the outer circle
+      outerCircle.states.create("hover", {
+        scale: 1.1,
+      });
+
+      // Animations for the inner circle similar to the first code snippet
+      innerCircle.animate({
+        key: "scale",
+        from: 0.5,
+        to: 3,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
+
+      innerCircle.animate({
+        key: "opacity",
+        from: 0.5,
+        to: 0.1,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
+
+      container.events.on("click", function (e) {
+        const dataItem = e.target.dataItem;
+        if (dataItem) {
+          pointSeries.zoomToCluster(dataItem);
+        }
+      });
+
+      return am5.Bullet.new(root, { sprite: container });
+    });
+
+    pointSeries.bullets.push(function () {
+      const container = am5.Container.new(root, {});
+
+      const innerCircle = container.children.push(
+        am5.Circle.new(root, {
+          radius: 13,
+          fill: am5.color(0x494af8),
+          strokeOpacity: 0,
+        })
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const outerCircle = container.children.push(
+        am5.Circle.new(root, {
+          radius: 35,
+          fill: am5.color("#000000"),
+          stroke: am5.color("#ffffff"),
+          strokeWidth: 3,
+          tooltipText: `[bold]{countryName}\n\n[bold]Sessions: [normal]{aggregateSessions}\n[bold]Users: [normal]{aggregateUsers}`,
+        })
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const label = container.children.push(
+        am5.Label.new(root, {
+          centerX: am5.p50,
+          centerY: am5.p50,
+          fill: am5.color(0xffffff),
+          populateText: true,
+          fontSize: 12,
+          fontFamily: "Jetbrains mono",
           text:
             selectedTab === "sessions"
               ? "{aggregateSessions}"
               : "{aggregateUsers}",
-          fill: am5.color(0xffffff),
-          fontSize: 12,
-          fontFamily: "Jetbrains mono",
-          populateText: true,
-          centerX: am5.p50,
-          centerY: am5.p50,
-          textAlign: "center",
         })
       );
 
+      // Animations for the inner circle similar to the first code snippet
       innerCircle.animate({
         key: "scale",
         from: 0.5,
@@ -130,13 +179,11 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
         loops: Infinity,
       });
 
-      return am5.Bullet.new(root, {
-        sprite: container,
-      });
+      return am5.Bullet.new(root, { sprite: container });
     });
 
-    pointSeries.data.setAll(
-      data.map((country) => ({
+    const mapData = data.flatMap((country) => [
+      {
         geometry: {
           type: "Point",
           coordinates: [country.longitude, country.latitude],
@@ -150,9 +197,32 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
           (sum, city) => sum + city.cityUsers,
           0
         ),
-        countryCities: country.countryCities,
-      }))
-    );
+        value:
+          selectedTab === "sessions"
+            ? country.countryCities.reduce(
+                (sum, city) => sum + city.citySessions,
+                0
+              )
+            : country.countryCities.reduce(
+                (sum, city) => sum + city.cityUsers,
+                0
+              ),
+      },
+      ...country.countryCities.map((city) => ({
+        geometry: {
+          type: "Point",
+          coordinates: [city.cityLongitude, city.cityLatitude],
+        },
+        cityName: city.cityName,
+        citySessions: city.citySessions,
+        cityUsers: city.cityUsers,
+        value: selectedTab === "sessions" ? city.citySessions : city.cityUsers,
+      })),
+    ]);
+
+    pointSeries.data.setAll(mapData);
+
+    chart.appear(1000, 100);
 
     return () => root.dispose();
   }, [selectedTab, data]);
