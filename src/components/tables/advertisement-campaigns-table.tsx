@@ -29,7 +29,6 @@ import AdvertisementCampaignsTableManageButtons from "../roots/advertisement-man
 import {
   Calendar,
   Type,
-  Projector,
   User,
   Globe,
   BarChart2,
