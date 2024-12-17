@@ -23,8 +23,18 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Progress } from "../ui/progress";
+import AdvertisementCampaignsTableManageButtons from "../roots/advertisement-management/advertisement-campaigns-table-manage-button";
 
-import { ArrowRight, FileText, Users } from "lucide-react";
+import {
+  Calendar,
+  Type,
+  User,
+  Globe,
+  BarChart2,
+  TrendingUp,
+  ArrowUpDown,
+} from "lucide-react";
 
 const AdvertisementCampaignsTable = ({
   selectedTab,
@@ -51,7 +61,11 @@ const AdvertisementCampaignsTable = ({
     [
       {
         id: "switch",
-        header: "Campaign (On/Off)",
+        header: () => (
+          <span className="font-semibold text-[14px] text-center w-full">
+            Campaign (On/Off)
+          </span>
+        ),
         cell: () => (
           <div>
             <Switch />
@@ -64,10 +78,9 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px]">Campaign ID</span>
-            <FileText size={16} />
+            <p>#</p>
           </div>
         ),
-        cell: ({ row }) => row.getValue("campaignId"),
       },
 
       {
@@ -75,7 +88,7 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px]">Date</span>
-            <Users size={16} />
+            <Calendar size={12} />
           </div>
         ),
       },
@@ -85,7 +98,7 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px] ">Type</span>
-            <ArrowRight size={16} />
+            <Type size={14} />
           </div>
         ),
       },
@@ -95,7 +108,7 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px] ">Display</span>
-            <ArrowRight size={16} />
+            <ArrowUpDown size={14} />
           </div>
         ),
       },
@@ -103,10 +116,7 @@ const AdvertisementCampaignsTable = ({
       {
         accessorKey: "projectMode",
         header: () => (
-          <div className="w-full flex items-center gap-4">
-            <span className="font-semibold text-[14px] ">Project Mode</span>
-            <ArrowRight size={16} />
-          </div>
+          <span className="font-semibold text-[14px]">Project Mode</span>
         ),
         cell: ({ row }) => {
           const projectMode = row.getValue("projectMode") as boolean;
@@ -119,7 +129,7 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px] ">Client</span>
-            <ArrowRight size={16} />
+            <User size={14} />
           </div>
         ),
       },
@@ -129,9 +139,66 @@ const AdvertisementCampaignsTable = ({
         header: () => (
           <div className="w-full flex items-center gap-4">
             <span className="font-semibold text-[14px] ">Zone/Country</span>
-            <ArrowRight size={16} />
+            <Globe size={16} />
           </div>
         ),
+      },
+
+      {
+        accessorKey: "impressions",
+        header: () => (
+          <div className="w-full flex items-center gap-4">
+            <span className="font-semibold text-[14px]">Impressions</span>
+            <BarChart2 size={16} />
+          </div>
+        ),
+        cell: ({ row }) => {
+          const impressions = row.original.impressions;
+          return (
+            <span className="text-sm font-medium">
+              {new Intl.NumberFormat().format(impressions)}
+            </span>
+          );
+        },
+      },
+
+      {
+        accessorKey: "conversions",
+        header: () => (
+          <div className="w-full flex items-center gap-4">
+            <span className="font-semibold text-[14px]">Conversions</span>
+            <TrendingUp size={16} />
+          </div>
+        ),
+        cell: ({ row }) => {
+          const totalImpressions = row.original.impressions;
+          const totalConversions = row.original.conversions;
+
+          const percentage =
+            totalImpressions > 0
+              ? ((totalConversions / totalImpressions) * 100).toFixed(0)
+              : 0;
+
+          return (
+            <div className="flex items-center lg:gap-8 gap-4">
+              <span className="md:text-[14px] text-[12px]">
+                {new Intl.NumberFormat().format(totalConversions)}
+              </span>
+              <Progress
+                value={parseFloat(percentage.toString())}
+                className="h-[7px] max-lg:w-[200px] bg-[#e9ecef]"
+                indicatorClassName="bg-[#FFC107] rounded-[50rem]"
+              />
+              <p className="md:text-[14px] text-[12px]">{percentage}%</p>
+            </div>
+          );
+        },
+      },
+
+      {
+        id: "actions",
+        header: "",
+        cell: () => <AdvertisementCampaignsTableManageButtons />,
       },
     ];
 
@@ -153,19 +220,27 @@ const AdvertisementCampaignsTable = ({
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className={`max-lg:!w-[180px] ${
+                    className={`max-lg:!w-[200px] ${
                       header.column.id === "switch"
-                        ? "lg:w-[180px]"
+                        ? "lg:w-[100px]"
                         : header.column.id === "campaignId"
-                        ? "lg:w-[200px]"
+                        ? "lg:w-[180px]"
                         : header.column.id === "timestamp"
-                        ? "lg:w-[240px]"
+                        ? "lg:w-[120px]"
                         : header.column.id === "campaignType"
-                        ? "lg:w-[180px]"
+                        ? "lg:w-[100px]"
                         : header.column.id === "campaignDisplay"
-                        ? "lg:w-[180px]"
+                        ? "lg:w-[100px]"
                         : header.column.id === "projectMode"
-                        ? "lg:w-[180px]"
+                        ? "lg:w-[100px]"
+                        : header.column.id === "client"
+                        ? "lg:w-[140px]"
+                        : header.column.id === "zone"
+                        ? "lg:w-[100px]"
+                        : header.column.id === "impressions"
+                        ? "lg:w-[100px]"
+                        : header.column.id === "conversions"
+                        ? "lg:w-[480px]"
                         : ""
                     }`}
                   >
@@ -224,7 +299,7 @@ const AdvertisementCampaignsTable = ({
           <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="font-inter text-heading-color border hover:bg-general-hover text-[14px] tracking-wider !shadow-button-shadow"
+            className="font-inter text-heading-color border hover:bg-general-hover text-[14px] tracking-wider !shadow-button-shadow border-border"
           >
             Previous
           </Button>

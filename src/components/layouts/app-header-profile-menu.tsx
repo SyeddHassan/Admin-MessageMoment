@@ -47,12 +47,18 @@ const AppHeaderProfileMenu = () => {
           align="end"
           className="w-48 bg-white dark:bg-background-color border-border font-inter animation-standard p-2 py-4"
         >
-          <DropdownMenuItem className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color">
-            View Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color">
-            <Link href={"/settings"}>Settings</Link>
-          </DropdownMenuItem>
+          <Link href={"/profile"} passHref>
+            <DropdownMenuItem className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color">
+              View Profile
+            </DropdownMenuItem>
+          </Link>
+
+          <Link href={"/settings"} passHref>
+            <DropdownMenuItem className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color">
+              Settings
+            </DropdownMenuItem>
+          </Link>
+
           <DropdownMenuItem
             onClick={HandleLogoOut}
             className="hover:bg-secondary-theme py-2 cursor-pointer text-heading-color hover:text-theme-heading-color"

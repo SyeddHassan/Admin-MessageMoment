@@ -219,29 +219,32 @@ export const AmChartsBarChart01 = ({
       })
     );
 
+    chart.set("paddingTop", 70);
+
     const legend = chart.children.push(
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
         y: 0,
         layout: root.horizontalLayout,
-        marginBottom: 20,
-        paddingTop: 15,
+        paddingTop: 20,
       })
     );
 
-    legend.data.setAll(chart.series.values);
-    chart.set("paddingTop", 50);
-
     legend.labels.template.setAll({
-      fontSize: "14px",
+      fontSize: "12px",
       fontFamily: "Inter",
       fontWeight: "normal",
     });
 
     legend.markers.template.setAll({
-      width: 18,
-      height: 18,
+      width: 12,
+      height: 12,
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -24,
+      marginRight: -24,
     });
 
     legend.data.setAll(chart.series.values);
@@ -474,20 +477,34 @@ export const AmChartsBarChart03 = ({
       })
     );
 
-    const legend = chart.children.unshift(
+    const legend = chart.children.push(
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
+        y: 0,
         layout: root.horizontalLayout,
+        paddingTop: 20,
         paddingBottom: 20,
       })
     );
 
     legend.labels.template.setAll({
-      fontSize: "14px",
+      fontSize: "12px",
       fontFamily: "Inter",
       fontWeight: "normal",
     });
+
+    legend.markers.template.setAll({
+      width: 12,
+      height: 12,
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -24,
+      marginRight: -24,
+    });
+
+    chart.set("paddingTop", 70);
 
     const exporting = am5exporting.Exporting.new(root, {
       filePrefix: chartId,
@@ -797,7 +814,6 @@ export const AmChartsBarChart05 = ({
         pinchZoomX: true,
         pinchZoomY: true,
         layout: root.verticalLayout,
-        paddingRight: 0,
       })
     );
 
@@ -937,18 +953,34 @@ export const AmChartsBarChart05 = ({
     createSeries("sources", "Sources", "#2D88E5");
     createSeries("chatCreations", "Chat Creations", "#AB40E8");
 
+    chart.set("paddingTop", 70);
+
     const legend = chart.children.push(
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
-        marginTop: 15,
-        marginBottom: 15,
+        y: 0,
+        layout: root.horizontalLayout,
+        paddingTop: 20,
       })
     );
+
     legend.labels.template.setAll({
-      fontSize: 14,
+      fontSize: "12px",
       fontFamily: "Inter",
+      fontWeight: "normal",
     });
+
+    legend.markers.template.setAll({
+      width: 12,
+      height: 12,
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -14,
+      marginRight: -14,
+    });
+
     legend.data.setAll(chart.series.values);
 
     chart.set(
@@ -1250,18 +1282,20 @@ export const AmChartsBarChart07 = ({
     series.data.setAll(data);
     yAxis.data.setAll(data);
 
-    series.bullets.push(() => {
-      return am5.Bullet.new(root, {
+    series.bullets.push(() =>
+      am5.Bullet.new(root, {
+        locationX: 1,
+        locationY: 0.5,
         sprite: am5.Label.new(root, {
-          text: "{valueX}",
-          centerX: am5.p50,
           centerY: am5.p50,
+          text: "{valueX}",
           populateText: true,
-          dy: 3,
-          dx: 30
+          fontSize: 14,
+          fontFamily: "Inter",
+          paddingLeft: 10,
         }),
-      });
-    });
+      })
+    );
 
     return () => {
       exporting.dispose();
@@ -1397,12 +1431,14 @@ export const AmChartsBarChart08 = ({
 
     series.bullets.push(() => {
       return am5.Bullet.new(root, {
+        locationX: 0.5,
+        locationY: 1.2,
         sprite: am5.Label.new(root, {
-          text: "{valueY}",
           centerX: am5.p50,
-          centerY: am5.p50,
+          text: "{valueY}",
           populateText: true,
-          dx: 3,
+          fontSize: 14,
+          fontFamily: "Inter",
         }),
       });
     });
@@ -1450,19 +1486,32 @@ export const AmChartsBarChart09 = ({
       })
     );
 
-    const legend = chart.children.unshift(
+    chart.set("paddingTop", 70);
+
+    const legend = chart.children.push(
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
+        y: 0,
         layout: root.horizontalLayout,
-        paddingBottom: 20,
+        paddingTop: 20,
       })
     );
 
     legend.labels.template.setAll({
-      fontSize: "14px",
+      fontSize: "12px",
       fontFamily: "Inter",
       fontWeight: "normal",
+    });
+
+    legend.markers.template.setAll({
+      width: 12,
+      height: 12,
+    });
+
+    legend.itemContainers.template.setAll({
+      marginLeft: -14,
+      marginRight: -14,
     });
 
     const exporting = am5exporting.Exporting.new(root, {
