@@ -9,22 +9,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FilterButtons01 } from "@/components/partials/filter-buttons";
 import RealTimeMapStats from "./real-time-map-stats";
 import Loading from "@/components/partials/loader";
-// const RealTimeMap = dynamic(
-//   () => import("../../maps/real-time-map").then((mod) => mod.RealTimeMap),
-//   {
-//     ssr: false,
-//     loading: () => (
-//       <Loading
-//         Icon={LoaderCircle}
-//         iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
-//         containerClassName="w-full h-full"
-//       />
-//     ),
-//   }
-// );
+const RealTimeMap = dynamic(
+  () => import("../../maps/real-time-map").then((mod) => mod.RealTimeMap),
+  {
+    ssr: false,
+    loading: () => (
+      <Loading
+        Icon={LoaderCircle}
+        iconClassName="w-[50px] h-[50px] text-secondary-theme animate-spin"
+        containerClassName="w-full h-full"
+      />
+    ),
+  }
+);
 
 import { LoaderCircle } from "lucide-react";
-import ClusteredWorldMap from "@/components/maps/real-time-map";
 
 const RealTimeMonitoringMapVersionCard = () => {
   const [selectedTab, setSelectedTab] = useState("sessions");
@@ -49,14 +48,12 @@ const RealTimeMonitoringMapVersionCard = () => {
       <CardContent className="py-5 md:px-[1.5rem] px-1 md:h-[550px] h-[900px] flex md:flex-row flex-col">
         {/* REAL TIME MAP */}
         <div className="lg:w-[66.66666667%] md:w-[55%] w-full h-full">
-          {/* <RealTimeMap
+          <RealTimeMap
             selectedTab={selectedTab}
             data={RealTimeMapData}
             selectedCountry={selectedCountry}
             setSelectedCountry={setSelectedCountry}
-          /> */}
-
-          <ClusteredWorldMap />
+          />
         </div>
 
         {/* REAL TIME MAP STATS */}

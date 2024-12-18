@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { Separator } from "../ui/separator";
 import { DateRangePicker } from "./date-range-picker";
-import NewCampaignButton from "./new-campaign-button";
+import NewCampaignButton from "../roots/advertisement-management/new-campaign-button";
 
 const SectionalHeading: React.FC<SectionalHeadingProps> = ({
   title,

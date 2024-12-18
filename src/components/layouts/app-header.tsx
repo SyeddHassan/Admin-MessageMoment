@@ -6,8 +6,6 @@ import SectionSearchbar from "@/utils/section-searchbar";
 import ThemeSwitcher from "@/utils/theme-switcher";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import AppHeaderInboxMenu from "./app-header-inbox-menu";
-import AppHeaderNotificationMenu from "./app-header-notification-menu";
 import AppHeaderProfileMenu from "./app-header-profile-menu";
 
 const AppHeader = () => {
@@ -25,12 +23,6 @@ const AppHeader = () => {
 
         {/* HEADER RIGHT SIDE */}
         <div className="flex items-center gap-4">
-          {/* DASHBOARD INBOX MENU */}
-          <AppHeaderInboxMenu />
-
-          {/* DASHBOARD NOTIFICATION MENU */}
-          <AppHeaderNotificationMenu />
-
           {/* THEME SWITCHER */}
           <ThemeSwitcher />
 

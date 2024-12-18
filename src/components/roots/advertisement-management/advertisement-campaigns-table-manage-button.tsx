@@ -30,7 +30,7 @@ const AdvertisementCampaignsTableManageButtons = () => {
             <Trash size={16} className="text-red-500" />
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent className="bg-white dark:bg-background-color border-none">
+        <AlertDialogContent className="bg-white dark:bg-background-color border-border">
           <AlertDialogHeader>
             <AlertDialogTitle className="font-inter text-heading-color font-bold">
               Are you absolutely sure?

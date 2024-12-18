@@ -1,22 +1,28 @@
-"use client"
+"use client";
+
 import React, { useLayoutEffect, useRef } from "react";
+
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
-import { RealTimeMapData } from "@/constants/dashboard-page-components-data";
 
-const ClusteredWorldMap: React.FC = () => {
-  const chartRef = useRef<am5.Root | null>(null);
+import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
+
+export const RealTimeMap = ({
+  selectedTab,
+  data,
+  selectedCountry,
+  setSelectedCountry,
+}: RealTimeMapProps) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
-    // Create root element
-    const root = am5.Root.new("chartdiv");
+    if (!chartRef.current) return;
 
-    // Set themes
+    const root = am5.Root.new(chartRef.current);
     root.setThemes([am5themes_Animated.new(root)]);
 
-    // Create the map chart
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "rotateX",
@@ -25,7 +31,12 @@ const ClusteredWorldMap: React.FC = () => {
       })
     );
 
-    // Create main polygon series for countries
+    const zoomControl = chart.set(
+      "zoomControl",
+      am5map.ZoomControl.new(root, {})
+    );
+    zoomControl.homeButton.set("visible", true);
+
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
@@ -34,15 +45,20 @@ const ClusteredWorldMap: React.FC = () => {
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      fill: am5.color(0xdadada),
+      tooltipText: "{name}",
+      toggleKey: "active",
+      interactive: true,
+      fill: am5.color(0xe3e6e8),
     });
 
-    // Create point series for markers
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: am5.color(0x494af8),
+    });
+
     const pointSeries = chart.series.push(
       am5map.ClusteredPointSeries.new(root, {})
     );
 
-    // Set clustered bullet
     pointSeries.set("clusteredBullet", function (root) {
       const container = am5.Container.new(root, {
         cursorOverStyle: "pointer",
@@ -99,22 +115,25 @@ const ClusteredWorldMap: React.FC = () => {
       });
     });
 
-    // Create regular bullets
     pointSeries.bullets.push(function () {
       const circle = am5.Circle.new(root, {
-        radius: 6,
+        radius: 12,
         tooltipY: 0,
-        fill: am5.color(0xff8c00),
-        tooltipText: "{title}",
+        fill: am5.color("#000000"),
+        stroke: am5.color("#ffffff"),
+        strokeWidth: 3,
+        tooltipText:
+          "[bold]{title}\n\n[bold]Sessions: [normal]{sessions}\n[bold]Users: [normal]{users}",
       });
+
+
 
       return am5.Bullet.new(root, {
         sprite: circle,
       });
     });
 
-    // Add data
-    RealTimeMapData.forEach((country) => {
+    data.forEach((country) => {
       country.countryCities.forEach((city) => {
         pointSeries.data.push({
           geometry: {
@@ -127,20 +146,12 @@ const ClusteredWorldMap: React.FC = () => {
       });
     });
 
-    // Zoom control
-    chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
-
-    // Make stuff animate on load
     chart.appear(1000, 100);
-
-    chartRef.current = root;
 
     return () => {
       root.dispose();
     };
-  }, []);
+  }, [data]);
 
-  return <div id="chartdiv" className="w-full h-full"></div>;
+  return <div ref={chartRef} className="h-full w-full" />;
 };
-
-export default ClusteredWorldMap;
