@@ -1,50 +1,31 @@
-"use client";
-
-import React, { useLayoutEffect, useRef, useState } from "react";
+"use client"
+import React, { useLayoutEffect, useRef } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
-import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
+import { RealTimeMapData } from "@/constants/dashboard-page-components-data";
 
-import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
-
-interface DataContext {
-  countryName: string;
-  geometry: {
-    type: "Point";
-    coordinates: [number, number];
-  };
-  value?: number;
-}
-
-export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
-  const chartRef = useRef<HTMLDivElement | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+const ClusteredWorldMap: React.FC = () => {
+  const chartRef = useRef<am5.Root | null>(null);
 
   useLayoutEffect(() => {
-    const root = am5.Root.new(chartRef.current!);
+    // Create root element
+    const root = am5.Root.new("chartdiv");
+
+    // Set themes
     root.setThemes([am5themes_Animated.new(root)]);
 
-    // Create Map Chart
+    // Create the map chart
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "rotateX",
         panY: "translateY",
         projection: am5map.geoMercator(),
-        maxZoomLevel: 32,
-        minZoomLevel: 1,
       })
     );
 
-    // Zoom control
-    const zoomControl = chart.set(
-      "zoomControl",
-      am5map.ZoomControl.new(root, {})
-    );
-    zoomControl.homeButton.set("visible", true);
-
-    // MapPolygonSeries: World map
+    // Create main polygon series for countries
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
@@ -53,85 +34,63 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      tooltipText: "{name}",
-      fill: am5.color(0xe3e6e8),
+      fill: am5.color(0xdadada),
     });
 
-    polygonSeries.mapPolygons.template.states.create("hover", {
-      fill: am5.color(0xd4d5ff),
-    });
-
-    // MapPointSeries: Country markers
+    // Create point series for markers
     const pointSeries = chart.series.push(
-      am5map.ClusteredPointSeries.new(root, {
-        calculateAggregates: true,
-        cursorOverStyle: "pointer",
-      })
+      am5map.ClusteredPointSeries.new(root, {})
     );
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-    pointSeries.bullets.push((root, series, dataItem) => {
-      const container = am5.Container.new(root, {});
 
-      const circle = container.children.push(
+    // Set clustered bullet
+    pointSeries.set("clusteredBullet", function (root) {
+      const container = am5.Container.new(root, {
+        cursorOverStyle: "pointer",
+      });
+
+      container.children.push(
         am5.Circle.new(root, {
-          radius: 30,
-          fill: am5.color("#000000"),
-          stroke: am5.color("#ffffff"),
-          strokeWidth: 3,
-          tooltipText: "[bold]{countryName}",
-          cursorOverStyle: "pointer",
+          radius: 8,
+          tooltipY: 0,
+          fill: am5.color(0xff8c00),
         })
       );
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+      container.children.push(
+        am5.Circle.new(root, {
+          radius: 12,
+          fillOpacity: 0.3,
+          tooltipY: 0,
+          fill: am5.color(0xff8c00),
+        })
+      );
+
+      container.children.push(
+        am5.Circle.new(root, {
+          radius: 16,
+          fillOpacity: 0.3,
+          tooltipY: 0,
+          fill: am5.color(0xff8c00),
+        })
+      );
+
       const label = container.children.push(
         am5.Label.new(root, {
           centerX: am5.p50,
           centerY: am5.p50,
           fill: am5.color(0xffffff),
           populateText: true,
-          fontSize: 12,
-          fontFamily: "Jetbrains mono",
+          fontSize: "8",
           text: "{value}",
         })
       );
 
-      const innerCircle = container.children.push(
-        am5.Circle.new(root, {
-          radius: 15,
-          fill: am5.color(0x494af8),
-          strokeOpacity: 0,
-        })
-      );
-
-      innerCircle.animate({
-        key: "scale",
-        from: 0.5,
-        to: 4,
-        duration: 900,
-        easing: am5.ease.out(am5.ease.cubic),
-        loops: Infinity,
-      });
-
-      innerCircle.animate({
-        key: "opacity",
-        from: 0.5,
-        to: 0.1,
-        duration: 900,
-        easing: am5.ease.out(am5.ease.cubic),
-        loops: Infinity,
-      });
-
-      circle.events.on("click", (ev) => {
-        const countryData = ev.target.dataItem?.dataContext as DataContext;
-        if (countryData?.countryName) {
-          const [longitude, latitude] = countryData.geometry.coordinates;
-
-          setSelectedCountry(countryData.countryName);
-          updateCityMarkers(countryData.countryName);
-
-          chart.zoomToGeoPoint({ longitude, latitude }, 3, true);
-          pointSeries.hide();
-          citySeries.show();
+      container.events.on("click", function (e) {
+        const dataItem = e.target.dataItem;
+        if (dataItem) {
+          pointSeries.zoomToCluster(dataItem);
+        } else {
+          console.warn("No dataItem found on click event.");
         }
       });
 
@@ -140,101 +99,48 @@ export const RealTimeMap = ({ selectedTab, data }: RealTimeMapProps) => {
       });
     });
 
-    const citySeries = chart.series.push(
-      am5map.MapPointSeries.new(root, {
-        calculateAggregates: true,
-      })
-    );
-
-    citySeries.bullets.push((root) => {
-      const container = am5.Container.new(root, {});
-
-      container.children.push(
-        am5.Circle.new(root, {
-          radius: 15,
-          fill: am5.color("#000000"),
-          stroke: am5.color("#ffffff"),
-          strokeWidth: 2,
-          tooltipText:
-            "[bold]{cityName}\n[bold]Sessions: [normal]{citySessions}\n[bold]Users: [normal]{cityUsers}",
-        })
-      );
-
-      container.children.push(
-        am5.Label.new(root, {
-          centerX: am5.p50,
-          centerY: am5.p50,
-          fill: am5.color(0xffffff),
-          populateText: true,
-          fontSize: 10,
-          text: "{value}",
-        })
-      );
+    // Create regular bullets
+    pointSeries.bullets.push(function () {
+      const circle = am5.Circle.new(root, {
+        radius: 6,
+        tooltipY: 0,
+        fill: am5.color(0xff8c00),
+        tooltipText: "{title}",
+      });
 
       return am5.Bullet.new(root, {
-        sprite: container,
+        sprite: circle,
       });
     });
 
-    const updateCityMarkers = (countryName: string | null) => {
-      const cityData =
-        countryName &&
-        data
-          .find((country) => country.countryName === countryName)
-          ?.countryCities.map((city) => ({
-            geometry: {
-              type: "Point",
-              coordinates: [city.cityLongitude, city.cityLatitude],
-            },
-            cityName: city.cityName,
-            citySessions: city.citySessions,
-            cityUsers: city.cityUsers,
-            value:
-              selectedTab === "sessions" ? city.citySessions : city.cityUsers,
-          }));
-
-      citySeries.data.setAll(cityData || []);
-    };
-
-    const countryData = data.map((country) => ({
-      geometry: {
-        type: "Point",
-        coordinates: [country.longitude, country.latitude],
-      },
-      countryName: country.countryName,
-      value:
-        selectedTab === "sessions"
-          ? country.countryCities.reduce(
-              (sum, city) => sum + city.citySessions,
-              0
-            )
-          : country.countryCities.reduce(
-              (sum, city) => sum + city.cityUsers,
-              0
-            ),
-    }));
-
-    pointSeries.data.setAll(countryData);
-    updateCityMarkers(null);
-
-    chart.events.on("wheel", () => {
-      const zoomLevel = chart.get("zoomLevel") ?? 0;
-      if (zoomLevel >= 5) {
-        pointSeries.hide();
-        citySeries.show();
-      } else {
-        pointSeries.show();
-        citySeries.hide();
-      }
+    // Add data
+    RealTimeMapData.forEach((country) => {
+      country.countryCities.forEach((city) => {
+        pointSeries.data.push({
+          geometry: {
+            type: "Point",
+            coordinates: [city.cityLongitude, city.cityLatitude],
+          },
+          title: city.cityName,
+          value: city.citySessions,
+        });
+      });
     });
 
+    // Zoom control
+    chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+
+    // Make stuff animate on load
     chart.appear(1000, 100);
+
+    chartRef.current = root;
 
     return () => {
       root.dispose();
-      setSelectedCountry(null);
     };
-  }, [selectedTab, data]);
+  }, []);
 
-  return <div className="h-full w-full" ref={chartRef} />;
+  return <div id="chartdiv" className="w-full h-full"></div>;
 };
+
+export default ClusteredWorldMap;
