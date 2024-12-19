@@ -59,47 +59,69 @@ export const RealTimeMap = ({
       am5map.ClusteredPointSeries.new(root, {})
     );
 
+    // MARKER BEFORE BREAKING
     pointSeries.set("clusteredBullet", function (root) {
       const container = am5.Container.new(root, {
         cursorOverStyle: "pointer",
       });
 
-      container.children.push(
+      const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: 8,
-          tooltipY: 0,
-          fill: am5.color(0xff8c00),
+          radius: 6,
+          fill: am5.color(0x494af8),
+          strokeOpacity: 0,
         })
       );
 
-      container.children.push(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 12,
-          fillOpacity: 0.3,
-          tooltipY: 0,
-          fill: am5.color(0xff8c00),
+          radius: 20,
+          fill: am5.color("#000000"),
+          stroke: am5.color("#ffffff"),
+          strokeWidth: 3,
+          tooltipText:
+            "[bold]{countryName}\n\n[bold]Sessions: [normal]{totalNumberSession}\n[bold]Users: [normal]{totalNumberUsers}",
+          interactive: true,
+          cursorOverStyle: "pointer",
         })
       );
 
-      container.children.push(
-        am5.Circle.new(root, {
-          radius: 16,
-          fillOpacity: 0.3,
-          tooltipY: 0,
-          fill: am5.color(0xff8c00),
-        })
-      );
-
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
+          text:
+            selectedTab === "sessions"
+              ? "{totalNumberSessions}"
+              : "{totalNumberUsers}",
+
+          fill: am5.color(0xffffff),
+          fontSize: 11,
+          fontFamily: "Jetbrains mono",
+          populateText: true,
           centerX: am5.p50,
           centerY: am5.p50,
-          fill: am5.color(0xffffff),
-          populateText: true,
-          fontSize: "8",
-          text: "{value}",
+          textAlign: "center",
         })
       );
+
+      circle.animate({
+        key: "scale",
+        from: 0.5,
+        to: 5,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
+
+      circle.animate({
+        key: "opacity",
+        from: 0.5,
+        to: 0.1,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
 
       container.events.on("click", function (e) {
         const dataItem = e.target.dataItem;
@@ -115,21 +137,69 @@ export const RealTimeMap = ({
       });
     });
 
+    // MARKER AFTER BREAKING
     pointSeries.bullets.push(function () {
-      const circle = am5.Circle.new(root, {
-        radius: 12,
-        tooltipY: 0,
-        fill: am5.color("#000000"),
-        stroke: am5.color("#ffffff"),
-        strokeWidth: 3,
-        tooltipText:
-          "[bold]{title}\n\n[bold]Sessions: [normal]{sessions}\n[bold]Users: [normal]{users}",
+      const container = am5.Container.new(root, {});
+
+      const circle = container.children.push(
+        am5.Circle.new(root, {
+          radius: 9,
+          fill: am5.color(0x494af8),
+          strokeOpacity: 0,
+        })
+      );
+
+      const outerCircle = container.children.push(
+        am5.Circle.new(root, {
+          radius: 30,
+          fill: am5.color("#000000"),
+          stroke: am5.color("#ffffff"),
+          strokeWidth: 3,
+          tooltipText:
+            "[bold]{countryName}, {cityName}\n\n[bold]Sessions: [normal]{citySessions}\n[bold]Users: [normal]{cityUsers}",
+          interactive: true,
+          cursorOverStyle: "pointer",
+        })
+      );
+
+      outerCircle.states.create("hover", {
+        scale: 1.1,
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const label = container.children.push(
+        am5.Label.new(root, {
+          text: selectedTab === "sessions" ? "{citySessions}" : "{cityUsers}",
+          fill: am5.color(0xffffff),
+          fontSize: 11,
+          fontFamily: "Jetbrains mono",
+          populateText: true,
+          centerX: am5.p50,
+          centerY: am5.p50,
+          textAlign: "center",
+        })
+      );
 
+      circle.animate({
+        key: "scale",
+        from: 0.5,
+        to: 5,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
+
+      circle.animate({
+        key: "opacity",
+        from: 0.5,
+        to: 0.1,
+        duration: 900,
+        easing: am5.ease.out(am5.ease.cubic),
+        loops: Infinity,
+      });
 
       return am5.Bullet.new(root, {
-        sprite: circle,
+        sprite: container,
       });
     });
 
@@ -140,18 +210,18 @@ export const RealTimeMap = ({
             type: "Point",
             coordinates: [city.cityLongitude, city.cityLatitude],
           },
-          title: city.cityName,
-          value: city.citySessions,
+          cityName: city.cityName,
+          citySessions: city.citySessions,
+          cityUsers: city.cityUsers,
+          countryName: country.countryName,
         });
       });
     });
 
-    chart.appear(1000, 100);
-
     return () => {
       root.dispose();
     };
-  }, [data]);
+  }, [data, selectedTab]);
 
   return <div ref={chartRef} className="h-full w-full" />;
 };

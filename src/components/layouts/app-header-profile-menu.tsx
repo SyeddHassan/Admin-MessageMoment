@@ -60,8 +60,11 @@ const AppHeaderProfileMenu = () => {
             <AlertDialogCancel className="text-[14px] text-heading-color font-inter hover:bg-general-hover border-border">
               Cancel
             </AlertDialogCancel>
-            <AlertDialogAction className="text-[14px] bg-secondary-theme text-theme-heading-color font-inter hover:bg-secondary-theme-hover">
-              Continue
+            <AlertDialogAction
+              onClick={HandleLogoOut}
+              className="text-[14px] bg-secondary-theme text-theme-heading-color font-inter hover:bg-secondary-theme-hover"
+            >
+              Logout
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
