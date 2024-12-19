@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
@@ -13,9 +13,9 @@ export const RealTimeMap = ({
   selectedTab,
   data,
   selectedCountry,
-  setSelectedCountry,
 }: RealTimeMapProps) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
+  const chartInstance = useRef<am5map.MapChart | null>(null);
 
   useLayoutEffect(() => {
     if (!chartRef.current) return;
@@ -218,10 +218,19 @@ export const RealTimeMap = ({
       });
     });
 
+    chartInstance.current = chart;
+
     return () => {
       root.dispose();
     };
   }, [data, selectedTab]);
+
+  useEffect(() => {
+    if (selectedCountry && chartInstance.current) {
+      const { longitude, latitude } = selectedCountry;
+      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 6);
+    }
+  }, [selectedCountry]);
 
   return <div ref={chartRef} className="h-full w-full" />;
 };

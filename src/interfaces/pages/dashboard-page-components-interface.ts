@@ -1,7 +1,7 @@
 export interface RealTimeMapProps {
   selectedTab: string;
-  selectedCountry?: string;
-  setSelectedCountry?: (tab: string) => void;
+  selectedCountry?: { latitude: number; longitude: number } | null;
+  setSelectedCountry?: (coords: { latitude: number; longitude: number }) => void;
   data: {
     countryName: string;
     countryCode: string;

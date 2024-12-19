@@ -27,7 +27,10 @@ import { LoaderCircle } from "lucide-react";
 
 const RealTimeMonitoringMapVersionCard = () => {
   const [selectedTab, setSelectedTab] = useState("sessions");
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
 
   return (
     <Card id="RealTimeMonitoringMapSection" className="!standard-card-styling">
@@ -52,7 +55,6 @@ const RealTimeMonitoringMapVersionCard = () => {
             selectedTab={selectedTab}
             data={RealTimeMapData}
             selectedCountry={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
           />
         </div>
 
@@ -62,6 +64,7 @@ const RealTimeMonitoringMapVersionCard = () => {
             selectedTab={selectedTab}
             data={RealTimeMapData}
             selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
           />
         </div>
       </CardContent>
