@@ -48,6 +48,7 @@ export const RealTimeMapData = [
     countryCode: "PK",
     latitude: 30.3753,
     longitude: 69.3451,
+    countryId: "pk",
     countryCities: [
       {
         cityName: "Islamabad",
@@ -55,6 +56,7 @@ export const RealTimeMapData = [
         cityLongitude: 73.0479,
         citySessions: 4021,
         cityUsers: 12954,
+        countryId: "pk",
       },
       {
         cityName: "Karachi",
@@ -62,6 +64,7 @@ export const RealTimeMapData = [
         cityLongitude: 67.0011,
         citySessions: 80485,
         cityUsers: 85115,
+        countryId: "pk",
       },
       {
         cityName: "Lahore",
@@ -69,59 +72,7 @@ export const RealTimeMapData = [
         cityLongitude: 74.3436,
         citySessions: 26571,
         cityUsers: 49571,
-      },
-    ],
-  },
-
-  {
-    countryName: "United States",
-    countryCode: "US",
-    latitude: 37.0902,
-    longitude: -95.7129,
-    countryCities: [
-      {
-        cityName: "New York",
-        cityLatitude: 40.7128,
-        cityLongitude: -74.006,
-        citySessions: 120754,
-        cityUsers: 850251,
-      },
-      {
-        cityName: "San Francisco",
-        cityLatitude: 37.7749,
-        cityLongitude: -122.4194,
-        citySessions: 55241,
-        cityUsers: 219654,
-      },
-      {
-        cityName: "Chicago",
-        cityLatitude: 41.8781,
-        cityLongitude: -87.6298,
-        citySessions: 67420,
-        cityUsers: 345512,
-      },
-    ],
-  },
-
-  {
-    countryName: "Canada",
-    countryCode: "CA",
-    latitude: 56.1304,
-    longitude: -106.3468,
-    countryCities: [
-      {
-        cityName: "Toronto",
-        cityLatitude: 43.65107,
-        cityLongitude: -79.347015,
-        citySessions: 47030,
-        cityUsers: 310756,
-      },
-      {
-        cityName: "Vancouver",
-        cityLatitude: 49.2827,
-        cityLongitude: -123.1207,
-        citySessions: 35921,
-        cityUsers: 156872,
+        countryId: "pk",
       },
     ],
   },
@@ -131,6 +82,7 @@ export const RealTimeMapData = [
     countryCode: "IN",
     latitude: 20.5937,
     longitude: 78.9629,
+    countryId: "in",
     countryCities: [
       {
         cityName: "Mumbai",
@@ -138,6 +90,7 @@ export const RealTimeMapData = [
         cityLongitude: 72.8777,
         citySessions: 93214,
         cityUsers: 421258,
+        countryId: "in",
       },
       {
         cityName: "Bangalore",
@@ -145,6 +98,7 @@ export const RealTimeMapData = [
         cityLongitude: 77.5946,
         citySessions: 74291,
         cityUsers: 297412,
+        countryId: "in",
       },
       {
         cityName: "Delhi",
@@ -152,6 +106,67 @@ export const RealTimeMapData = [
         cityLongitude: 77.1025,
         citySessions: 83659,
         cityUsers: 392148,
+        countryId: "in",
+      },
+    ],
+  },
+
+  {
+    countryName: "Canada",
+    countryCode: "CA",
+    latitude: 56.1304,
+    longitude: -106.3468,
+    countryId: "ca",
+    countryCities: [
+      {
+        cityName: "Toronto",
+        cityLatitude: 43.65107,
+        cityLongitude: -79.347015,
+        citySessions: 47030,
+        cityUsers: 310756,
+        countryId: "ca",
+      },
+      {
+        cityName: "Vancouver",
+        cityLatitude: 49.2827,
+        cityLongitude: -123.1207,
+        citySessions: 35921,
+        cityUsers: 156872,
+        countryId: "ca",
+      },
+    ],
+  },
+
+  {
+    countryName: "United States",
+    countryCode: "US",
+    latitude: 37.0902,
+    longitude: -95.7129,
+    countryId: "us",
+    countryCities: [
+      {
+        cityName: "New York",
+        cityLatitude: 40.7128,
+        cityLongitude: -74.006,
+        citySessions: 120754,
+        cityUsers: 850251,
+        countryId: "us",
+      },
+      {
+        cityName: "San Francisco",
+        cityLatitude: 37.7749,
+        cityLongitude: -122.4194,
+        citySessions: 55241,
+        cityUsers: 219654,
+        countryId: "us",
+      },
+      {
+        cityName: "Chicago",
+        cityLatitude: 41.8781,
+        cityLongitude: -87.6298,
+        citySessions: 67420,
+        cityUsers: 345512,
+        countryId: "us",
       },
     ],
   },
@@ -161,6 +176,7 @@ export const RealTimeMapData = [
     countryCode: "GB",
     latitude: 55.3781,
     longitude: -3.436,
+    countryId: "gb",
     countryCities: [
       {
         cityName: "London",
@@ -168,6 +184,7 @@ export const RealTimeMapData = [
         cityLongitude: -0.1278,
         citySessions: 67321,
         cityUsers: 248157,
+        countryId: "gb",
       },
       {
         cityName: "Manchester",
@@ -175,59 +192,7 @@ export const RealTimeMapData = [
         cityLongitude: -2.2426,
         citySessions: 28175,
         cityUsers: 125870,
-      },
-    ],
-  },
-
-  {
-    countryName: "Australia",
-    countryCode: "AU",
-    latitude: -25.2744,
-    longitude: 133.7751,
-    countryCities: [
-      {
-        cityName: "Sydney",
-        cityLatitude: -33.8688,
-        cityLongitude: 151.2093,
-        citySessions: 85213,
-        cityUsers: 326141,
-      },
-      {
-        cityName: "Melbourne",
-        cityLatitude: -37.8136,
-        cityLongitude: 144.9631,
-        citySessions: 71521,
-        cityUsers: 294106,
-      },
-      {
-        cityName: "Brisbane",
-        cityLatitude: -27.4698,
-        cityLongitude: 153.0251,
-        citySessions: 42958,
-        cityUsers: 189274,
-      },
-    ],
-  },
-
-  {
-    countryName: "Germany",
-    countryCode: "DE",
-    latitude: 51.1657,
-    longitude: 10.4515,
-    countryCities: [
-      {
-        cityName: "Berlin",
-        cityLatitude: 52.52,
-        cityLongitude: 13.405,
-        citySessions: 42312,
-        cityUsers: 195312,
-      },
-      {
-        cityName: "Munich",
-        cityLatitude: 48.1351,
-        cityLongitude: 11.582,
-        citySessions: 34785,
-        cityUsers: 157942,
+        countryId: "gb",
       },
     ],
   },

@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useEffect, useLayoutEffect, useRef } from "react";
-
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
-
 import { RealTimeMapProps } from "@/interfaces/pages/dashboard-page-components-interface";
 
 export const RealTimeMap = ({
@@ -55,11 +53,16 @@ export const RealTimeMap = ({
       fill: am5.color(0x494af8),
     });
 
+    // Modified ClusteredPointSeries configuration
     const pointSeries = chart.series.push(
-      am5map.ClusteredPointSeries.new(root, {})
+      am5map.ClusteredPointSeries.new(root, {
+        calculateCenterLatitude: "average",
+        calculateCenterLongitude: "average",
+        groupIdField: "countryId", // This ensures clustering only happens within the same country
+        scatterDistance: 50,
+      })
     );
 
-    // MARKER BEFORE BREAKING
     pointSeries.set("clusteredBullet", function (root) {
       const container = am5.Container.new(root, {
         cursorOverStyle: "pointer",
@@ -73,7 +76,6 @@ export const RealTimeMap = ({
         })
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
           radius: 20,
@@ -81,20 +83,18 @@ export const RealTimeMap = ({
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
           tooltipText:
-            "[bold]{countryName}\n\n[bold]Sessions: [normal]{totalNumberSession}\n[bold]Users: [normal]{totalNumberUsers}",
+            "[bold]{countryName}\n\n[bold]Sessions: [normal]{countryTotalSessions}\n[bold]Users: [normal]{countryTotalUsers}",
           interactive: true,
           cursorOverStyle: "pointer",
         })
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
           text:
             selectedTab === "sessions"
-              ? "{totalNumberSessions}"
-              : "{totalNumberUsers}",
-
+              ? "{countryTotalSessions}"
+              : "{countryTotalUsers}",
           fill: am5.color(0xffffff),
           fontSize: 11,
           fontFamily: "Jetbrains mono",
@@ -127,8 +127,6 @@ export const RealTimeMap = ({
         const dataItem = e.target.dataItem;
         if (dataItem) {
           pointSeries.zoomToCluster(dataItem);
-        } else {
-          console.warn("No dataItem found on click event.");
         }
       });
 
@@ -137,7 +135,6 @@ export const RealTimeMap = ({
       });
     });
 
-    // MARKER AFTER BREAKING
     pointSeries.bullets.push(function () {
       const container = am5.Container.new(root, {});
 
@@ -148,7 +145,7 @@ export const RealTimeMap = ({
           strokeOpacity: 0,
         })
       );
-
+  
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
           radius: 30,
@@ -162,11 +159,6 @@ export const RealTimeMap = ({
         })
       );
 
-      outerCircle.states.create("hover", {
-        scale: 1.1,
-      });
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
           text: selectedTab === "sessions" ? "{citySessions}" : "{cityUsers}",
@@ -203,6 +195,7 @@ export const RealTimeMap = ({
       });
     });
 
+    // Modified data pushing to include countryId
     data.forEach((country) => {
       country.countryCities.forEach((city) => {
         pointSeries.data.push({
@@ -214,6 +207,9 @@ export const RealTimeMap = ({
           citySessions: city.citySessions,
           cityUsers: city.cityUsers,
           countryName: country.countryName,
+          countryTotalSessions: country.countryTotalSessions,
+          countryTotalUsers: country.countryTotalUsers,
+          countryId: country.countryId, // This ensures proper grouping
         });
       });
     });
