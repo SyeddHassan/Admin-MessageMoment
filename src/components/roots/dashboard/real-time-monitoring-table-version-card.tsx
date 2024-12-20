@@ -12,7 +12,7 @@ const RealTimeMonitoringTableVersionCard = () => {
   const [filteredInput, setFilteredInput] = useState("");
 
   return (
-    <Card id="RealTimeMonitoringMapSection" className="!standard-card-styling">
+    <Card id="RealTimeMonitoringTableSection" className="!standard-card-styling">
       <CardHeader className="py-4 border-b border-border flex items-center flex-row max-md:justify-center gap-4">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">

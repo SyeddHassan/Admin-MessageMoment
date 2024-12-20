@@ -62,18 +62,13 @@ export const SidebarNavigationData = [
 export const SectionSearchbarData = [
   // DASHBOARD PAGE
   {
-    sectionId: "RealTimeGlobalActivitySection",
+    sectionId: "RealTimeMonitoringMapSection",
     displaySectionName: "Real Time Global Activity Section",
     link: "/dashboard",
   },
   {
-    sectionId: "RealTimeSessionMonitoringSection",
+    sectionId: "RealTimeMonitoringTableSection",
     displaySectionName: "Real Time Session Monitoring Section",
-    link: "/dashboard",
-  },
-  {
-    sectionId: "RealTimeUsersMonitoringSection",
-    displaySectionName: "Real Time Users Monitoring Section",
     link: "/dashboard",
   },
   {
@@ -85,5 +80,72 @@ export const SectionSearchbarData = [
     sectionId: "ReturnedVisitorsSection",
     displaySectionName: "Returned Visitors Section",
     link: "/dashboard",
+  },
+
+  // USERS & SESSIONS PAGE
+  {
+    sectionId: "AcctiveUsersSessionsSection",
+    displaySectionName: "Active Users and Sessions Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "SessionTypeSection",
+    displaySectionName: "Session Type Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "ActiveRegionSessionsSection",
+    displaySectionName: "Most Active Regions (Sessions) Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "AverageSessionDurationSection",
+    displaySectionName: "Average Session Duration Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "PeakUasgeTimesSection",
+    displaySectionName: "Peak Usage Times Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "PeakTimesSection",
+    displaySectionName: "Peak Times Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "ActiveUsersSessionTimeSection",
+    displaySectionName: "Session Time by Active Users Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "UsersSharingLinkSection",
+    displaySectionName: "Users Sharing Link Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "DeviceUsersSection",
+    displaySectionName: "Users by Device Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "BroswerUsersSection",
+    displaySectionName: "Users by Browser Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "OperatingSystemSection",
+    displaySectionName: "Users by Operation System Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "UsersAvgMessagesLineChart",
+    displaySectionName: "Avg. Messages by User Section",
+    link: "/users-sessions",
+  },
+  {
+    sectionId: "UsersAvgInactivityLineChart",
+    displaySectionName: "Avg. Inactivity by User Section",
+    link: "/users-sessions",
   },
 ];

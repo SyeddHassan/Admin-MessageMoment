@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useLayoutEffect, useRef } from "react";
+
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
@@ -53,13 +54,13 @@ export const RealTimeMap = ({
       fill: am5.color(0x494af8),
     });
 
-    // Modified ClusteredPointSeries configuration
     const pointSeries = chart.series.push(
       am5map.ClusteredPointSeries.new(root, {
-        calculateCenterLatitude: "average",
-        calculateCenterLongitude: "average",
-        groupIdField: "countryId", // This ensures clustering only happens within the same country
-        scatterDistance: 50,
+        groupIdField: "countryId",
+        minDistance: 100,
+        scatterDistance: 90,
+        scatterRadius: 90,
+        stopClusterZoom: 0.5,
       })
     );
 
@@ -76,27 +77,25 @@ export const RealTimeMap = ({
         })
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
-          radius: 20,
+          radius: 16,
           fill: am5.color("#000000"),
           stroke: am5.color("#ffffff"),
           strokeWidth: 3,
-          tooltipText:
-            "[bold]{countryName}\n\n[bold]Sessions: [normal]{countryTotalSessions}\n[bold]Users: [normal]{countryTotalUsers}",
+          // tooltipText: "{value}",
           interactive: true,
           cursorOverStyle: "pointer",
         })
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
-          text:
-            selectedTab === "sessions"
-              ? "{countryTotalSessions}"
-              : "{countryTotalUsers}",
+          text: "{value}",
           fill: am5.color(0xffffff),
-          fontSize: 11,
+          fontSize: 13,
           fontFamily: "Jetbrains mono",
           populateText: true,
           centerX: am5.p50,
@@ -145,7 +144,8 @@ export const RealTimeMap = ({
           strokeOpacity: 0,
         })
       );
-  
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const outerCircle = container.children.push(
         am5.Circle.new(root, {
           radius: 30,
@@ -159,6 +159,7 @@ export const RealTimeMap = ({
         })
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const label = container.children.push(
         am5.Label.new(root, {
           text: selectedTab === "sessions" ? "{citySessions}" : "{cityUsers}",
@@ -195,7 +196,6 @@ export const RealTimeMap = ({
       });
     });
 
-    // Modified data pushing to include countryId
     data.forEach((country) => {
       country.countryCities.forEach((city) => {
         pointSeries.data.push({
@@ -207,9 +207,7 @@ export const RealTimeMap = ({
           citySessions: city.citySessions,
           cityUsers: city.cityUsers,
           countryName: country.countryName,
-          countryTotalSessions: country.countryTotalSessions,
-          countryTotalUsers: country.countryTotalUsers,
-          countryId: country.countryId, // This ensures proper grouping
+          countryId: country.countryId,
         });
       });
     });
@@ -224,7 +222,7 @@ export const RealTimeMap = ({
   useEffect(() => {
     if (selectedCountry && chartInstance.current) {
       const { longitude, latitude } = selectedCountry;
-      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 6);
+      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 16);
     }
   }, [selectedCountry]);
 

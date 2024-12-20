@@ -5,7 +5,7 @@ import { ChartJsDoughnutChart02 } from "@/components/charts/chartjs-doughnut-cha
 
 const SessionTypeCard = () => {
   return (
-    <Card id="FileStatusSection" className="!standard-card-styling col-span-1">
+    <Card id="SessionTypeSection" className="!standard-card-styling col-span-1">
       <CardHeader className="lg:py-[30px] py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">
