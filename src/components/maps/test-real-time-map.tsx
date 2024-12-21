@@ -61,6 +61,8 @@ export const TestRealTimeMap = ({
       am5map.ZoomControl.new(root, {})
     );
     zoomControl.homeButton.set("visible", true);
+    zoomControl.plusButton.set("visible", true);
+    zoomControl.minusButton.set("visible", true);
 
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
@@ -124,6 +126,7 @@ export const TestRealTimeMap = ({
         ),
       };
     });
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const bulletTemplate = am5.Template.new({});
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -135,7 +138,7 @@ export const TestRealTimeMap = ({
 
       const circle = container.children.push(
         am5.Circle.new(root, {
-          radius: 6,
+          radius: 10,
           fill: am5.color(0x494af8),
           strokeOpacity: 0,
         })
@@ -181,7 +184,7 @@ export const TestRealTimeMap = ({
       circle.animate({
         key: "opacity",
         from: 0.5,
-        to: 0.1,
+        to: 0,
         duration: 900,
         easing: am5.ease.out(am5.ease.cubic),
         loops: Infinity,
@@ -215,10 +218,54 @@ export const TestRealTimeMap = ({
       });
     });
 
+    // Handle Zoom In button
+    zoomControl.plusButton.events.on("click", () => {
+      const zoomLevel = chart.get("zoomLevel") ?? 0;
+      if (zoomLevel <= 2) {
+        // Show city data
+        const cityData: ProcessedCityData[] = [];
+        processedData.forEach((country) => {
+          cityData.push(...country.cities);
+        });
+        pointSeries.data.setAll(cityData);
+
+        chart.zoomToGeoPoint(
+          {
+            longitude: processedData[0].geometry.coordinates[0], // Use coordinates to focus on
+            latitude: processedData[0].geometry.coordinates[1],
+          },
+          6
+        );
+      }
+    });
+
+    // Handle Zoom Out button
+    zoomControl.minusButton.events.on("click", () => {
+      const zoomLevel = chart.get("zoomLevel") ?? 0;
+      if (zoomLevel > 4) {
+        // Show country data
+        pointSeries.data.setAll(processedData);
+
+        chart.zoomToGeoPoint(
+          {
+            longitude: 0,
+            latitude: 0,
+          },
+          2
+        );
+      }
+    });
     pointSeries.data.setAll(processedData);
 
+    // Home button functionality
+    zoomControl.homeButton.events.on("click", () => {
+      chart.goHome();
+      pointSeries.data.setAll(processedData);
+    });
+
+    // Handle mouse wheel zoom
     chart.events.on("wheel", () => {
-      const zoomLevel = chart.get("zoomLevel") ?? 1;
+      const zoomLevel = chart.get("zoomLevel") ?? 0;
       if (zoomLevel > 2) {
         const cityData: ProcessedCityData[] = [];
         processedData.forEach((country) => {
@@ -229,13 +276,6 @@ export const TestRealTimeMap = ({
         pointSeries.data.setAll(processedData);
       }
     });
-
-    // Home button functionality
-    zoomControl.homeButton.events.on("click", () => {
-      chart.goHome();
-      pointSeries.data.setAll(processedData);
-    });
-
     chartInstance.current = chart;
 
     return () => {
