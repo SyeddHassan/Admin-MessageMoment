@@ -257,7 +257,7 @@ export const TestRealTimeMap = ({
     });
 
     // Handle zoom using touch gestures
-    chart.events.on("globalpointermove", () => {
+    chart.events.on("geoboundschanged", () => {
       const zoomLevel = chart.get("zoomLevel") ?? 1;
       if (zoomLevel > 4) {
         // Zoomed in: Show city data
