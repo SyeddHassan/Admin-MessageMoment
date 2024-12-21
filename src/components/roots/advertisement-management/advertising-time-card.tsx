@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartJsDoughnutChart02 } from "@/components/charts/chartjs-doughnut-charts";
 
-const AdvertisingTimeCard = () => {
+const AdvertisingTypeCard = () => {
   return (
     <Card
       id="AdvertisingTimeSection"
@@ -21,7 +21,7 @@ const AdvertisingTimeCard = () => {
         <ChartJsDoughnutChart02
           chartData={[
             { label: "Text", percentage: 15, color: "#5ebce1" },
-            { label: "Image", percentage: 25, color: "#3a56af" },
+            { label: "Image/Video", percentage: 25, color: "#3a56af" },
           ]}
         />
       </CardContent>
@@ -29,4 +29,4 @@ const AdvertisingTimeCard = () => {
   );
 };
 
-export default AdvertisingTimeCard;
+export default AdvertisingTypeCard;

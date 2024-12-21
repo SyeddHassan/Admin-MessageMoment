@@ -8,7 +8,7 @@ import GoalAchievedCard from "@/components/roots/advertisement-management/goal-a
 import ImpressionsCard from "@/components/roots/advertisement-management/impressions-card";
 import ConversionsCard from "@/components/roots/advertisement-management/conversions-card";
 import PeakTimeTypeCard from "@/components/roots/advertisement-management/peak-time-type-card";
-import AdvertisingTimeCard from "@/components/roots/advertisement-management/advertising-time-card";
+import AdvertisingTypeCard from "@/components/roots/advertisement-management/advertising-time-card";
 import RegionAdCampaignsCard from "@/components/roots/advertisement-management/region-ad-campaigns-card";
 
 const AdvertisementManagementSystemPage = () => {
@@ -49,7 +49,7 @@ const AdvertisementManagementSystemPage = () => {
         <PeakTimeTypeCard />
 
         {/* ADVERTISING TIME CARD */}
-        <AdvertisingTimeCard />
+        <AdvertisingTypeCard />
 
         {/* REGION AD CAMPAIGNS CARD */}
         <RegionAdCampaignsCard />

@@ -9,7 +9,7 @@ export const ChartJsPieChart01Cofigurations = (): ChartOptions<"doughnut"> => {
     responsive: true,
     plugins: {
       legend: {
-        position: "right" as const,
+        position: "bottom" as const,
         labels: {
           color: isDarkTheme ? "#ffffff" : "#000000",
           usePointStyle: true,
@@ -17,8 +17,8 @@ export const ChartJsPieChart01Cofigurations = (): ChartOptions<"doughnut"> => {
           padding: 20,
           font: {
             family: "Inter",
-            size: 12,
-            weight: "bold",
+            size: 14,
+            weight: "normal",
           },
         },
       },
@@ -29,7 +29,10 @@ export const ChartJsPieChart01Cofigurations = (): ChartOptions<"doughnut"> => {
         borderColor: "transparent",
         borderWidth: 0,
         cornerRadius: 8,
+        padding: 10,
         displayColors: false,
+        multiKeyBackground: "#fff",
+        titleMarginBottom: 0,
         titleFont: {
           size: 0,
         },
@@ -49,14 +52,7 @@ export const ChartJsPieChart01Cofigurations = (): ChartOptions<"doughnut"> => {
       },
 
       datalabels: {
-        display: true,
-        color: "#fff",
-        formatter: (value: number) => `${value.toFixed(2)}%`,
-        font: {
-          family: "JetBrains Mono, sans-serif",
-          size: 12,
-          weight: "normal",
-        },
+        display: false,
       },
     },
     cutout: "0%",

@@ -6,7 +6,8 @@ import { TimelineChartProps } from "@/interfaces/charts/timline-charts-interface
 
 import { Badge } from "@/components/ui/badge";
 
-import { AlertCircle, LayoutPanelTop } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import { TbWorldWww } from "react-icons/tb";
 
 const TimelineChart = ({ data }: TimelineChartProps) => {
   const [timelineData, setTimelineData] = useState<
@@ -83,7 +84,7 @@ const TimelineChart = ({ data }: TimelineChartProps) => {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="bg-[#2D6B58] text-white p-3 sm:p-4 rounded-lg">
+      <div className="bg-[#2D6B58] text-white p-3 sm:p-4 rounded-md">
         <h2 className="text-lg sm:text-2xl font-semibold font-inter tracking-wider uppercase">
           Everything is working
         </h2>
@@ -92,8 +93,8 @@ const TimelineChart = ({ data }: TimelineChartProps) => {
       {/* TIMELINE SECTION */}
       <div className="space-y-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-          <div className="flex items-center gap-2 ml-3 mb-2 sm:mb-0">
-            <LayoutPanelTop className="h-4 w-4 sm:h-5 sm:w-5 text-heading-color" />
+          <div className="flex items-center gap-2 mb-2 sm:mb-0">
+            <TbWorldWww className="h-4 w-4 sm:h-5 sm:w-5 text-heading-color" />
             <h3 className="text-sm sm:text-base font-inter text-heading-color font-semibold">
               Site Loading
             </h3>
@@ -103,12 +104,7 @@ const TimelineChart = ({ data }: TimelineChartProps) => {
 
         {/* TIMELINE VISIUALZATION */}
         <div className="relative mt-6 sm:mt-0">
-          <div className="absolute left-[-3.6rem] sm:-left-[4.5rem] top-1/2 -translate-y-1/2 -rotate-90 text-[10px] sm:text-xs text-muted-foreground whitespace-nowrap">
-            <span className="font-inter text-heading-color font-semibold">
-              Frequency (seconds)
-            </span>
-          </div>
-          <div className="flex gap-0.5 h-6 sm:h-8 ml-4 sm:ml-6">
+          <div className="flex gap-0.5 h-6 sm:h-8">
             {timelineData.map((day, index) => (
               <div
                 key={index}
@@ -118,7 +114,7 @@ const TimelineChart = ({ data }: TimelineChartProps) => {
             ))}
           </div>
         </div>
-        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground ml-4 sm:ml-6">
+        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground">
           <span className="font-inter text-paragraph-color font-semibold">
             90 days ago
           </span>

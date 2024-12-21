@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import SectionSearchbar from "@/utils/section-searchbar";
 import ThemeSwitcher from "@/utils/theme-switcher";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -16,9 +15,6 @@ const AppHeader = () => {
         <div className="flex items-center gap-4">
           {/* LARGE SCREEN SIDEBAR BUTTON */}
           <SidebarTrigger />
-
-          {/* COMPONENT SEARCH BAR */}
-          <SectionSearchbar />
         </div>
 
         {/* HEADER RIGHT SIDE */}

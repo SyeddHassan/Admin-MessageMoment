@@ -102,7 +102,7 @@ const NewCampaignButton = () => {
                       : "text-heading-color"
                   }`}
                 >
-                  Image Campaign
+                  Image/Video Campaign
                 </h1>
               </div>
             </div>

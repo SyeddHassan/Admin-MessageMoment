@@ -29,7 +29,7 @@ const RealTimeMapStats = ({
           0
         );
         const formattedValue = new Intl.NumberFormat().format(value);
-        const percentage = ((value / total) * 100).toFixed(2);
+        const percentage = ((value / total) * 100).toFixed(0);
 
         return (
           <div key={index} className="flex items-center gap-4 pl-4 pr-8">

@@ -48,7 +48,10 @@ export const ChartJsDoughnutChart02Cofigurations =
           borderColor: "transparent",
           borderWidth: 0,
           cornerRadius: 8,
+          padding: 10,
           displayColors: false,
+          multiKeyBackground: "#fff",
+          titleMarginBottom: 0,
           titleFont: {
             size: 0,
           },
@@ -70,7 +73,7 @@ export const ChartJsDoughnutChart02Cofigurations =
         datalabels: {
           display: true,
           color: "#fff",
-          formatter: (value: number) => `${value.toFixed(2)}%`,
+          formatter: (value: number) => `${value}%`,
           font: {
             family: "JetBrains Mono, sans-serif",
             size: 12,

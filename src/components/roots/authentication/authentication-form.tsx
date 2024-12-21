@@ -46,10 +46,10 @@ const AuthenticationForm = () => {
     <div className="flex-1 w-full flex-center">
       <Card className="bg-white sm:w-[400px] w-[90%]">
         <CardHeader>
-          <CardTitle className="md:text-4xl text-3xl font-inter text-heading-color">
+          <CardTitle className="md:text-4xl text-3xl font-inter text-heading-color text-center">
             Login
           </CardTitle>
-          <CardDescription className="md:text-[13px] text-[12px] text-paragraph-color">
+          <CardDescription className="md:text-[13px] text-[12px] text-paragraph-color text-center">
             Please enter your credentials to access the admin dashboard and
             manage the system.
           </CardDescription>
@@ -58,7 +58,7 @@ const AuthenticationForm = () => {
         <CardContent className="flex flex-col md:gap-6 gap-4 md:mt-2 md:mb-4 mb-2">
           <div className="flex flex-col gap-3">
             <Label htmlFor="email" className="text-heading-color font-inter">
-              Username or Email Address
+              Username
             </Label>
             <Input
               type="email"
@@ -99,7 +99,7 @@ const AuthenticationForm = () => {
                 <p className="text-[16px]">Please wait</p>
               </span>
             ) : (
-              "Login"
+              "Log In"
             )}
           </Button>
         </CardFooter>
