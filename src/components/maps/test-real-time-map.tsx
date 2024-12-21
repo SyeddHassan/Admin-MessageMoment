@@ -126,7 +126,7 @@ export const TestRealTimeMap = ({
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const bulletTemplate = am5.Template.new({});
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     pointSeries.bullets.push((root, series, dataItem) => {
       const container = am5.Container.new(root, {});
       const data = dataItem.dataContext as
@@ -186,7 +186,7 @@ export const TestRealTimeMap = ({
         easing: am5.ease.out(am5.ease.cubic),
         loops: Infinity,
       });
-
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       container.events.on("click", (e) => {
         if (!("cityName" in data)) {
           const clickedCountry = processedData.find(
