@@ -20,12 +20,10 @@ import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { Users, Clock, Hash, MapPin } from "lucide-react";
 import RealTimeSessionMonitoringViewParticipantsTable from "@/components/tables/real-time-session-monitoring-view-participants-table";
 
 const SessionMonitoringTableManageButton = () => {
@@ -79,68 +77,36 @@ const SessionMonitoringTableManageButton = () => {
               View Participants
             </p>
           </DialogTrigger>
-          <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-white dark:bg-primary-theme border-border">
-            <DialogTitle>
-              <div className="pt-8 py-4">
-                <h2 className="font-inter font-bold text-[34px] leading-[36px] text-heading-color tracking-wide mb-6 px-8">
-                  Session Details
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 dark:bg-[#494af8]/10 bg-[#000000]/10 mx-6 py-3 px-2 rounded-xl">
-                  <div className="flex items-start gap-2">
-                    <Hash className="h-4 w-4 text-heading-color dark:text-theme-heading-color" />
-                    <div className="flex flex-col gap-2">
-                      <p className="text-[14px] leading-[16px] font-medium text-heading-color dark:text-theme-heading-color font-inter">
-                        Session ID
-                      </p>
-                      <p className="text-[12px] leading-[12px] text-paragraph-color dark:text-theme-paragraph-color">
-                        128397128937112
-                      </p>
-                    </div>
-                  </div>
+          <DialogContent className="max-w-[1536px] w-[90%] h-[90%] bg-white border-border dark:bg-background-color flex flex-col justify-between rounded-[6px] pb-0">
+            <DialogHeader className="md:h-[60px] h-[60px] flex flex-col justify-center gap-2">
+              <DialogTitle className="md:text-[44px] text-[28px] text-secondary-theme font-inter font-bold md:leading-[50px] leading-[34px] text-start md:px-4">
+                Session Details
+              </DialogTitle>
+              <Separator className="h-[2px]" />
+            </DialogHeader>
 
-                  <div className="flex items-start gap-2">
-                    <Users className="h-4 w-4 text-heading-color dark:text-theme-heading-color" />
-                    <div className="flex flex-col gap-2">
-                      <p className="text-[14px] leading-[16px] font-medium text-heading-color dark:text-theme-heading-color font-inter">
-                        Participants
-                      </p>
-                      <p className="text-[12px] leading-[12px] text-paragraph-color dark:text-theme-paragraph-color">
-                        8/10
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <MapPin className="h-4 w-4 text-heading-color dark:text-theme-heading-color" />
-                    <div className="flex flex-col gap-2">
-                      <p className="text-[14px] leading-[16px] font-medium text-heading-color dark:text-theme-heading-color font-inter">
-                        Location
-                      </p>
-                      <p className="text-[12px] leading-[12px] text-paragraph-color dark:text-theme-paragraph-color">
-                        Argentina
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-heading-color dark:text-theme-heading-color" />
-                    <div className="flex flex-col gap-2">
-                      <p className="text-[14px] leading-[16px] font-medium text-heading-color dark:text-theme-heading-color font-inter">
-                        Duration
-                      </p>
-                      <p className="text-[12px] leading-[12px] text-paragraph-color dark:text-theme-paragraph-color">
-                        12m 04s
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <div className="overflow-y-auto md:h-[calc(100%-60px)] h-[calc(100%-60px)] md:px-4 px-2 flex flex-col gap-8 py-4">
+              <div className="w-full bg-background-color dark:bg-white/10 md:rounded-[50px] rounded-lg shadow-xl grid md:grid-cols-4 grid-cols-2 max-md:gap-y-4 justify-center p-4">
+              <div className="text-center flex flex-col gap-1">
+                <h1 className="lg:text-[20px] md:text-[16px] text-[14px] lg:leading-[26px] md:leading-[24px] leading-[22px] font-inter font-bold text-heading-color">Session Id</h1>
+                <p className="lg:text-[16px] md:text-[14px] text-[12px] lg:leading-[23px] md:leading-[21px] leading-[19px]">12839712893712</p>
               </div>
-            </DialogTitle>
+              <div className="text-center flex flex-col gap-1">
+                <h1 className="lg:text-[20px] md:text-[16px] text-[14px] lg:leading-[26px] md:leading-[24px] leading-[22px] font-inter font-bold text-heading-color">Participants</h1>
+                <p className="lg:text-[16px] md:text-[14px] text-[12px] lg:leading-[23px] md:leading-[21px] leading-[19px]">8/10</p>
+              </div>
+              <div className="text-center flex flex-col gap-1">
+                <h1 className="lg:text-[20px] md:text-[16px] text-[14px] lg:leading-[26px] md:leading-[24px] leading-[22px] font-inter font-bold text-heading-color">Location</h1>
+                <p className="lg:text-[16px] md:text-[14px] text-[12px] lg:leading-[23px] md:leading-[21px] leading-[19px]">Argentina</p>
+              </div>
+              <div className="text-center flex flex-col gap-1">
+                <h1 className="lg:text-[20px] md:text-[16px] text-[14px] lg:leading-[26px] md:leading-[24px] leading-[22px] font-inter font-bold text-heading-color">Duration</h1>
+                <p className="lg:text-[16px] md:text-[14px] text-[12px] lg:leading-[23px] md:leading-[21px] leading-[19px]">12m 04s</p>
+              </div>
+              </div>
 
-            {/* Table */}
-            <ScrollArea className="h-[60vh]">
               <RealTimeSessionMonitoringViewParticipantsTable />
-            </ScrollArea>
+            </div>
           </DialogContent>
         </Dialog>
       </PopoverContent>

@@ -34,12 +34,14 @@ const RealTimeMapStats = ({
         return (
           <div key={index} className="flex items-center gap-4 pl-4 pr-8">
             <span
-              onClick={() =>
-                setSelectedCountry?.({
-                  latitude: item.latitude,
-                  longitude: item.longitude,
-                })
-              }
+              onClick={() => {
+                if (setSelectedCountry) {
+                  setSelectedCountry({
+                    latitude: item.latitude,
+                    longitude: item.longitude,
+                  });
+                }
+              }}
               className={`fi fi-${item.countryCode.toLowerCase()} !w-[25px] !h-[25px] rounded-full flag-shadow !bg-cover bg-[50%_50%] cursor-pointer`}
             />
 

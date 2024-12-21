@@ -18,10 +18,10 @@ import { Globe, Clock, Smartphone, Chrome, Activity } from "lucide-react";
 
 const RealTimeSessionMonitoringViewParticipantsTable = () => {
   return (
-    <div className="overflow-x-auto px-8">
+    <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-          <TableRow className="text-heading-color font-inter border-border">
+          <TableRow className="text-heading-color font-inter border-border !w-[600px]">
             <TableHead className="w-[50px]">#</TableHead>
             <TableHead>ID</TableHead>
             <TableHead>IP Address</TableHead>
@@ -40,7 +40,7 @@ const RealTimeSessionMonitoringViewParticipantsTable = () => {
             (participant, index) => (
               <TableRow
                 key={participant.id}
-                className="text-[14px] leading-[16px] border-border"
+                className="!w-[200px] text-[14px] leading-[16px] border-border"
               >
                 <TableCell className="text-heading-color">
                   {index + 1}
