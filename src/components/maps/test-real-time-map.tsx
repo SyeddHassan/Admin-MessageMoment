@@ -218,7 +218,7 @@ export const TestRealTimeMap = ({
       });
     });
 
-    // Handle Zoom In button
+    // Handle Zoom In button for Mouse
     zoomControl.plusButton.events.on("click", () => {
       const zoomLevel = chart.get("zoomLevel") ?? 0;
       if (zoomLevel <= 2) {
@@ -239,7 +239,7 @@ export const TestRealTimeMap = ({
       }
     });
 
-    // Handle Zoom Out button
+    // Handle Zoom Out button for Mouse
     zoomControl.minusButton.events.on("click", () => {
       const zoomLevel = chart.get("zoomLevel") ?? 0;
       if (zoomLevel > 4) {
@@ -255,7 +255,22 @@ export const TestRealTimeMap = ({
         );
       }
     });
-    pointSeries.data.setAll(processedData);
+
+    // Handle zoom using touch gestures
+    chart.events.on("globalpointermove", () => {
+      const zoomLevel = chart.get("zoomLevel") ?? 1;
+      if (zoomLevel > 4) {
+        // Zoomed in: Show city data
+        const cityData: ProcessedCityData[] = [];
+        processedData.forEach((country) => {
+          cityData.push(...country.cities);
+        });
+        pointSeries.data.setAll(cityData);
+      } else {
+        // Zoomed out: Show country data
+        pointSeries.data.setAll(processedData);
+      }
+    });
 
     // Home button functionality
     zoomControl.homeButton.events.on("click", () => {
@@ -263,7 +278,7 @@ export const TestRealTimeMap = ({
       pointSeries.data.setAll(processedData);
     });
 
-    // Handle mouse wheel zoom
+    // Handle mouse wheel zoom for Mouse
     chart.events.on("wheel", () => {
       const zoomLevel = chart.get("zoomLevel") ?? 0;
       if (zoomLevel > 2) {
