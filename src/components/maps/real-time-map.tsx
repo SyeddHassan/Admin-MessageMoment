@@ -27,6 +27,7 @@ export const RealTimeMap = ({
         panX: "rotateX",
         panY: "translateY",
         projection: am5map.geoMercator(),
+        pinchZoom: false
       })
     );
 
@@ -222,7 +223,8 @@ export const RealTimeMap = ({
   useEffect(() => {
     if (selectedCountry && chartInstance.current) {
       const { longitude, latitude } = selectedCountry;
-      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 16);
+
+      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 11, true);
     }
   }, [selectedCountry]);
 
