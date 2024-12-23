@@ -23,6 +23,7 @@ const AmChartsBarChart05 = dynamic(
 );
 
 import { LoaderCircle } from "lucide-react";
+import { ChartJsBarChart05 } from "@/components/charts/chartjs-bar-charts";
 
 const TrafficSourceVsChatCreationCard = () => {
   return (
@@ -39,12 +40,11 @@ const TrafficSourceVsChatCreationCard = () => {
 
       {/* TRAFFIC SOURCE VS CHAT CREATION BAR CHART */}
       <CardContent className="py-4 h-[500px] max-md:px-2">
-        <AmChartsBarChart05
-          chartId="TrafficSourceVsChatCreationBarChart"
+        <ChartJsBarChart05
           data={[
-            { category: "Direct", sources: 119, chatCreations: 15 },
-            { category: "Twitter", sources: 6, chatCreations: 20 },
-            { category: "Google.com", sources: 4, chatCreations: 25 },
+            { category: "Direct", sources: 5, chatCreations: 15 },
+            { category: "Twitter", sources: 6, chatCreations: 8 },
+            { category: "Google.com", sources: 4, chatCreations: 2 },
           ]}
         />
       </CardContent>

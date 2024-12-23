@@ -30,6 +30,7 @@ const AvgSessionDurationProjectModeCard = () => {
       id="AvgSessionDurationProjectModeSection"
       className="!standard-card-styling lg:col-span-2 md:col-span-4 col-span-1"
     >
+      
       <CardHeader className="py-6 border-b border-border">
         {/* CARD HEADING */}
         <CardTitle className="font-inter font-medium text-heading-color text-[16px] leading-[18px]">

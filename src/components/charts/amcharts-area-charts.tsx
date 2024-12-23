@@ -48,13 +48,27 @@ export const AmChartsAreaChart01 = ({
         pinchZoomX: true,
         pinchZoomY: true,
         layout: root.verticalLayout,
-        paddingLeft: 20,
+        paddingLeft: 5,
         paddingRight: 20,
         paddingTop: 20,
         paddingBottom: 60,
         dy: 15,
       })
     );
+
+     chart.leftAxesContainer.children.unshift(
+          am5.Label.new(root, {
+            text: "Day (Hours)",
+            rotation: -90, 
+            x: 0, 
+            y: am5.percent(50), 
+            centerX: am5.p50,
+            centerY: am5.p50,
+            fontSize: 16, 
+            fill: am5.color(0x000000), 
+          })
+        );
+        
 
     const exporting = am5exporting.Exporting.new(root, {
       filePrefix: chartId,

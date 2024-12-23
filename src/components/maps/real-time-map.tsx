@@ -224,7 +224,7 @@ export const RealTimeMap = ({
     if (selectedCountry && chartInstance.current) {
       const { longitude, latitude } = selectedCountry;
 
-      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 11, true);
+      chartInstance.current.zoomToGeoPoint({ longitude, latitude }, 16, true);
     }
   }, [selectedCountry]);
 

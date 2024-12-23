@@ -39,6 +39,7 @@ const UsersAvgMessagesCard = () => {
 
       {/* AVERAGE MESSAGES BY USERS LINE CHART */}
       <CardContent className="py-6 h-[500px] max-md:px-2">
+        <p className="absolute left-0 top-1/2 -translate-y-1/2 transform rotate-90 text-left">Messages</p>
         <AmChartsLineChart02
           chartId="UsersAvgMessagesLineChart"
           data={[
@@ -52,6 +53,7 @@ const UsersAvgMessagesCard = () => {
           ]}
         />
       </CardContent>
+      <p className="font-inter font-medium text-heading-color text-[16px] leading-[18px] text-center mb-6">Time Period</p>
     </Card>
   );
 };

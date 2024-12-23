@@ -23,6 +23,8 @@ const AmChartsBarChart04 = dynamic(
 );
 
 import { LoaderCircle } from "lucide-react";
+import { AmChartsBarChart07 } from "../../charts/amcharts-bar-charts";
+import { ChartJsBarChart04 } from "@/components/charts/chartjs-bar-charts";
 
 const PageVisitsCard = () => {
   return (
@@ -36,16 +38,18 @@ const PageVisitsCard = () => {
 
       {/* PAGE VISITS BAR CHART */}
       <CardContent className="py-4 h-[500px] max-md:px-2">
-        <AmChartsBarChart04
-          chartId="PageVisitsBarChart"
-          data={[
-            { category: "Homepage", value: 68 },
-            { category: "Chat Session", value: 55 },
-            { category: "FAQS", value: 27 },
-            { category: "Privacy", value: 26 },
-            { category: "Terms of Use", value: 24 },
-            { category: "Contact Page", value: 17 },
-          ]}
+        <ChartJsBarChart04
+          data={{
+            labels: [
+              "Homepage",
+              "Chat Session",
+              "FAQS",
+              "Privacy",
+              "Terms of Use",
+              "Contact Page",
+            ],
+            values: [68, 55, 27, 26, 24, 17],
+          }}
         />
       </CardContent>
     </Card>

@@ -26,6 +26,7 @@ export const ChartJsDoughnutChart02Cofigurations =
 
     return {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: "bottom" as const,
